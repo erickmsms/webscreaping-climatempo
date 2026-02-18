@@ -1,4 +1,4 @@
-# 🌦️ Webscraping Climatempo — Pipeline Completo com Airflow + DBT
+# 🌦️ Webscraping Climatempo — Pipeline Completo com Scrapy + Airflow + DBT
 
 Projeto de engenharia de dados que coleta previsões meteorológicas via **web scraping**, estrutura os dados em arquitetura medalhão (Bronze → Silver → Gold) e avalia a **qualidade das previsões** comparando previsão D-1 vs dado real D.
 
