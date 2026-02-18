@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  # --- TABELA GOLD: DADOS DO DIA ---
+  - name: gold_climatempo_dadosdia
+    description: "Visão consolidada do clima observado hoje por cidade, com cálculo de amplitude térmica."
+    columns:
+      - name: cidade_id
+        description: "ID único da cidade."
+        tests:
+          - not_null
+
+      - name: temp_min
+        description: "Temperatura mínima registrada no dia."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "<= temp_max" # Garante que min nunca é maior que max
+
+      - name: temp_max
+        description: "Temperatura máxima registrada no dia."
+        tests:
+          - not_null
+
+      - name: amplitude_termica
+        description: "Calculado como (temp_max - temp_min)."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0" # Amplitude não pode ser negativa
+
+      - name: chuva_mm
+        description: "Volume de chuva em milímetros."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+  # --- TABELA GOLD: PREVISÕES ---
+  - name: gold_climatempo_previsoes
+    description: "Tabela de previsões para o dia seguinte (D+1)."
+    columns:
+      - name: data_previsao
+        description: "Data para a qual a previsão é válida (data_coleta + 1)."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> data_coleta" # Valida a lógica de D+1
+
+      - name: clima_desc
+        description: "Descrição textual do clima."
+        tests:
+          - not_null

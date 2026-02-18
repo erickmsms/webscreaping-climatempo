@@ -1,0 +1,41 @@
+cidade,atualouprevisao,tmin,tmax,descricao,chuva,dt_ingest
+pedra-pe,atual,18°,30°,Sol com muitas nuvens durante o dia e períodos de céu nublado. Noite com muitas nuvens.,0.0mm,2026-02-16T23:24:42.270551+00:00
+pedra-pe,previsao,19°,31°,Sol com muitas nuvens. Pancadas de chuva à tarde e à noite.,2.4mm,2026-02-16T23:24:42.270551+00:00
+saopaulo-sp,atual,19°,34°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,10.0mm,2026-02-16T23:24:43.482222+00:00
+saopaulo-sp,previsao,21°,33°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,19.9mm,2026-02-16T23:24:43.482222+00:00
+recife-pe,atual,24°,32°,Sol com algumas nuvens e chuva passageira durante o dia. À noite o tempo fica firme.,15.1mm,2026-02-16T23:24:44.927669+00:00
+recife-pe,previsao,24°,32°,Sol com algumas nuvens e chuva passageira durante o dia. À noite o tempo fica firme.,12.0mm,2026-02-16T23:24:44.927669+00:00
+americana-sp,atual,20°,33°,Sol com algumas nuvens. Não chove.,0.0mm,2026-02-16T23:24:45.992707+00:00
+americana-sp,previsao,21°,33°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,5.0mm,2026-02-16T23:24:45.992707+00:00
+pedra-pe,atual,19°,31°,"Sol com muitas nuvens e pancadas de chuva à tarde. Muitas nuvens à noite, sem chuva.",1.1mm,2026-02-17T12:50:11.063946+00:00
+pedra-pe,previsao,20°,29°,Sol com muitas nuvens. Pancadas de chuva à tarde e à noite.,3.1mm,2026-02-17T12:50:11.063946+00:00
+saopaulo-sp,atual,21°,34°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,19.9mm,2026-02-17T12:50:11.280287+00:00
+saopaulo-sp,previsao,20°,30°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,35.1mm,2026-02-17T12:50:11.280287+00:00
+recife-pe,atual,24°,32°,Sol com algumas nuvens e chuva passageira durante o dia. À noite o tempo fica firme.,12.0mm,2026-02-17T12:50:12.596112+00:00
+recife-pe,previsao,23°,31°,Sol com algumas nuvens. Chove rápido durante o dia e à noite.,15.0mm,2026-02-17T12:50:12.596112+00:00
+americana-sp,atual,20°,33°,Sol com muitas nuvens. Pancadas de chuva à tarde e à noite.,1.4mm,2026-02-17T12:50:13.953746+00:00
+americana-sp,previsao,21°,30°,Sol com muitas nuvens a nublado com chuva de manhã. Tarde e noite com temporal.,15.0mm,2026-02-17T12:50:13.953746+00:00
+pedra-pe,atual,19°,31°,"Sol com muitas nuvens e pancadas de chuva à tarde. Muitas nuvens à noite, sem chuva.",1.1mm,2026-02-17T14:11:29.115448+00:00
+pedra-pe,previsao,20°,29°,Sol com muitas nuvens. Pancadas de chuva à tarde e à noite.,3.1mm,2026-02-17T14:11:29.115448+00:00
+saopaulo-sp,atual,21°,34°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,20.1mm,2026-02-17T14:11:29.375803+00:00
+saopaulo-sp,previsao,20°,29°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,35.1mm,2026-02-17T14:11:29.375803+00:00
+recife-pe,atual,25°,31°,Sol com algumas nuvens. Chove rápido durante o dia e à noite.,11.9mm,2026-02-17T14:11:30.339900+00:00
+recife-pe,previsao,25°,30°,"Sol com algumas nuvens e chuva passageira. À noite, muitas nuvens mas com tempo firme.",14.9mm,2026-02-17T14:11:30.339900+00:00
+americana-sp,atual,20°,33°,Sol com muitas nuvens. Pancadas de chuva à tarde e à noite.,1.4mm,2026-02-17T14:11:31.871659+00:00
+americana-sp,previsao,21°,30°,Sol com muitas nuvens a nublado com chuva de manhã. Tarde e noite com temporal.,15.0mm,2026-02-17T14:11:31.871659+00:00
+pedra-pe,atual,20°,29°,Sol com muitas nuvens. Pancadas de chuva à tarde e à noite.,3.1mm,2026-02-18T04:00:15.993046+00:00
+pedra-pe,previsao,21°,32°,Sol com muitas nuvens e períodos de céu nublado. Noite com pancadas de chuva.,0.8mm,2026-02-18T04:00:15.993046+00:00
+saopaulo-sp,atual,20°,29°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,35.1mm,2026-02-18T04:00:16.090629+00:00
+saopaulo-sp,previsao,20°,28°,"Sol com algumas nuvens e chuva passageira. À noite, muitas nuvens mas com tempo firme.",10.0mm,2026-02-18T04:00:16.090629+00:00
+recife-pe,atual,25°,30°,"Sol com algumas nuvens e chuva passageira. À noite, muitas nuvens mas com tempo firme.",14.9mm,2026-02-18T04:00:18.520290+00:00
+recife-pe,previsao,26°,29°,Sol com algumas nuvens. Chove rápido durante o dia e à noite.,15.0mm,2026-02-18T04:00:18.520290+00:00
+americana-sp,atual,21°,30°,Sol com muitas nuvens a nublado com chuva de manhã. Tarde e noite com temporal.,15.0mm,2026-02-18T04:00:56.514529+00:00
+americana-sp,previsao,21°,30°,Sol com muitas nuvens durante o dia e períodos de céu nublado. Noite com muitas nuvens.,0.4mm,2026-02-18T04:00:56.514529+00:00
+pedra-pe,atual,20°,29°,Sol com muitas nuvens. Pancadas de chuva à tarde e à noite.,3.1mm,2026-02-18T04:22:38.464599+00:00
+pedra-pe,previsao,21°,32°,Sol com muitas nuvens e períodos de céu nublado. Noite com pancadas de chuva.,0.8mm,2026-02-18T04:22:38.464599+00:00
+saopaulo-sp,atual,20°,29°,Sol e aumento de nuvens de manhã. Pancadas de chuva à tarde e à noite.,35.1mm,2026-02-18T04:22:38.630309+00:00
+saopaulo-sp,previsao,20°,28°,"Sol com algumas nuvens e chuva passageira. À noite, muitas nuvens mas com tempo firme.",10.0mm,2026-02-18T04:22:38.630309+00:00
+recife-pe,atual,25°,30°,"Sol com algumas nuvens e chuva passageira. À noite, muitas nuvens mas com tempo firme.",14.9mm,2026-02-18T04:22:39.563667+00:00
+recife-pe,previsao,26°,29°,Sol com algumas nuvens. Chove rápido durante o dia e à noite.,15.0mm,2026-02-18T04:22:39.563667+00:00
+americana-sp,atual,21°,30°,Sol com muitas nuvens a nublado com chuva de manhã. Tarde e noite com temporal.,15.0mm,2026-02-18T04:22:40.599450+00:00
+americana-sp,previsao,21°,30°,Sol com muitas nuvens durante o dia e períodos de céu nublado. Noite com muitas nuvens.,0.4mm,2026-02-18T04:22:40.599450+00:00

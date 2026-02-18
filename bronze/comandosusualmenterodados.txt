@@ -1,0 +1,19 @@
+pip freeze < requirements.txt
+
+python -m venv .venv ; .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install scrapy;
+pip install pandas;
+pip install sqlalchemy;
+pip install dbt-sqlite; 
+pip install streamlit;
+pip install plotly;
+
+Ctrl + Shift + P
+Digite "Python: Select Interpreter" e dê Enter.
+Procure pela opção que tem o caminho da sua pasta .venv
+
+cd "C:\Users\Erick\Downloads\projeto_screap\bronze\coleta";
+scrapy crawl previsao -o data.jsonl; cd ..; python transform/transform.py; cd coleta
+
+streamlit run dashboard/app.py
