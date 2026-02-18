@@ -4,6 +4,13 @@ Projeto de engenharia de dados que coleta previsões meteorológicas via **web s
 
 Toda a pipeline é **orquestrada com Apache Airflow**.
 
+<img width="1914" height="872" alt="image" src="https://github.com/user-attachments/assets/8752f960-504e-42a2-a0af-9b110ec9d988" />
+<img width="1914" height="872" alt="image" src="https://github.com/user-attachments/assets/7071829b-082e-49be-b2e5-11f43b34115b" />
+<img width="1914" height="872" alt="image" src="https://github.com/user-attachments/assets/defe169b-5051-4a32-afde-85fadb64bc5e" />
+
+
+<img width="1918" height="968" alt="image" src="https://github.com/user-attachments/assets/8fd29bb6-4de8-4a4a-a4bd-2faace0392b4" />
+
 ---
 
 # 🎯 Objetivo do Projeto
