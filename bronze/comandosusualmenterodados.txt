@@ -13,7 +13,8 @@ Ctrl + Shift + P
 Digite "Python: Select Interpreter" e dê Enter.
 Procure pela opção que tem o caminho da sua pasta .venv
 
-cd "C:\Users\Erick\Downloads\projeto_screap\bronze\coleta";
-scrapy crawl previsao -o data.jsonl; cd ..; python transform/transform.py; cd coleta
+cd "C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\bronze\coleta";
+scrapy crawl previsao -o data.jsonl; cd ..; python transform/transform.py; cd coleta;
+cd "C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima"; dbt run;
 
 streamlit run dashboard/app.py

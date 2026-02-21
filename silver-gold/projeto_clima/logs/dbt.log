@@ -6919,3 +6919,893 @@ WHERE tipo_previsao = 'AMANHA'
 [0m01:46:02.753391 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029D32B2C170>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029D36646F60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029D366462D0>]}
 [0m01:46:02.754608 [debug] [MainThread]: Flushing usage events
 [0m01:46:04.195217 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:03:18.883037 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000244FD25F2D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000244FD292F10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000244FD292990>]}
+
+
+============================== 12:03:18.887548 | e78010e4-e5e6-4f18-9acb-d6c5c624a092 ==============================
+[0m12:03:18.887548 [info ] [MainThread]: Running with dbt=1.11.6
+[0m12:03:18.887548 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Administrador\\.dbt', 'invocation_command': 'dbt debug', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\silver-gold\\projeto_clima\\logs'}
+[0m12:03:18.901058 [info ] [MainThread]: dbt version: 1.11.6
+[0m12:03:18.901058 [info ] [MainThread]: python version: 3.11.9
+[0m12:03:18.902059 [info ] [MainThread]: python path: C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\.venv\Scripts\python.exe
+[0m12:03:18.902059 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m12:03:18.905134 [info ] [MainThread]: Using profiles dir at C:\Users\Administrador\.dbt
+[0m12:03:18.905134 [info ] [MainThread]: Using profiles.yml file at C:\Users\Administrador\.dbt\profiles.yml
+[0m12:03:18.906136 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\dbt_project.yml
+[0m12:03:18.989386 [info ] [MainThread]: Configuration:
+[0m12:03:18.989386 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m12:03:18.990387 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m12:03:18.990387 [info ] [MainThread]: Required dependencies:
+[0m12:03:18.991388 [debug] [MainThread]: Executing "git --help"
+[0m12:03:19.018424 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:03:19.019425 [debug] [MainThread]: STDERR: "b''"
+[0m12:03:19.020425 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:03:19.020425 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m12:03:19.021424 [info ] [MainThread]: [31m1 check failed:[0m
+[0m12:03:19.021424 [info ] [MainThread]: Profile loading failed for the following reason:
+Runtime Error
+  Could not find profile named 'projeto_clima'
+
+
+[0m12:03:19.022928 [debug] [MainThread]: Command `dbt debug` failed at 12:03:19.021424 after 0.20 seconds
+[0m12:03:19.022928 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000244FC1F0290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000244FD2AE0D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000244FD2ACFD0>]}
+[0m12:03:19.022928 [debug] [MainThread]: Flushing usage events
+[0m12:03:19.695643 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:09:47.109795 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002803FECAF10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002803FECB610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002803FECBD90>]}
+
+
+============================== 12:09:47.114796 | 30df1b13-d856-46c7-b2c0-a74a747cc016 ==============================
+[0m12:09:47.114796 [info ] [MainThread]: Running with dbt=1.11.6
+[0m12:09:47.115301 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Administrador\\.dbt', 'invocation_command': 'dbt debug', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\silver-gold\\projeto_clima\\logs'}
+[0m12:09:47.126814 [info ] [MainThread]: dbt version: 1.11.6
+[0m12:09:47.127815 [info ] [MainThread]: python version: 3.11.9
+[0m12:09:47.127815 [info ] [MainThread]: python path: C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\.venv\Scripts\python.exe
+[0m12:09:47.128816 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m12:09:47.147832 [info ] [MainThread]: Using profiles dir at C:\Users\Administrador\.dbt
+[0m12:09:47.148831 [info ] [MainThread]: Using profiles.yml file at C:\Users\Administrador\.dbt\profiles.yml
+[0m12:09:47.148831 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\dbt_project.yml
+[0m12:09:47.149832 [info ] [MainThread]: adapter type: sqlite
+[0m12:09:47.150832 [info ] [MainThread]: adapter version: 1.10.0
+[0m12:09:47.230643 [info ] [MainThread]: Configuration:
+[0m12:09:47.231643 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m12:09:47.231643 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m12:09:47.231643 [info ] [MainThread]: Required dependencies:
+[0m12:09:47.232643 [debug] [MainThread]: Executing "git --help"
+[0m12:09:47.262167 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:09:47.263169 [debug] [MainThread]: STDERR: "b''"
+[0m12:09:47.263169 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:09:47.263169 [info ] [MainThread]: Connection:
+[0m12:09:47.264675 [info ] [MainThread]:   database: main
+[0m12:09:47.264675 [info ] [MainThread]:   schema: main
+[0m12:09:47.264675 [info ] [MainThread]:   schemas_and_paths: {'main': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\dataset_climatempo.db'}
+[0m12:09:47.265679 [info ] [MainThread]:   schema_directory: C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo
+[0m12:09:47.266681 [info ] [MainThread]: Registered adapter: sqlite=1.10.0
+[0m12:09:47.513092 [debug] [MainThread]: Acquiring new sqlite connection 'debug'
+[0m12:09:47.574791 [debug] [MainThread]: Using sqlite connection "debug"
+[0m12:09:47.575846 [debug] [MainThread]: On debug: select 1 as id
+[0m12:09:47.575846 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:09:47.576847 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:09:47.577847 [debug] [MainThread]: On debug: Close
+[0m12:09:47.577847 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m12:09:47.578847 [info ] [MainThread]: [32mAll checks passed![0m
+[0m12:09:47.579848 [debug] [MainThread]: Command `dbt debug` succeeded at 12:09:47.579848 after 0.53 seconds
+[0m12:09:47.579848 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m12:09:47.580845 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028039047B50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002803FEC8050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028039387350>]}
+[0m12:09:47.580845 [debug] [MainThread]: Flushing usage events
+[0m12:09:48.396022 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:09:59.153594 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BB3AF3D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BB2C96D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BB3AFC90>]}
+
+
+============================== 12:09:59.158104 | 519b2818-ec13-44a8-ab15-e19193a667da ==============================
+[0m12:09:59.158104 [info ] [MainThread]: Running with dbt=1.11.6
+[0m12:09:59.158104 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\Administrador\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt run', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\silver-gold\\projeto_clima\\logs'}
+[0m12:09:59.316144 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BC5719D0>]}
+[0m12:09:59.366712 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BB3FD210>]}
+[0m12:09:59.367711 [info ] [MainThread]: Registered adapter: sqlite=1.10.0
+[0m12:09:59.648454 [debug] [MainThread]: checksum: ec27062d18352e9cfca161c166fcc73d2201661a23a3cf3c89196a27f32cfcb8, vars: {}, profile: , target: , version: 1.11.6
+[0m12:09:59.720546 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m12:09:59.721544 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BA386990>]}
+[0m12:10:00.559158 [warn ] [MainThread]: [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+functionality
+Found top-level arguments to test `dbt_utils.expression_is_true` defined on
+'gold_climatempo_dadosdia' in package 'projeto_clima'
+(models\climatempo\gold\schema.yml). Arguments to generic tests should be nested
+under the `arguments` property.
+[0m12:10:00.559158 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BC951990>]}
+[0m12:10:00.665563 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BCA3FDD0>]}
+[0m12:10:00.719716 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\manifest.json
+[0m12:10:00.721715 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\semantic_manifest.json
+[0m12:10:00.742741 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BCD17350>]}
+[0m12:10:00.742741 [info ] [MainThread]: Found 3 models, 16 data tests, 416 macros
+[0m12:10:00.743744 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BCC365D0>]}
+[0m12:10:00.745246 [info ] [MainThread]: 
+[0m12:10:00.746250 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m12:10:00.746250 [info ] [MainThread]: 
+[0m12:10:00.747249 [debug] [MainThread]: Acquiring new sqlite connection 'master'
+[0m12:10:00.752250 [debug] [ThreadPool]: Acquiring new sqlite connection 'list_main'
+[0m12:10:00.824826 [debug] [ThreadPool]: Using sqlite connection "list_main"
+[0m12:10:00.825939 [debug] [ThreadPool]: On list_main: BEGIN
+[0m12:10:00.825939 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:10:00.826941 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:10:00.826941 [debug] [ThreadPool]: Using sqlite connection "list_main"
+[0m12:10:00.827940 [debug] [ThreadPool]: On list_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main"} */
+
+        pragma database_list
+    
+[0m12:10:00.827940 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:10:00.828940 [debug] [ThreadPool]: On list_main: ROLLBACK
+[0m12:10:00.829941 [debug] [ThreadPool]: On list_main: Close
+[0m12:10:00.830943 [debug] [ThreadPool]: Acquiring new sqlite connection 'list_main_main'
+[0m12:10:00.836451 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:10:00.836451 [debug] [ThreadPool]: On list_main_main: BEGIN
+[0m12:10:00.836451 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:10:00.837453 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:10:00.837453 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:10:00.838452 [debug] [ThreadPool]: On list_main_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main_main"} */
+
+        pragma database_list
+    
+[0m12:10:00.838452 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:10:00.839452 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:10:00.839452 [debug] [ThreadPool]: On list_main_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main_main"} */
+
+            SELECT
+                'main' as database
+                ,name
+                ,'main' AS schema
+                ,type as data_type
+            FROM
+                main.sqlite_master
+            WHERE
+                name NOT LIKE 'sqlite_%'
+        
+[0m12:10:00.840450 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:10:00.841452 [debug] [ThreadPool]: On list_main_main: ROLLBACK
+[0m12:10:00.842455 [debug] [ThreadPool]: On list_main_main: Close
+[0m12:10:00.843453 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BC460510>]}
+[0m12:10:00.843453 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:10:00.843453 [debug] [MainThread]: On master: BEGIN
+[0m12:10:00.844452 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:10:00.844452 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:10:00.845546 [debug] [MainThread]: On master: COMMIT
+[0m12:10:00.845546 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:10:00.845546 [debug] [MainThread]: On master: COMMIT
+[0m12:10:00.846545 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m12:10:00.846545 [debug] [MainThread]: On master: Close
+[0m12:10:00.850545 [debug] [Thread-1 (]: Began running node model.projeto_clima.silver_climatempo_previsao
+[0m12:10:00.850545 [info ] [Thread-1 (]: 1 of 3 START sql table model main.silver_climatempo_previsao ................... [RUN]
+[0m12:10:00.851545 [debug] [Thread-1 (]: Acquiring new sqlite connection 'model.projeto_clima.silver_climatempo_previsao'
+[0m12:10:00.851545 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.silver_climatempo_previsao
+[0m12:10:00.857052 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.silver_climatempo_previsao"
+[0m12:10:00.858051 [debug] [Thread-1 (]: Began executing node model.projeto_clima.silver_climatempo_previsao
+[0m12:10:00.868561 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:10:00.869562 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.silver_climatempo_previsao"} */
+drop table if exists "main"."silver_climatempo_previsao"
+[0m12:10:00.870562 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m12:10:00.874561 [debug] [Thread-1 (]: SQL status: OK in 0.004 seconds
+[0m12:10:00.878615 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.silver_climatempo_previsao"
+[0m12:10:00.879615 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:10:00.880616 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: BEGIN
+[0m12:10:00.880616 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:10:00.880616 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:10:00.881615 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.silver_climatempo_previsao"} */
+
+  
+    
+    
+    create  table main."silver_climatempo_previsao"
+    as
+        
+
+WITH deduped_raw AS (
+    SELECT 
+        *,
+        ROW_NUMBER() OVER (
+            PARTITION BY DATE(dt_ingest), atualouprevisao, cidade 
+            ORDER BY dt_ingest DESC -- Mantém o registro mais recente em caso de duplicatas
+        ) as rn
+    FROM raw_climatempo_previsao
+)
+
+SELECT
+    UPPER(cidade) as cidade_id,
+    CASE 
+        WHEN atualouprevisao = 'atual' THEN 'HOJE'
+        ELSE 'AMANHA'
+    END as tipo_previsao,
+    CAST(REPLACE(tmin, '°', '') AS INTEGER) as temp_min,
+    CAST(REPLACE(tmax, '°', '') AS INTEGER) as temp_max,
+    TRIM(descricao) as clima_desc,
+    CAST(REPLACE(chuva, 'mm', '') AS FLOAT) as chuva_mm,
+    DATE(dt_ingest) as data_coleta
+FROM deduped_raw
+WHERE rn = 1
+
+  
+[0m12:10:00.882615 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:10:00.887127 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: COMMIT
+[0m12:10:00.887127 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:10:00.888126 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: COMMIT
+[0m12:10:00.890636 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m12:10:00.892634 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: Close
+[0m12:10:00.893639 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BCD538D0>]}
+[0m12:10:00.894639 [info ] [Thread-1 (]: 1 of 3 OK created sql table model main.silver_climatempo_previsao .............. [[32mOK[0m in 0.04s]
+[0m12:10:00.895149 [debug] [Thread-1 (]: Finished running node model.projeto_clima.silver_climatempo_previsao
+[0m12:10:00.896150 [debug] [Thread-1 (]: Began running node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:10:00.897149 [info ] [Thread-1 (]: 2 of 3 START sql table model main.gold_climatempo_dadosdia ..................... [RUN]
+[0m12:10:00.897149 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.projeto_clima.silver_climatempo_previsao, now model.projeto_clima.gold_climatempo_dadosdia)
+[0m12:10:00.898150 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:10:00.902150 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:10:00.903150 [debug] [Thread-1 (]: Began executing node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:10:00.905661 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:10:00.906660 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_dadosdia"} */
+drop table if exists "main"."gold_climatempo_dadosdia"
+[0m12:10:00.906660 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:10:00.909660 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m12:10:00.910660 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:10:00.911660 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:10:00.911660 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: BEGIN
+[0m12:10:00.911660 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:10:00.912662 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:10:00.912662 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_dadosdia"} */
+
+  
+    
+    
+    create  table main."gold_climatempo_dadosdia"
+    as
+        
+
+SELECT
+    cidade_id,
+    temp_min,
+    temp_max,
+    clima_desc,
+    chuva_mm,
+    data_coleta,
+    (temp_max - temp_min) as amplitude_termica
+FROM main."silver_climatempo_previsao"
+WHERE tipo_previsao = 'HOJE'
+
+  
+[0m12:10:00.913661 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:10:00.914662 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: COMMIT
+[0m12:10:00.914662 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:10:00.916017 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: COMMIT
+[0m12:10:00.919013 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m12:10:00.920015 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: Close
+[0m12:10:00.920015 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BC97BAD0>]}
+[0m12:10:00.921015 [info ] [Thread-1 (]: 2 of 3 OK created sql table model main.gold_climatempo_dadosdia ................ [[32mOK[0m in 0.02s]
+[0m12:10:00.922013 [debug] [Thread-1 (]: Finished running node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:10:00.922013 [debug] [Thread-1 (]: Began running node model.projeto_clima.gold_climatempo_previsoes
+[0m12:10:00.923013 [info ] [Thread-1 (]: 3 of 3 START sql table model main.gold_climatempo_previsoes .................... [RUN]
+[0m12:10:00.923013 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.projeto_clima.gold_climatempo_dadosdia, now model.projeto_clima.gold_climatempo_previsoes)
+[0m12:10:00.923013 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.gold_climatempo_previsoes
+[0m12:10:00.926524 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:10:00.926524 [debug] [Thread-1 (]: Began executing node model.projeto_clima.gold_climatempo_previsoes
+[0m12:10:00.930531 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:10:00.930531 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_previsoes"} */
+drop table if exists "main"."gold_climatempo_previsoes"
+[0m12:10:00.931529 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:10:00.934529 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m12:10:00.936038 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:10:00.936038 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:10:00.937040 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: BEGIN
+[0m12:10:00.937040 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:10:00.938038 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:10:00.938038 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_previsoes"} */
+
+  
+    
+    
+    create  table main."gold_climatempo_previsoes"
+    as
+        
+
+SELECT
+    cidade_id,
+    temp_min,
+    temp_max,
+    clima_desc,
+    chuva_mm,
+    data_coleta,
+    DATE(data_coleta, '+1 day') as data_previsao,
+    (temp_max - temp_min) as amplitude_termica
+FROM main."silver_climatempo_previsao"
+WHERE tipo_previsao = 'AMANHA'
+
+  
+[0m12:10:00.939037 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:10:00.940037 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: COMMIT
+[0m12:10:00.940037 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:10:00.941040 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: COMMIT
+[0m12:10:00.943037 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m12:10:00.943037 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: Close
+[0m12:10:00.944542 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '519b2818-ec13-44a8-ab15-e19193a667da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BCC1B190>]}
+[0m12:10:00.945548 [info ] [Thread-1 (]: 3 of 3 OK created sql table model main.gold_climatempo_previsoes ............... [[32mOK[0m in 0.02s]
+[0m12:10:00.945548 [debug] [Thread-1 (]: Finished running node model.projeto_clima.gold_climatempo_previsoes
+[0m12:10:00.947548 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:10:00.947548 [debug] [MainThread]: On master: BEGIN
+[0m12:10:00.947548 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m12:10:00.948547 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:10:00.948547 [debug] [MainThread]: On master: COMMIT
+[0m12:10:00.949548 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:10:00.949548 [debug] [MainThread]: On master: COMMIT
+[0m12:10:00.949548 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m12:10:00.950551 [debug] [MainThread]: On master: Close
+[0m12:10:00.950551 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m12:10:00.951548 [debug] [MainThread]: Connection 'list_main' was properly closed.
+[0m12:10:00.951548 [debug] [MainThread]: Connection 'list_main_main' was properly closed.
+[0m12:10:00.951548 [debug] [MainThread]: Connection 'model.projeto_clima.gold_climatempo_previsoes' was properly closed.
+[0m12:10:00.952549 [info ] [MainThread]: 
+[0m12:10:00.952549 [info ] [MainThread]: Finished running 3 table models in 0 hours 0 minutes and 0.21 seconds (0.21s).
+[0m12:10:00.953549 [debug] [MainThread]: Command end result
+[0m12:10:00.971562 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\manifest.json
+[0m12:10:00.973565 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\semantic_manifest.json
+[0m12:10:00.978069 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\run_results.json
+[0m12:10:00.978069 [info ] [MainThread]: 
+[0m12:10:00.979070 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m12:10:00.979070 [info ] [MainThread]: 
+[0m12:10:00.980070 [info ] [MainThread]: Done. PASS=3 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=3
+[0m12:10:00.980070 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- MissingArgumentsPropertyInGenericTestDeprecation: 6 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m12:10:00.981070 [debug] [MainThread]: Command `dbt run` succeeded at 12:10:00.981070 after 1.89 seconds
+[0m12:10:00.981070 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BB40FB50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205B4597B50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205BB43A850>]}
+[0m12:10:00.982070 [debug] [MainThread]: Flushing usage events
+[0m12:10:01.662696 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:12:29.043232 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C15EB1F710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C15EB17490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C15EB53A90>]}
+
+
+============================== 12:12:29.047231 | 9d0632b1-49c1-4260-af54-c125c7d140f5 ==============================
+[0m12:12:29.047231 [info ] [MainThread]: Running with dbt=1.11.6
+[0m12:12:29.048233 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Administrador\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt debug', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\silver-gold\\projeto_clima\\logs'}
+[0m12:12:29.062847 [info ] [MainThread]: dbt version: 1.11.6
+[0m12:12:29.062847 [info ] [MainThread]: python version: 3.11.9
+[0m12:12:29.063846 [info ] [MainThread]: python path: C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\.venv\Scripts\python.exe
+[0m12:12:29.063846 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m12:12:29.083693 [info ] [MainThread]: Using profiles dir at C:\Users\Administrador\.dbt
+[0m12:12:29.084692 [info ] [MainThread]: Using profiles.yml file at C:\Users\Administrador\.dbt\profiles.yml
+[0m12:12:29.084692 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\dbt_project.yml
+[0m12:12:29.085692 [info ] [MainThread]: adapter type: sqlite
+[0m12:12:29.085692 [info ] [MainThread]: adapter version: 1.10.0
+[0m12:12:29.173576 [info ] [MainThread]: Configuration:
+[0m12:12:29.174573 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m12:12:29.174573 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m12:12:29.175572 [info ] [MainThread]: Required dependencies:
+[0m12:12:29.175572 [debug] [MainThread]: Executing "git --help"
+[0m12:12:29.204287 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:12:29.204287 [debug] [MainThread]: STDERR: "b''"
+[0m12:12:29.205287 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:12:29.205287 [info ] [MainThread]: Connection:
+[0m12:12:29.206288 [info ] [MainThread]:   database: main
+[0m12:12:29.206288 [info ] [MainThread]:   schema: main
+[0m12:12:29.207289 [info ] [MainThread]:   schemas_and_paths: {'main': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\dataset_climatempo.db'}
+[0m12:12:29.207289 [info ] [MainThread]:   schema_directory: C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo
+[0m12:12:29.208288 [info ] [MainThread]: Registered adapter: sqlite=1.10.0
+[0m12:12:29.465867 [debug] [MainThread]: Acquiring new sqlite connection 'debug'
+[0m12:12:29.533707 [debug] [MainThread]: Using sqlite connection "debug"
+[0m12:12:29.533707 [debug] [MainThread]: On debug: select 1 as id
+[0m12:12:29.534705 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:12:29.535706 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:12:29.535706 [debug] [MainThread]: On debug: Close
+[0m12:12:29.536706 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m12:12:29.536706 [info ] [MainThread]: [32mAll checks passed![0m
+[0m12:12:29.537706 [debug] [MainThread]: Command `dbt debug` succeeded at 12:12:29.537706 after 0.56 seconds
+[0m12:12:29.538706 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m12:12:29.538706 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C157CA7B50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C15EBABF10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C15EBABF50>]}
+[0m12:12:29.538706 [debug] [MainThread]: Flushing usage events
+[0m12:12:30.416665 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:12:34.366710 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFBF39F350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFBF39F5D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFBF39FB90>]}
+
+
+============================== 12:12:34.369710 | c00a9b4a-8b5f-4fae-9a50-435a3330be78 ==============================
+[0m12:12:34.369710 [info ] [MainThread]: Running with dbt=1.11.6
+[0m12:12:34.371214 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\Administrador\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt run', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\silver-gold\\projeto_clima\\logs'}
+[0m12:12:34.496526 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFC0533D10>]}
+[0m12:12:34.545612 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFBEB40710>]}
+[0m12:12:34.546613 [info ] [MainThread]: Registered adapter: sqlite=1.10.0
+[0m12:12:34.790456 [debug] [MainThread]: checksum: ec27062d18352e9cfca161c166fcc73d2201661a23a3cf3c89196a27f32cfcb8, vars: {}, profile: , target: , version: 1.11.6
+[0m12:12:34.894159 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m12:12:34.895159 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m12:12:34.895159 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m12:12:34.926687 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFBF3FFDD0>]}
+[0m12:12:34.981632 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\manifest.json
+[0m12:12:34.983638 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\semantic_manifest.json
+[0m12:12:35.000302 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFC08F6310>]}
+[0m12:12:35.000302 [info ] [MainThread]: Found 3 models, 16 data tests, 416 macros
+[0m12:12:35.001304 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFC051B5D0>]}
+[0m12:12:35.002623 [info ] [MainThread]: 
+[0m12:12:35.002623 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m12:12:35.003623 [info ] [MainThread]: 
+[0m12:12:35.003623 [debug] [MainThread]: Acquiring new sqlite connection 'master'
+[0m12:12:35.008624 [debug] [ThreadPool]: Acquiring new sqlite connection 'list_main'
+[0m12:12:35.079752 [debug] [ThreadPool]: Using sqlite connection "list_main"
+[0m12:12:35.079752 [debug] [ThreadPool]: On list_main: BEGIN
+[0m12:12:35.079752 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:12:35.081257 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:12:35.081257 [debug] [ThreadPool]: Using sqlite connection "list_main"
+[0m12:12:35.082261 [debug] [ThreadPool]: On list_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main"} */
+
+        pragma database_list
+    
+[0m12:12:35.082261 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:12:35.083262 [debug] [ThreadPool]: On list_main: ROLLBACK
+[0m12:12:35.084261 [debug] [ThreadPool]: On list_main: Close
+[0m12:12:35.085262 [debug] [ThreadPool]: Acquiring new sqlite connection 'list_main_main'
+[0m12:12:35.089768 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:12:35.091306 [debug] [ThreadPool]: On list_main_main: BEGIN
+[0m12:12:35.091306 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:12:35.092310 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:12:35.092310 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:12:35.093310 [debug] [ThreadPool]: On list_main_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main_main"} */
+
+        pragma database_list
+    
+[0m12:12:35.093310 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:12:35.094311 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:12:35.094311 [debug] [ThreadPool]: On list_main_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main_main"} */
+
+            SELECT
+                'main' as database
+                ,name
+                ,'main' AS schema
+                ,type as data_type
+            FROM
+                main.sqlite_master
+            WHERE
+                name NOT LIKE 'sqlite_%'
+        
+[0m12:12:35.095312 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:12:35.096311 [debug] [ThreadPool]: On list_main_main: ROLLBACK
+[0m12:12:35.096311 [debug] [ThreadPool]: On list_main_main: Close
+[0m12:12:35.097310 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFC07BC5D0>]}
+[0m12:12:35.098310 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:12:35.098310 [debug] [MainThread]: On master: BEGIN
+[0m12:12:35.099311 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:12:35.099311 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:12:35.100310 [debug] [MainThread]: On master: COMMIT
+[0m12:12:35.100310 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:12:35.100310 [debug] [MainThread]: On master: COMMIT
+[0m12:12:35.100310 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m12:12:35.101313 [debug] [MainThread]: On master: Close
+[0m12:12:35.102821 [debug] [Thread-1 (]: Began running node model.projeto_clima.silver_climatempo_previsao
+[0m12:12:35.103820 [info ] [Thread-1 (]: 1 of 3 START sql table model main.silver_climatempo_previsao ................... [RUN]
+[0m12:12:35.104826 [debug] [Thread-1 (]: Acquiring new sqlite connection 'model.projeto_clima.silver_climatempo_previsao'
+[0m12:12:35.104826 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.silver_climatempo_previsao
+[0m12:12:35.109820 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.silver_climatempo_previsao"
+[0m12:12:35.111324 [debug] [Thread-1 (]: Began executing node model.projeto_clima.silver_climatempo_previsao
+[0m12:12:35.123841 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:12:35.124840 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.silver_climatempo_previsao"} */
+drop table if exists "main"."silver_climatempo_previsao"
+[0m12:12:35.124840 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m12:12:35.127839 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m12:12:35.132347 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.silver_climatempo_previsao"
+[0m12:12:35.133348 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:12:35.133348 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: BEGIN
+[0m12:12:35.134347 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:12:35.134347 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:12:35.135347 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.silver_climatempo_previsao"} */
+
+  
+    
+    
+    create  table main."silver_climatempo_previsao"
+    as
+        
+
+WITH deduped_raw AS (
+    SELECT 
+        *,
+        ROW_NUMBER() OVER (
+            PARTITION BY DATE(dt_ingest), atualouprevisao, cidade 
+            ORDER BY dt_ingest DESC -- Mantém o registro mais recente em caso de duplicatas
+        ) as rn
+    FROM raw_climatempo_previsao
+)
+
+SELECT
+    UPPER(cidade) as cidade_id,
+    CASE 
+        WHEN atualouprevisao = 'atual' THEN 'HOJE'
+        ELSE 'AMANHA'
+    END as tipo_previsao,
+    CAST(REPLACE(tmin, '°', '') AS INTEGER) as temp_min,
+    CAST(REPLACE(tmax, '°', '') AS INTEGER) as temp_max,
+    TRIM(descricao) as clima_desc,
+    CAST(REPLACE(chuva, 'mm', '') AS FLOAT) as chuva_mm,
+    DATE(dt_ingest) as data_coleta
+FROM deduped_raw
+WHERE rn = 1
+
+  
+[0m12:12:35.136348 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:12:35.177023 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: COMMIT
+[0m12:12:35.177023 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:12:35.178023 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: COMMIT
+[0m12:12:35.180025 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m12:12:35.182534 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: Close
+[0m12:12:35.183534 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFC0D9B8D0>]}
+[0m12:12:35.184534 [info ] [Thread-1 (]: 1 of 3 OK created sql table model main.silver_climatempo_previsao .............. [[32mOK[0m in 0.08s]
+[0m12:12:35.184534 [debug] [Thread-1 (]: Finished running node model.projeto_clima.silver_climatempo_previsao
+[0m12:12:35.185538 [debug] [Thread-1 (]: Began running node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:12:35.186533 [info ] [Thread-1 (]: 2 of 3 START sql table model main.gold_climatempo_dadosdia ..................... [RUN]
+[0m12:12:35.186533 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.projeto_clima.silver_climatempo_previsao, now model.projeto_clima.gold_climatempo_dadosdia)
+[0m12:12:35.186533 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:12:35.190038 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:12:35.190038 [debug] [Thread-1 (]: Began executing node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:12:35.194589 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:12:35.194589 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_dadosdia"} */
+drop table if exists "main"."gold_climatempo_dadosdia"
+[0m12:12:35.195589 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:12:35.235383 [debug] [Thread-1 (]: SQL status: OK in 0.040 seconds
+[0m12:12:35.237384 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:12:35.238384 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:12:35.238384 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: BEGIN
+[0m12:12:35.238384 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:12:35.239387 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:12:35.239387 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_dadosdia"} */
+
+  
+    
+    
+    create  table main."gold_climatempo_dadosdia"
+    as
+        
+
+SELECT
+    cidade_id,
+    temp_min,
+    temp_max,
+    clima_desc,
+    chuva_mm,
+    data_coleta,
+    (temp_max - temp_min) as amplitude_termica
+FROM main."silver_climatempo_previsao"
+WHERE tipo_previsao = 'HOJE'
+
+  
+[0m12:12:35.241384 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:12:35.241384 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: COMMIT
+[0m12:12:35.242453 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:12:35.242453 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: COMMIT
+[0m12:12:35.245453 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m12:12:35.246453 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: Close
+[0m12:12:35.247452 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFC0DC42D0>]}
+[0m12:12:35.247452 [info ] [Thread-1 (]: 2 of 3 OK created sql table model main.gold_climatempo_dadosdia ................ [[32mOK[0m in 0.06s]
+[0m12:12:35.248453 [debug] [Thread-1 (]: Finished running node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:12:35.248453 [debug] [Thread-1 (]: Began running node model.projeto_clima.gold_climatempo_previsoes
+[0m12:12:35.249453 [info ] [Thread-1 (]: 3 of 3 START sql table model main.gold_climatempo_previsoes .................... [RUN]
+[0m12:12:35.249453 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.projeto_clima.gold_climatempo_dadosdia, now model.projeto_clima.gold_climatempo_previsoes)
+[0m12:12:35.250454 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.gold_climatempo_previsoes
+[0m12:12:35.252961 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:12:35.253961 [debug] [Thread-1 (]: Began executing node model.projeto_clima.gold_climatempo_previsoes
+[0m12:12:35.256962 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:12:35.256962 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_previsoes"} */
+drop table if exists "main"."gold_climatempo_previsoes"
+[0m12:12:35.257962 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:12:35.261467 [debug] [Thread-1 (]: SQL status: OK in 0.004 seconds
+[0m12:12:35.262475 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:12:35.263475 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:12:35.264477 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: BEGIN
+[0m12:12:35.264477 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:12:35.264477 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:12:35.265472 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_previsoes"} */
+
+  
+    
+    
+    create  table main."gold_climatempo_previsoes"
+    as
+        
+
+SELECT
+    cidade_id,
+    temp_min,
+    temp_max,
+    clima_desc,
+    chuva_mm,
+    data_coleta,
+    DATE(data_coleta, '+1 day') as data_previsao,
+    (temp_max - temp_min) as amplitude_termica
+FROM main."silver_climatempo_previsao"
+WHERE tipo_previsao = 'AMANHA'
+
+  
+[0m12:12:35.266472 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:12:35.266472 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: COMMIT
+[0m12:12:35.267474 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:12:35.267474 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: COMMIT
+[0m12:12:35.269471 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m12:12:35.270472 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: Close
+[0m12:12:35.271472 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c00a9b4a-8b5f-4fae-9a50-435a3330be78', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFC050DA10>]}
+[0m12:12:35.271472 [info ] [Thread-1 (]: 3 of 3 OK created sql table model main.gold_climatempo_previsoes ............... [[32mOK[0m in 0.02s]
+[0m12:12:35.272575 [debug] [Thread-1 (]: Finished running node model.projeto_clima.gold_climatempo_previsoes
+[0m12:12:35.273574 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:12:35.274574 [debug] [MainThread]: On master: BEGIN
+[0m12:12:35.274574 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m12:12:35.275573 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:12:35.275573 [debug] [MainThread]: On master: COMMIT
+[0m12:12:35.276573 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:12:35.276573 [debug] [MainThread]: On master: COMMIT
+[0m12:12:35.276573 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m12:12:35.277578 [debug] [MainThread]: On master: Close
+[0m12:12:35.277578 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m12:12:35.278574 [debug] [MainThread]: Connection 'list_main' was properly closed.
+[0m12:12:35.278574 [debug] [MainThread]: Connection 'list_main_main' was properly closed.
+[0m12:12:35.278574 [debug] [MainThread]: Connection 'model.projeto_clima.gold_climatempo_previsoes' was properly closed.
+[0m12:12:35.279574 [info ] [MainThread]: 
+[0m12:12:35.279574 [info ] [MainThread]: Finished running 3 table models in 0 hours 0 minutes and 0.28 seconds (0.28s).
+[0m12:12:35.280573 [debug] [MainThread]: Command end result
+[0m12:12:35.299729 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\manifest.json
+[0m12:12:35.303240 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\semantic_manifest.json
+[0m12:12:35.307239 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\run_results.json
+[0m12:12:35.308241 [info ] [MainThread]: 
+[0m12:12:35.308241 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m12:12:35.309240 [info ] [MainThread]: 
+[0m12:12:35.309240 [info ] [MainThread]: Done. PASS=3 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=3
+[0m12:12:35.310240 [debug] [MainThread]: Command `dbt run` succeeded at 12:12:35.310240 after 1.00 seconds
+[0m12:12:35.311241 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFB85D7B50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFB899C7D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FFBDFB2E10>]}
+[0m12:12:35.311241 [debug] [MainThread]: Flushing usage events
+[0m12:12:35.976434 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:13:25.337467 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA784FFA50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA78292310>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA78292890>]}
+
+
+============================== 12:13:25.340971 | def1967a-0154-4769-b12d-39f3bb670d3b ==============================
+[0m12:13:25.340971 [info ] [MainThread]: Running with dbt=1.11.6
+[0m12:13:25.341973 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Administrador\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt run', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\Administrador\\Downloads\\webclimatempo\\webscreaping-climatempo\\silver-gold\\projeto_clima\\logs'}
+[0m12:13:25.470293 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA795B0210>]}
+[0m12:13:25.519442 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA77CA0710>]}
+[0m12:13:25.520950 [info ] [MainThread]: Registered adapter: sqlite=1.10.0
+[0m12:13:25.773642 [debug] [MainThread]: checksum: ec27062d18352e9cfca161c166fcc73d2201661a23a3cf3c89196a27f32cfcb8, vars: {}, profile: , target: , version: 1.11.6
+[0m12:13:25.882271 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m12:13:25.883272 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m12:13:25.883272 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m12:13:25.914796 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA79A279D0>]}
+[0m12:13:25.971368 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\manifest.json
+[0m12:13:25.973370 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\semantic_manifest.json
+[0m12:13:25.990387 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA79B5CF10>]}
+[0m12:13:25.991393 [info ] [MainThread]: Found 3 models, 16 data tests, 416 macros
+[0m12:13:25.991393 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA7991D710>]}
+[0m12:13:25.993393 [info ] [MainThread]: 
+[0m12:13:25.994392 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m12:13:25.994392 [info ] [MainThread]: 
+[0m12:13:25.995393 [debug] [MainThread]: Acquiring new sqlite connection 'master'
+[0m12:13:25.999393 [debug] [ThreadPool]: Acquiring new sqlite connection 'list_main'
+[0m12:13:26.070120 [debug] [ThreadPool]: Using sqlite connection "list_main"
+[0m12:13:26.071125 [debug] [ThreadPool]: On list_main: BEGIN
+[0m12:13:26.071125 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:13:26.072128 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:13:26.072128 [debug] [ThreadPool]: Using sqlite connection "list_main"
+[0m12:13:26.072128 [debug] [ThreadPool]: On list_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main"} */
+
+        pragma database_list
+    
+[0m12:13:26.073128 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:13:26.074127 [debug] [ThreadPool]: On list_main: ROLLBACK
+[0m12:13:26.074127 [debug] [ThreadPool]: On list_main: Close
+[0m12:13:26.075128 [debug] [ThreadPool]: Acquiring new sqlite connection 'list_main_main'
+[0m12:13:26.080632 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:13:26.081635 [debug] [ThreadPool]: On list_main_main: BEGIN
+[0m12:13:26.081635 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:13:26.082637 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m12:13:26.082637 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:13:26.083635 [debug] [ThreadPool]: On list_main_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main_main"} */
+
+        pragma database_list
+    
+[0m12:13:26.083635 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:13:26.084636 [debug] [ThreadPool]: Using sqlite connection "list_main_main"
+[0m12:13:26.084636 [debug] [ThreadPool]: On list_main_main: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "connection_name": "list_main_main"} */
+
+            SELECT
+                'main' as database
+                ,name
+                ,'main' AS schema
+                ,type as data_type
+            FROM
+                main.sqlite_master
+            WHERE
+                name NOT LIKE 'sqlite_%'
+        
+[0m12:13:26.085634 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m12:13:26.086636 [debug] [ThreadPool]: On list_main_main: ROLLBACK
+[0m12:13:26.086636 [debug] [ThreadPool]: On list_main_main: Close
+[0m12:13:26.087638 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA79DD3C10>]}
+[0m12:13:26.088635 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:13:26.088635 [debug] [MainThread]: On master: BEGIN
+[0m12:13:26.088635 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:13:26.088635 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:13:26.090141 [debug] [MainThread]: On master: COMMIT
+[0m12:13:26.090141 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:13:26.090141 [debug] [MainThread]: On master: COMMIT
+[0m12:13:26.091147 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m12:13:26.091147 [debug] [MainThread]: On master: Close
+[0m12:13:26.093147 [debug] [Thread-1 (]: Began running node model.projeto_clima.silver_climatempo_previsao
+[0m12:13:26.094150 [info ] [Thread-1 (]: 1 of 3 START sql table model main.silver_climatempo_previsao ................... [RUN]
+[0m12:13:26.095148 [debug] [Thread-1 (]: Acquiring new sqlite connection 'model.projeto_clima.silver_climatempo_previsao'
+[0m12:13:26.095148 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.silver_climatempo_previsao
+[0m12:13:26.100652 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.silver_climatempo_previsao"
+[0m12:13:26.101654 [debug] [Thread-1 (]: Began executing node model.projeto_clima.silver_climatempo_previsao
+[0m12:13:26.114165 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:13:26.115165 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.silver_climatempo_previsao"} */
+drop table if exists "main"."silver_climatempo_previsao"
+[0m12:13:26.115165 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m12:13:26.119167 [debug] [Thread-1 (]: SQL status: OK in 0.004 seconds
+[0m12:13:26.122678 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.silver_climatempo_previsao"
+[0m12:13:26.123677 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:13:26.123677 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: BEGIN
+[0m12:13:26.124678 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:13:26.124678 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:13:26.125678 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.silver_climatempo_previsao"} */
+
+  
+    
+    
+    create  table main."silver_climatempo_previsao"
+    as
+        
+
+WITH deduped_raw AS (
+    SELECT 
+        *,
+        ROW_NUMBER() OVER (
+            PARTITION BY DATE(dt_ingest), atualouprevisao, cidade 
+            ORDER BY dt_ingest DESC -- Mantém o registro mais recente em caso de duplicatas
+        ) as rn
+    FROM raw_climatempo_previsao
+)
+
+SELECT
+    UPPER(cidade) as cidade_id,
+    CASE 
+        WHEN atualouprevisao = 'atual' THEN 'HOJE'
+        ELSE 'AMANHA'
+    END as tipo_previsao,
+    CAST(REPLACE(tmin, '°', '') AS INTEGER) as temp_min,
+    CAST(REPLACE(tmax, '°', '') AS INTEGER) as temp_max,
+    TRIM(descricao) as clima_desc,
+    CAST(REPLACE(chuva, 'mm', '') AS FLOAT) as chuva_mm,
+    DATE(dt_ingest) as data_coleta
+FROM deduped_raw
+WHERE rn = 1
+
+  
+[0m12:13:26.127186 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:13:26.170739 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: COMMIT
+[0m12:13:26.171744 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.silver_climatempo_previsao"
+[0m12:13:26.171744 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: COMMIT
+[0m12:13:26.173740 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m12:13:26.175740 [debug] [Thread-1 (]: On model.projeto_clima.silver_climatempo_previsao: Close
+[0m12:13:26.177742 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA74402450>]}
+[0m12:13:26.178744 [info ] [Thread-1 (]: 1 of 3 OK created sql table model main.silver_climatempo_previsao .............. [[32mOK[0m in 0.08s]
+[0m12:13:26.178744 [debug] [Thread-1 (]: Finished running node model.projeto_clima.silver_climatempo_previsao
+[0m12:13:26.178744 [debug] [Thread-1 (]: Began running node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:13:26.180251 [info ] [Thread-1 (]: 2 of 3 START sql table model main.gold_climatempo_dadosdia ..................... [RUN]
+[0m12:13:26.180251 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.projeto_clima.silver_climatempo_previsao, now model.projeto_clima.gold_climatempo_dadosdia)
+[0m12:13:26.181257 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:13:26.184258 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:13:26.185256 [debug] [Thread-1 (]: Began executing node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:13:26.188256 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:13:26.188256 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_dadosdia"} */
+drop table if exists "main"."gold_climatempo_dadosdia"
+[0m12:13:26.189259 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:13:26.192348 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m12:13:26.193352 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:13:26.194349 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:13:26.194349 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: BEGIN
+[0m12:13:26.195349 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:13:26.195349 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:13:26.195349 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_dadosdia"} */
+
+  
+    
+    
+    create  table main."gold_climatempo_dadosdia"
+    as
+        
+
+SELECT
+    cidade_id,
+    temp_min,
+    temp_max,
+    clima_desc,
+    chuva_mm,
+    data_coleta,
+    (temp_max - temp_min) as amplitude_termica
+FROM main."silver_climatempo_previsao"
+WHERE tipo_previsao = 'HOJE'
+
+  
+[0m12:13:26.197350 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:13:26.198348 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: COMMIT
+[0m12:13:26.198348 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_dadosdia"
+[0m12:13:26.199350 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: COMMIT
+[0m12:13:26.201446 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m12:13:26.202443 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_dadosdia: Close
+[0m12:13:26.202443 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA79F4BC90>]}
+[0m12:13:26.203444 [info ] [Thread-1 (]: 2 of 3 OK created sql table model main.gold_climatempo_dadosdia ................ [[32mOK[0m in 0.02s]
+[0m12:13:26.204446 [debug] [Thread-1 (]: Finished running node model.projeto_clima.gold_climatempo_dadosdia
+[0m12:13:26.204446 [debug] [Thread-1 (]: Began running node model.projeto_clima.gold_climatempo_previsoes
+[0m12:13:26.204446 [info ] [Thread-1 (]: 3 of 3 START sql table model main.gold_climatempo_previsoes .................... [RUN]
+[0m12:13:26.205445 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.projeto_clima.gold_climatempo_dadosdia, now model.projeto_clima.gold_climatempo_previsoes)
+[0m12:13:26.205445 [debug] [Thread-1 (]: Began compiling node model.projeto_clima.gold_climatempo_previsoes
+[0m12:13:26.208444 [debug] [Thread-1 (]: Writing injected SQL for node "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:13:26.209443 [debug] [Thread-1 (]: Began executing node model.projeto_clima.gold_climatempo_previsoes
+[0m12:13:26.211951 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:13:26.211951 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_previsoes"} */
+drop table if exists "main"."gold_climatempo_previsoes"
+[0m12:13:26.212955 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:13:26.216951 [debug] [Thread-1 (]: SQL status: OK in 0.004 seconds
+[0m12:13:26.217952 [debug] [Thread-1 (]: Writing runtime sql for node "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:13:26.217952 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:13:26.218956 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: BEGIN
+[0m12:13:26.218956 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m12:13:26.218956 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:13:26.218956 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "projeto_clima", "target_name": "dev", "node_id": "model.projeto_clima.gold_climatempo_previsoes"} */
+
+  
+    
+    
+    create  table main."gold_climatempo_previsoes"
+    as
+        
+
+SELECT
+    cidade_id,
+    temp_min,
+    temp_max,
+    clima_desc,
+    chuva_mm,
+    data_coleta,
+    DATE(data_coleta, '+1 day') as data_previsao,
+    (temp_max - temp_min) as amplitude_termica
+FROM main."silver_climatempo_previsao"
+WHERE tipo_previsao = 'AMANHA'
+
+  
+[0m12:13:26.220462 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m12:13:26.221470 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: COMMIT
+[0m12:13:26.221470 [debug] [Thread-1 (]: Using sqlite connection "model.projeto_clima.gold_climatempo_previsoes"
+[0m12:13:26.222467 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: COMMIT
+[0m12:13:26.224470 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m12:13:26.225467 [debug] [Thread-1 (]: On model.projeto_clima.gold_climatempo_previsoes: Close
+[0m12:13:26.225467 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'def1967a-0154-4769-b12d-39f3bb670d3b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA76FE7BD0>]}
+[0m12:13:26.226469 [info ] [Thread-1 (]: 3 of 3 OK created sql table model main.gold_climatempo_previsoes ............... [[32mOK[0m in 0.02s]
+[0m12:13:26.227466 [debug] [Thread-1 (]: Finished running node model.projeto_clima.gold_climatempo_previsoes
+[0m12:13:26.227972 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:13:26.228974 [debug] [MainThread]: On master: BEGIN
+[0m12:13:26.228974 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m12:13:26.228974 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m12:13:26.230479 [debug] [MainThread]: On master: COMMIT
+[0m12:13:26.230479 [debug] [MainThread]: Using sqlite connection "master"
+[0m12:13:26.230479 [debug] [MainThread]: On master: COMMIT
+[0m12:13:26.231484 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m12:13:26.231484 [debug] [MainThread]: On master: Close
+[0m12:13:26.232490 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m12:13:26.232490 [debug] [MainThread]: Connection 'list_main' was properly closed.
+[0m12:13:26.232490 [debug] [MainThread]: Connection 'list_main_main' was properly closed.
+[0m12:13:26.233490 [debug] [MainThread]: Connection 'model.projeto_clima.gold_climatempo_previsoes' was properly closed.
+[0m12:13:26.233490 [info ] [MainThread]: 
+[0m12:13:26.234488 [info ] [MainThread]: Finished running 3 table models in 0 hours 0 minutes and 0.24 seconds (0.24s).
+[0m12:13:26.235489 [debug] [MainThread]: Command end result
+[0m12:13:26.252512 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\manifest.json
+[0m12:13:26.255512 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\semantic_manifest.json
+[0m12:13:26.261022 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima\target\run_results.json
+[0m12:13:26.261022 [info ] [MainThread]: 
+[0m12:13:26.261022 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m12:13:26.262027 [info ] [MainThread]: 
+[0m12:13:26.262027 [info ] [MainThread]: Done. PASS=3 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=3
+[0m12:13:26.263026 [debug] [MainThread]: Command `dbt run` succeeded at 12:13:26.263026 after 0.99 seconds
+[0m12:13:26.264024 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA71707B50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA71A47390>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EA71ACC1D0>]}
+[0m12:13:26.264024 [debug] [MainThread]: Flushing usage events
+[0m12:13:26.917196 [debug] [MainThread]: An error was encountered while trying to flush usage events

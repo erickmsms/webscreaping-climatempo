@@ -65,3 +65,50 @@ Runtime Error
 [0m09:52:26.851213 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C7615BCBC0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C7642F4890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C7634917F0>]}
 [0m09:52:26.852456 [debug] [MainThread]: Flushing usage events
 [0m09:52:28.267868 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:03:07.308521 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025EB1370410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025EB4B97710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025EB4B9B750>]}
+
+
+============================== 12:03:07.313024 | be9562b4-6828-438c-8047-bd13dc9aafe5 ==============================
+[0m12:03:07.313024 [info ] [MainThread]: Running with dbt=1.11.6
+[0m12:03:07.314028 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\Administrador\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'invocation_command': 'dbt debug', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m12:03:07.326535 [info ] [MainThread]: dbt version: 1.11.6
+[0m12:03:07.326535 [info ] [MainThread]: python version: 3.11.9
+[0m12:03:07.327536 [info ] [MainThread]: python path: C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\.venv\Scripts\python.exe
+[0m12:03:07.328540 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m12:03:07.355999 [info ] [MainThread]: Using profiles dir at C:\Users\Administrador\.dbt
+[0m12:03:07.356999 [info ] [MainThread]: Using profiles.yml file at C:\Users\Administrador\.dbt\profiles.yml
+[0m12:03:07.356999 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\dbt_project.yml
+[0m12:03:07.358000 [info ] [MainThread]: adapter type: sqlite
+[0m12:03:07.358000 [info ] [MainThread]: adapter version: 1.10.0
+[0m12:03:07.359001 [info ] [MainThread]: Configuration:
+[0m12:03:07.359001 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m12:03:07.360000 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m12:03:07.360000 [info ] [MainThread]: Required dependencies:
+[0m12:03:07.361000 [debug] [MainThread]: Executing "git --help"
+[0m12:03:07.391527 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:03:07.391527 [debug] [MainThread]: STDERR: "b''"
+[0m12:03:07.391527 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:03:07.391527 [info ] [MainThread]: Connection:
+[0m12:03:07.393033 [info ] [MainThread]:   database: bd_ackta_tratado
+[0m12:03:07.393033 [info ] [MainThread]:   schema: main
+[0m12:03:07.394039 [info ] [MainThread]:   schemas_and_paths: {'main': 'C:/Users/Administrador/Documents/BD Ackta/bd_ackta_tratado.db'}
+[0m12:03:07.394039 [info ] [MainThread]:   schema_directory: C:/Users/Administrador/Documents/BD Ackta
+[0m12:03:07.395039 [info ] [MainThread]: Registered adapter: sqlite=1.10.0
+[0m12:03:07.646970 [debug] [MainThread]: Acquiring new sqlite connection 'debug'
+[0m12:03:07.709239 [debug] [MainThread]: Using sqlite connection "debug"
+[0m12:03:07.709239 [debug] [MainThread]: On debug: select 1 as id
+[0m12:03:07.709239 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:03:07.714269 [debug] [MainThread]: SQL status: OK in 0.005 seconds
+[0m12:03:07.715269 [debug] [MainThread]: On debug: Close
+[0m12:03:07.715269 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m12:03:07.716269 [info ] [MainThread]: [31m1 check failed:[0m
+[0m12:03:07.716269 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\dbt_project.yml> not found
+
+[0m12:03:07.717270 [debug] [MainThread]: Command `dbt debug` failed at 12:03:07.717270 after 0.47 seconds
+[0m12:03:07.717270 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m12:03:07.718269 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025EB5DC2190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025EAE0FC1D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025EB4B26E90>]}
+[0m12:03:07.718269 [debug] [MainThread]: Flushing usage events
+[0m12:03:08.545907 [debug] [MainThread]: An error was encountered while trying to flush usage events
