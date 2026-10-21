@@ -6,6 +6,9 @@ import type { Painel } from "@/lib/analise/painel";
 import { GLOSSARIO } from "@/lib/apresentacao/glossario";
 import { textoDoDestaque } from "@/lib/apresentacao/textos";
 
+/** Com a coluna de correlação ao lado, o gráfico cresce para ficar da altura dela. */
+const ALTURA_COM_CORRELACAO = 418;
+
 type Props = { painel: Painel; cores: Record<string, string> };
 
 /** Erro de chuva por dia, com os maiores erros anotados no gráfico e, ao lado, a correlação entre as cidades. */
@@ -20,7 +23,7 @@ export function ErroDeChuva({ painel, cores }: Props) {
           <GraficoLinhas
             rotulo="Erro de chuva por dia"
             unidade="mm"
-            altura={300}
+            altura={painel.correlacoes ? ALTURA_COM_CORRELACAO : 300}
             series={desenharSeries(painel.graficos.chuva, painel.cidades[0], cores)}
             anotacoes={painel.destaquesChuva.map((d) => ({
               x: d.dia,
