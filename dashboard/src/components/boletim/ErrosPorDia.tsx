@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { CorrelacaoDeErros } from "@/components/boletim/CorrelacaoDeErros";
 import { GraficoLinhas } from "@/components/graficos/GraficoLinhas";
 import { desenharSeries } from "@/components/graficos/series";
+import { Chips } from "@/components/ui/Chips";
 import { Secao } from "@/components/ui/Secao";
 import type { Painel } from "@/lib/analise/painel";
 import { GLOSSARIO } from "@/lib/apresentacao/glossario";
@@ -11,21 +15,52 @@ const ALTURA_COM_CORRELACAO = 418;
 
 type Props = { painel: Painel; cores: Record<string, string> };
 
-/** Erro de chuva por dia, com os maiores erros anotados no gráfico e, ao lado, a correlação entre as cidades. */
-export function ErroDeChuva({ painel, cores }: Props) {
+const VARIAVEIS = [
+  { chave: "chuva", chip: "Chuva", rotulo: "Erro de chuva por dia", unidade: "mm", dica: GLOSSARIO.chuvaPorDia },
+  {
+    chave: "temperaturaMax",
+    chip: "Temperatura máxima",
+    rotulo: "Erro na temperatura máxima por dia",
+    unidade: "°C",
+    dica: GLOSSARIO.temperaturaPorDia,
+  },
+  {
+    chave: "temperaturaMin",
+    chip: "Temperatura mínima",
+    rotulo: "Erro na temperatura mínima por dia",
+    unidade: "°C",
+    dica: GLOSSARIO.temperaturaPorDia,
+  },
+] as const;
+
+type Variavel = (typeof VARIAVEIS)[number]["chave"];
+
+const OPCOES = VARIAVEIS.map((v) => ({ valor: v.chave, rotulo: v.chip }));
+
+/**
+ * Erro por dia de uma variável à escolha (chuva ou temperatura), com os maiores erros de chuva anotados
+ * no gráfico e, ao lado, a correlação entre as cidades. Trocar de variável só muda a escala: a altura fica.
+ */
+export function ErroPorDia({ painel, cores }: Props) {
+  const [chave, setChave] = useState<Variavel>("chuva");
+  const variavel = VARIAVEIS.find((v) => v.chave === chave) ?? VARIAVEIS[0];
+  const anotacoes = chave === "chuva" ? painel.destaquesChuva : [];
+
   return (
     <Secao
-      titulo={painel.destaquesChuva.length > 0 ? "Quando a previsão errou feio" : "Erro na chuva, dia a dia"}
-      dica={GLOSSARIO.chuvaPorDia}
+      titulo={painel.destaquesChuva.length > 0 ? "Quando a previsão errou feio" : "Erro por dia"}
+      dica={variavel.dica}
     >
+      <Chips rotulo="Erro a mostrar no gráfico" opcoes={OPCOES} valor={chave} aoEscolher={setChave} />
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
         <div className="min-w-0 flex-1">
           <GraficoLinhas
-            rotulo="Erro de chuva por dia"
-            unidade="mm"
+            key={chave}
+            rotulo={variavel.rotulo}
+            unidade={variavel.unidade}
             altura={painel.correlacoes ? ALTURA_COM_CORRELACAO : 300}
-            series={desenharSeries(painel.graficos.chuva, painel.cidades[0], cores)}
-            anotacoes={painel.destaquesChuva.map((d) => ({
+            series={desenharSeries(painel.graficos[chave], painel.cidades[0], cores)}
+            anotacoes={anotacoes.map((d) => ({
               x: d.dia,
               y: d.erro,
               cor: cores[d.cidade_id],

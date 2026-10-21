@@ -5,7 +5,7 @@ import { Abertura } from "@/components/boletim/Abertura";
 import { Cabecalho } from "@/components/boletim/Cabecalho";
 import { COLUNAS_POR_CIDADE } from "@/components/boletim/colunas";
 import { ComoMedimos } from "@/components/boletim/ComoMedimos";
-import { ErroDeChuva, ErroDeTemperatura } from "@/components/boletim/ErrosPorDia";
+import { ErroDeTemperatura, ErroPorDia } from "@/components/boletim/ErrosPorDia";
 import { NumerosPrincipais } from "@/components/boletim/NumerosPrincipais";
 import { QuadroMetricas } from "@/components/boletim/QuadroMetricas";
 import { Ranking } from "@/components/boletim/Ranking";
@@ -40,7 +40,7 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
               <Ranking linhas={painel.ranking} cores={cores} selecionadas={painel.numCidades < opcoes.length ? painel.cidades : undefined} />
             </Secao>
 
-            <ErroDeChuva painel={painel} cores={cores} />
+            <ErroPorDia painel={painel} cores={cores} />
             <ErroDeTemperatura painel={painel} cores={cores} />
 
             {painel.porCidade && (
