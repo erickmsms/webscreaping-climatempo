@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import { formatarDecimal, formatarDia } from "@/lib/apresentacao/formato";
 import type { PontoSerie } from "@/lib/analise/painel";
 
@@ -93,12 +93,15 @@ export function GraficoLinhas({
   series,
   anotacoes = [],
   altura = 260,
+  acoes,
 }: {
   rotulo: string;
   unidade: string;
   series: SerieDesenho[];
   anotacoes?: Anotacao[];
   altura?: number;
+  /** Controles na linha da legenda, alinhados à direita (por exemplo, um seletor). */
+  acoes?: ReactNode;
 }) {
   const [ref, largura] = useLargura<HTMLDivElement>();
   const [ativo, setAtivo] = useState<number | null>(null);
@@ -121,7 +124,7 @@ export function GraficoLinhas({
   }, [series, largura, altura]);
 
   const { datas, y, px, py } = desenho;
-  const tAtivo = ativo === null ? null : datas[ativo];
+  const tAtivo = ativo === null ? null : (datas[ativo] ?? null);
 
   function aoMoverPonteiro(e: PointerEvent<SVGSVGElement>) {
     const x = e.clientX - e.currentTarget.getBoundingClientRect().left;
@@ -153,15 +156,20 @@ export function GraficoLinhas({
 
   return (
     <figure className="m-0 flex flex-col gap-3">
-      {series.length >= 2 && (
-        <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
-          {series.map((s) => (
-            <li key={s.nome} className="flex items-center gap-2">
-              <span aria-hidden className="inline-block h-[3px] w-[18px] rounded-full" style={{ background: s.cor }} />
-              {s.nome}
-            </li>
-          ))}
-        </ul>
+      {(series.length >= 2 || acoes) && (
+        <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
+          {series.length >= 2 && (
+            <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+              {series.map((s) => (
+                <li key={s.nome} className="flex items-center gap-2">
+                  <span aria-hidden className="inline-block h-[3px] w-[18px] rounded-full" style={{ background: s.cor }} />
+                  {s.nome}
+                </li>
+              ))}
+            </ul>
+          )}
+          {acoes && <div className="ml-auto">{acoes}</div>}
+        </div>
       )}
 
       {/* overflow-hidden: no HTML pré-renderizado o SVG ainda tem a largura padrão, até o ResizeObserver medir. */}

@@ -4,14 +4,14 @@ import { useState } from "react";
 import { CorrelacaoDeErros } from "@/components/boletim/CorrelacaoDeErros";
 import { GraficoLinhas } from "@/components/graficos/GraficoLinhas";
 import { desenharSeries } from "@/components/graficos/series";
-import { Chips } from "@/components/ui/Chips";
 import { Secao } from "@/components/ui/Secao";
+import { SeletorUnico } from "@/components/ui/SeletorUnico";
 import type { Painel } from "@/lib/analise/painel";
 import { GLOSSARIO } from "@/lib/apresentacao/glossario";
 import { textoDoDestaque } from "@/lib/apresentacao/textos";
 
 /** Com a coluna de correlação ao lado, o gráfico cresce para ficar da altura dela. */
-const ALTURA_COM_CORRELACAO = 418;
+const ALTURA_COM_CORRELACAO = 394;
 
 type Props = { painel: Painel; cores: Record<string, string> };
 
@@ -51,14 +51,13 @@ export function ErroPorDia({ painel, cores }: Props) {
       titulo={painel.destaquesChuva.length > 0 ? "Quando a previsão errou feio" : "Erro por dia"}
       dica={variavel.dica}
     >
-      <Chips rotulo="Erro a mostrar no gráfico" opcoes={OPCOES} valor={chave} aoEscolher={setChave} />
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
         <div className="min-w-0 flex-1">
           <GraficoLinhas
-            key={chave}
             rotulo={variavel.rotulo}
             unidade={variavel.unidade}
             altura={painel.correlacoes ? ALTURA_COM_CORRELACAO : 300}
+            acoes={<SeletorUnico rotulo="Erro" opcoes={OPCOES} valor={chave} aoEscolher={setChave} />}
             series={desenharSeries(painel.graficos[chave], painel.cidades[0], cores)}
             anotacoes={anotacoes.map((d) => ({
               x: d.dia,
