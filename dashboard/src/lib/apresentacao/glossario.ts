@@ -51,10 +51,12 @@ export const GLOSSARIO = {
     "Previsto − real, em °C. Acima de zero, a previsão foi mais quente que o dia; abaixo, mais fria.",
 
   correlacao:
-    "Mede se duas cidades erram juntas. Vai de −1 a +1: perto de +1, quando uma erra para mais a outra também; " +
-    "perto de zero, os erros de uma não dizem nada sobre os da outra; perto de −1, quando uma erra para mais a outra " +
-    "erra para menos. O índice de cada quadro é a média de todos os pares de cidades. " +
-    "Pares com poucos dias em comum ficam sem valor.",
+    "Responde se, quando uma cidade erra num dia, as outras erram junto. Para cada par de cidades, comparamos os " +
+    "erros de cada dia e medimos o quanto eles andam juntos, numa escala de −1 a +1; o índice é a média de todos os pares. " +
+    "Perto de +1: quando uma erra para mais, a outra também (erros em comum, como uma frente fria que ninguém previu). " +
+    "Perto de zero: os erros de uma cidade não dizem nada sobre os das outras. " +
+    "Perto de −1: quando uma erra para mais, a outra erra para menos. " +
+    "Mostramos um índice para a chuva, um para a temperatura máxima e um para a mínima. Aparece com duas ou mais cidades marcadas.",
 
   porCidade:
     "Erro médio e acerto de chuva em cada cidade, do maior para o menor erro na máxima.",

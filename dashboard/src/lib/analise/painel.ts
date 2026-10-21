@@ -7,7 +7,7 @@
  * antigo dashboard Streamlit.
  */
 import type { LinhaComparada } from "@/lib/analise/comparacao";
-import { matrizDeCorrelacao, type MatrizDeCorrelacao } from "@/lib/analise/correlacao";
+import { matrizDeCorrelacao } from "@/lib/analise/correlacao";
 import {
   acuraciaChuvaBinaria,
   acuraciaDescricao,
@@ -57,8 +57,8 @@ export type Painel = {
   /** Métricas por cidade (só com mais de uma cidade). */
   porCidade: MetricasCidade[] | null;
   graficos: { temperaturaMax: GraficoErro; temperaturaMin: GraficoErro; chuva: GraficoErro };
-  /** Correlação entre os erros das cidades (só com mais de uma cidade). */
-  correlacoes: { chuva: MatrizDeCorrelacao; temperaturaMax: MatrizDeCorrelacao; temperaturaMin: MatrizDeCorrelacao } | null;
+  /** Índice de correlação entre os erros das cidades, por tipo de erro (só com mais de uma cidade). */
+  correlacoes: { chuva: number; temperaturaMax: number; temperaturaMin: number } | null;
   destaquesChuva: Destaque[];
 };
 
@@ -144,9 +144,9 @@ export function montarPainel(todasAsLinhas: LinhaComparada[], selecionadas: stri
     },
     correlacoes: varias
       ? {
-          chuva: matrizDeCorrelacao(linhas, "erro_chuva_mm"),
-          temperaturaMax: matrizDeCorrelacao(linhas, "erro_temp_max"),
-          temperaturaMin: matrizDeCorrelacao(linhas, "erro_temp_min"),
+          chuva: matrizDeCorrelacao(linhas, "erro_chuva_mm").indice,
+          temperaturaMax: matrizDeCorrelacao(linhas, "erro_temp_max").indice,
+          temperaturaMin: matrizDeCorrelacao(linhas, "erro_temp_min").indice,
         }
       : null,
     destaquesChuva: destaquesDeChuva(linhas),
