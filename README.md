@@ -55,7 +55,7 @@ Compara a previsão coletada em D-1 com o dado observado em D.
 
 Métricas calculadas:
 
-* MAE, RMSE, viés e MAPE da temperatura máxima e mínima, e MAE, RMSE e viés da chuva
+* Erro médio, RMSE, viés e erro percentual da temperatura máxima e mínima, e erro médio, RMSE e viés da chuva
 * Acerto de "choveu ou não", do volume de chuva e da descrição do tempo
 * Score composto por cidade, que gera o ranking
 

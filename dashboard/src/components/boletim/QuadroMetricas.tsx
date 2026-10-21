@@ -23,11 +23,11 @@ function Grupo({ titulo, linhas }: { titulo: string; linhas: Linha[] }) {
 
 function temperatura(t: ErrosTemperatura): Linha[] {
   return [
-    { rotulo: "Erro Médio (MAE)", valor: formatarComUnidade(t.mae, "°C"), dica: GLOSSARIO.mae },
+    { rotulo: "Erro Médio", valor: formatarComUnidade(t.mae, "°C"), dica: GLOSSARIO.mae },
     { rotulo: "RMSE", valor: formatarComUnidade(t.rmse, "°C"), dica: GLOSSARIO.rmse },
     { rotulo: "Viés", valor: formatarComUnidade(t.bias, "°C", { sinal: true }), dica: GLOSSARIO.vies },
     {
-      rotulo: "Erro Percentual (MAPE)",
+      rotulo: "Erro Percentual",
       valor: Number.isNaN(t.mape) ? "—" : `${formatarDecimal(t.mape, 2)}%`,
       dica: GLOSSARIO.mape,
     },
@@ -43,7 +43,7 @@ export function QuadroMetricas({ painel }: { painel: Painel }) {
       <Grupo
         titulo="Chuva"
         linhas={[
-          { rotulo: "Erro Médio (MAE)", valor: formatarComUnidade(painel.chuva.mae, "mm"), dica: GLOSSARIO.mae },
+          { rotulo: "Erro Médio", valor: formatarComUnidade(painel.chuva.mae, "mm"), dica: GLOSSARIO.mae },
           { rotulo: "RMSE", valor: formatarComUnidade(painel.chuva.rmse, "mm"), dica: GLOSSARIO.rmse },
           { rotulo: "Viés", valor: formatarComUnidade(painel.chuva.bias, "mm", { sinal: true }), dica: GLOSSARIO.vies },
         ]}

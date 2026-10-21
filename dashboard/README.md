@@ -2,7 +2,7 @@
 
 Dashboard em **Next.js + React** que mede a qualidade da previsão do
 Climatempo: compara a previsão coletada em D-1 com o dado de D e mostra
-métricas de erro (MAE, RMSE, Bias, MAPE), acurácias, métricas por cidade,
+métricas de erro (erro médio, RMSE, viés, erro percentual), acurácias, métricas por cidade,
 séries de erro por dia, a base comparada e o ranking por score composto.
 
 O visual é o de um boletim: abre com a conclusão em manchete, gerada a partir
@@ -45,7 +45,7 @@ src/
       NumerosPrincipais.tsx   os três números do resumo
       Ranking.tsx             ranking com barras
       ErrosPorDia.tsx         erro de chuva e de temperatura por dia
-      QuadroMetricas.tsx      MAE, RMSE, viés, MAPE e acertos
+      QuadroMetricas.tsx      erro médio, RMSE, viés, erro percentual e acertos
       BaseComparada.tsx       base de pares D-1 -> D, recolhida
       ComoMedimos.tsx, Rodape.tsx, Cabecalho.tsx
       colunas.ts              colunas das duas tabelas
@@ -113,8 +113,8 @@ teste junto.
 - **Leitura ilegível é ausente, não zero.** O `-` que o site às vezes devolve no
   lugar da temperatura, e a chuva vazia, viram `null`. O dbt antigo convertia
   isso em 0 sem avisar.
-- **Explicações em tooltips, não em rodapé.** Cada termo técnico (MAE, RMSE,
-  viés, MAPE, acertos, score) tem um ícone "?" ao lado com a explicação, em
+- **Explicações em tooltips, não em rodapé.** Cada termo técnico (erro médio,
+  RMSE, viés, erro percentual, acertos, score) tem um ícone "?" ao lado com a explicação, em
   `components/ui/Dica.tsx`. Os textos ficam em `lib/apresentacao/glossario.ts`,
   com os pesos e limites vindos das mesmas constantes do cálculo. O balão abre
   com mouse, teclado (foco) ou toque, fecha com Esc ou ao tocar fora, e tem

@@ -11,7 +11,7 @@ const pct = (peso: number) => Math.trunc(peso * 100);
 
 export const GLOSSARIO = {
   mae:
-    "Erro médio absoluto: quanto a previsão errou, em média, por dia, sem importar se foi para mais ou para menos. " +
+    "Erro médio: quanto a previsão errou, em média, por dia, sem importar se foi para mais ou para menos. " +
     "Quanto menor, melhor. Um erro médio de 0,6 °C quer dizer que, em média, a previsão errou 0,6 °C.",
 
   rmse:
@@ -23,7 +23,7 @@ export const GLOSSARIO = {
     "do que aconteceu). Abaixo de zero: costuma subestimar. Perto de zero: os erros para mais e para menos se compensam.",
 
   mape:
-    "Erro percentual: o tamanho do erro em relação ao valor real. Um MAPE de 2% na máxima quer dizer que a previsão " +
+    "Erro percentual: o tamanho do erro em relação ao valor real. Um erro percentual de 2% na máxima quer dizer que a previsão " +
     "errou, em média, 2% do valor da temperatura. Não conta os dias em que o valor real foi zero.",
 
   erroPrevistoReal:
@@ -55,7 +55,7 @@ export const GLOSSARIO = {
     "Previsto − real, em °C. Acima de zero, a previsão foi mais quente que o dia; abaixo, mais fria.",
 
   porCidade:
-    "Erro médio (MAE) e acerto de chuva em cada cidade, do maior para o menor erro na máxima.",
+    "Erro médio e acerto de chuva em cada cidade, do maior para o menor erro na máxima.",
 
   dias: "Quantos dias de previsão foram comparados nesta cidade.",
 
