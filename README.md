@@ -4,12 +4,12 @@ Projeto de engenharia de dados que coleta previsões meteorológicas via **web s
 
 Toda a pipeline é **orquestrada com Apache Airflow**.
 
-<img width="1914" height="872" alt="image" src="https://github.com/user-attachments/assets/8752f960-504e-42a2-a0af-9b110ec9d988" />
-<img width="1914" height="872" alt="image" src="https://github.com/user-attachments/assets/7071829b-082e-49be-b2e5-11f43b34115b" />
-<img width="1914" height="872" alt="image" src="https://github.com/user-attachments/assets/defe169b-5051-4a32-afde-85fadb64bc5e" />
+<img width="1280" alt="Dashboard: métricas gerais, de temperatura, de chuva e de classificação" src="docs/img/dashboard-metricas.png" />
+<img width="1280" alt="Dashboard: métricas por cidade e erro de temperatura ao longo do tempo" src="docs/img/dashboard-graficos.png" />
+<img width="1280" alt="Dashboard: ranking de precisão por cidade" src="docs/img/dashboard-ranking.png" />
 
 
-<img width="1918" height="968" alt="image" src="https://github.com/user-attachments/assets/8fd29bb6-4de8-4a4a-a4bd-2faace0392b4" />
+<img width="1918" height="968" alt="DAG do pipeline no Airflow" src="https://github.com/user-attachments/assets/8fd29bb6-4de8-4a4a-a4bd-2faace0392b4" />
 
 ---
 
@@ -38,7 +38,7 @@ Scrapy → Transform → Bronze (CSV)
                 ↓
              Airflow
                 ↓
-           Dashboard (Streamlit)
+           Dashboard (Next.js)
 ```
 
 ---
@@ -188,8 +188,7 @@ Ranking final ponderado:
 * SQLite
 * DBT
 * Apache Airflow
-* Streamlit
-* Plotly
+* Next.js + React (dashboard)
 
 ---
 
@@ -201,10 +200,12 @@ Ranking final ponderado:
 
 3. Rodar DAG
 
-4. Abrir dashboard:
+4. Abrir o dashboard (detalhes em [`dashboard-next/README.md`](dashboard-next/README.md)):
 
 ```
-streamlit run dashboard/app.py
+cd dashboard-next
+npm install
+npm run dev
 ```
 
 ---

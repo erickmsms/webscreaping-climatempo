@@ -6,9 +6,7 @@ pip install -r requirements.txt
 pip install scrapy;
 pip install pandas;
 pip install sqlalchemy;
-pip install dbt-sqlite; 
-pip install streamlit;
-pip install plotly;
+pip install dbt-sqlite;
 
 Ctrl + Shift + P
 Digite "Python: Select Interpreter" e dê Enter.
@@ -18,4 +16,4 @@ cd "C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\bronz
 scrapy crawl previsao -o data.jsonl; cd ..; python transform/transform.py; cd coleta;
 cd "C:\Users\Administrador\Downloads\webclimatempo\webscreaping-climatempo\silver-gold\projeto_clima"; dbt run;
 
-streamlit run dashboard/app.py
+cd dashboard-next; npm install; npm run dev
