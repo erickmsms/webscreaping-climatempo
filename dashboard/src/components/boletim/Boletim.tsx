@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { Abertura } from "@/components/boletim/Abertura";
-import { BaseComparada } from "@/components/boletim/BaseComparada";
 import { Cabecalho } from "@/components/boletim/Cabecalho";
 import { COLUNAS_POR_CIDADE } from "@/components/boletim/colunas";
 import { ComoMedimos } from "@/components/boletim/ComoMedimos";
@@ -54,7 +53,6 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
               <QuadroMetricas painel={painel} />
             </Secao>
 
-            <BaseComparada linhas={painel.base} />
             <ComoMedimos />
             <Rodape inicio={painel.inicio} fim={painel.fim} />
           </>

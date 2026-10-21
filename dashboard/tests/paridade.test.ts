@@ -98,6 +98,9 @@ function expectTabelaIgual(obtida: Record<string, Valor>[], esperada: Tabela, no
 
 const comoRegistro = (l: LinhaComparada) => l as unknown as Record<string, Valor>;
 
+/** A base de pares que o Streamlit mostrava (e a tela deste app não mostra mais). */
+const baseDaVisao = (cidade: string) => (cidade === "Todas" ? linhas : linhas.filter((l) => l.cidade_id === cidade));
+
 it("oferece as mesmas opções de cidade", () => {
   expect(opcoesDeCidade(linhas)).toEqual(gabarito.opcoes_cidade);
 });
@@ -116,7 +119,7 @@ describe.each(gabarito.opcoes_cidade)("visão %s", (cidade) => {
     if (painel.porCidade) {
       expectTabelaIgual(painel.porCidade, primeira, "métricas por cidade");
       const [base, ranking] = resto;
-      expectTabelaIgual(painel.base.map(comoRegistro), base, "base comparada");
+      expectTabelaIgual(baseDaVisao(cidade).map(comoRegistro), base, "base comparada");
       expectTabelaIgual(
         painel.ranking.map((r) => ({
           CidadeID: r.cidade_id,
@@ -130,7 +133,7 @@ describe.each(gabarito.opcoes_cidade)("visão %s", (cidade) => {
       );
     } else {
       expect(esperado.tabelas).toHaveLength(1);
-      expectTabelaIgual(painel.base.map(comoRegistro), primeira, "base comparada");
+      expectTabelaIgual(baseDaVisao(cidade).map(comoRegistro), primeira, "base comparada");
     }
   });
 

@@ -3,7 +3,7 @@
 Dashboard em **Next.js + React** que mede a qualidade da previsão do
 Climatempo: compara a previsão coletada em D-1 com o dado de D e mostra
 métricas de erro (erro médio, RMSE, viés, erro percentual), acurácias, métricas por cidade,
-séries de erro por dia, a base comparada e o ranking por score composto.
+séries de erro por dia e o ranking por score composto.
 
 O visual é o de um boletim: abre com a conclusão em manchete, gerada a partir
 dos dados, seguida dos números principais e do ranking. Os detalhes vêm depois.
@@ -46,9 +46,8 @@ src/
       Ranking.tsx             ranking com barras
       ErrosPorDia.tsx         erro de chuva e de temperatura por dia
       QuadroMetricas.tsx      erro médio, RMSE, viés, erro percentual e acertos
-      BaseComparada.tsx       base de pares D-1 -> D, recolhida
       ComoMedimos.tsx, Rodape.tsx, Cabecalho.tsx
-      colunas.ts              colunas das duas tabelas
+      colunas.ts              colunas da tabela por cidade
     graficos/               GraficoLinhas e series.ts (modelo -> séries desenhadas)
     ui/                     genéricos: Secao, Dica/Termo (tooltip), TabelaDados, Aviso
   lib/

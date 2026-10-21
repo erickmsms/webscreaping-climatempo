@@ -57,7 +57,6 @@ export type Painel = {
   porCidade: MetricasCidade[] | null;
   graficos: { temperaturaMax: GraficoErro; temperaturaMin: GraficoErro; chuva: GraficoErro };
   destaquesChuva: Destaque[];
-  base: LinhaComparada[];
 };
 
 /** Opções do seletor de cidade: "Todas" + cidades em ordem alfabética. */
@@ -141,6 +140,5 @@ export function montarPainel(todasAsLinhas: LinhaComparada[], cidade: string): P
       chuva: graficoDeErro(linhas, todas, "erro_chuva_mm", "mm"),
     },
     destaquesChuva: destaquesDeChuva(linhas),
-    base: linhas,
   };
 }

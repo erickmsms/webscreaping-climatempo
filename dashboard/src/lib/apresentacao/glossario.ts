@@ -26,9 +26,6 @@ export const GLOSSARIO = {
     "Erro percentual: o tamanho do erro em relação ao valor real. Um erro percentual de 2% na máxima quer dizer que a previsão " +
     "errou, em média, 2% do valor da temperatura. Não conta os dias em que o valor real foi zero.",
 
-  erroPrevistoReal:
-    "Previsto menos real. Acima de zero, a previsão foi maior que o observado; abaixo de zero, foi menor.",
-
   acertoChuva:
     "Em quantos por cento dos dias a previsão acertou se ia chover ou não, sem olhar a quantidade de chuva.",
 
@@ -58,8 +55,4 @@ export const GLOSSARIO = {
     "Erro médio e acerto de chuva em cada cidade, do maior para o menor erro na máxima.",
 
   dias: "Quantos dias de previsão foram comparados nesta cidade.",
-
-  previstoEm: "Dia em que a previsão foi coletada (D-1).",
-
-  diaObservado: "Dia observado (D), com o qual a previsão foi comparada.",
 } as const;

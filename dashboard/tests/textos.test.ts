@@ -37,7 +37,6 @@ function painel(extra: Partial<Painel>): Painel {
       chuva: { unidade: "mm", series: [] },
     },
     destaquesChuva: [],
-    base: [],
     ...extra,
   };
 }
