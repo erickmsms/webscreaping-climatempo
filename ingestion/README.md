@@ -48,5 +48,15 @@ Uma linha JSON por cidade e tipo, a cada execução:
 
 ## Cidades
 
-As URLs ficam em `start_urls`, no spider. Hoje: Pedra (PE), São Paulo (SP),
-Recife (PE) e Americana (SP).
+As URLs ficam em `start_urls`, no spider. São 34:
+
+- as 4 originais: Pedra (PE), São Paulo (SP), Recife (PE) e Americana (SP);
+- desde 21/10/2026, as demais 25 capitais;
+- desde 21/10/2026, 5 cidades sorteadas entre os municípios do IBGE: Santa
+  Rosa do Sul (SC), Itaperuna (RJ), Jaboticaba (RS), Careiro da Várzea (AM) e
+  Aperibé (RJ).
+
+Os ids das URLs vêm do sitemap do Climatempo
+(`/sitemap/previsoes-cidades-15-dias.xml`). Todas entram na coleta e na
+validação, mas o dashboard ainda exibe só as 4 originais (`CIDADES_EXIBIDAS`,
+em `dashboard/src/lib/apresentacao/cidades.ts`).

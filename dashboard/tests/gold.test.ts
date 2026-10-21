@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { montarComparacao } from "@/lib/analise/comparacao";
 import { lerChuva, lerRegistros, lerTemperatura, montarGold, type RegistroBruto } from "@/lib/analise/gold";
+import { CIDADES_EXIBIDAS, soCidadesExibidas } from "@/lib/apresentacao/cidades";
 
 function registro(extra: Partial<RegistroBruto> = {}): RegistroBruto {
   return {
@@ -92,13 +93,21 @@ describe("montarGold", () => {
   });
 });
 
+describe("soCidadesExibidas", () => {
+  it("deixa fora da tela as cidades que só a coleta guarda", () => {
+    const registros = [registro(), registro({ cidade: "manaus-am" }), registro({ cidade: "saopaulo-sp" })];
+    expect(soCidadesExibidas(registros).map((r) => r.cidade)).toEqual(["recife-pe", "saopaulo-sp"]);
+  });
+});
+
 describe("histórico completo da coleta (data/bronze/previsoes.jsonl)", () => {
   const caminho = fileURLToPath(new URL("../../data/bronze/previsoes.jsonl", import.meta.url));
   const { dadosDia, previsoes } = montarGold(lerRegistros(fs.readFileSync(caminho, "utf-8")));
   const linhas = montarComparacao(dadosDia, previsoes);
 
-  it("cobre meses de coleta, com as quatro cidades", () => {
-    expect(new Set(linhas.map((l) => l.cidade_id)).size).toBe(4);
+  it("cobre meses de coleta, com as quatro cidades exibidas", () => {
+    const cidades = [...new Set(linhas.map((l) => l.cidade_id))];
+    expect(cidades).toEqual(expect.arrayContaining([...CIDADES_EXIBIDAS].map((c) => c.toUpperCase())));
     expect(linhas.length).toBeGreaterThan(200);
     expect(linhas[0].dia_real < "2026-03-01").toBe(true);
   });

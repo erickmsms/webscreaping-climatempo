@@ -1,6 +1,6 @@
 # 🌦️ Webscraping Climatempo — Qualidade da Previsão do Tempo
 
-Todo dia, um workflow coleta a previsão do Climatempo para 4 cidades e guarda no repositório. No dia seguinte, a coleta mostra o que de fato foi registrado. Um dashboard compara os dois e mede **o quanto a previsão acerta**.
+Todo dia, um workflow coleta a previsão do Climatempo para 34 cidades e guarda no repositório. No dia seguinte, a coleta mostra o que de fato foi registrado. Um dashboard compara os dois e mede **o quanto a previsão acerta**. Por enquanto, o dashboard exibe só as 4 cidades originais; as outras 30 entraram na coleta em 21/10/2026 e ainda estão juntando histórico.
 
 <img width="1168" alt="Dashboard: manchete com a cidade de previsão mais confiável, números principais e ranking de precisão" src="docs/img/dashboard-abertura.png" />
 <img width="1168" alt="Dashboard: erro de chuva por dia com os piores erros anotados e erro de temperatura por dia" src="docs/img/dashboard-graficos.png" />

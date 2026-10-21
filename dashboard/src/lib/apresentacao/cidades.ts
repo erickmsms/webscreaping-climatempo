@@ -1,6 +1,18 @@
 export type NomeCidade = { nome: string; uf: string };
 
 /**
+ * Cidades que o dashboard exibe, pelo id da coleta ("saopaulo-sp"). Desde
+ * 21/10/2026 a coleta também guarda as demais capitais e cinco cidades
+ * sorteadas; elas ficam fora da tela por enquanto.
+ */
+export const CIDADES_EXIBIDAS: ReadonlySet<string> = new Set(["pedra-pe", "saopaulo-sp", "recife-pe", "americana-sp"]);
+
+/** Só as leituras das cidades exibidas. */
+export function soCidadesExibidas<T extends { cidade: string }>(registros: T[]): T[] {
+  return registros.filter((r) => CIDADES_EXIBIDAS.has(r.cidade));
+}
+
+/**
  * O id vem da URL do Climatempo em caixa alta ("SAOPAULO-SP"), sem acento nem
  * espaço. Cidades cujo nome não dá para reconstruir a partir do id ficam aqui.
  */

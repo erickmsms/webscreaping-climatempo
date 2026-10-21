@@ -63,7 +63,7 @@ src/
     apresentacao/
       formato.ts            formatação brasileira, com o arredondamento do Python
       textos.ts             manchete, linha fina e anotações, gerados dos números
-      cidades.ts            nome legível da cidade a partir do id ("SAOPAULO-SP")
+      cidades.ts            cidades exibidas e nome legível a partir do id ("SAOPAULO-SP")
       cores.ts              cor fixa por cidade
 tests/                      testes unitários e de paridade
 ```
@@ -124,3 +124,8 @@ teste junto.
 - **Cache de 1h.** O workflow acrescenta a coleta uma vez por dia; a página é
   pré-renderizada e revalidada a cada hora.
 - **Filtro de cidade no navegador.** Trocar de cidade não faz nova requisição.
+- **A coleta tem mais cidades do que a tela.** Desde 21/10/2026 a coleta guarda
+  34 cidades, mas o dashboard exibe só as 4 originais, listadas em
+  `CIDADES_EXIBIDAS` (`lib/apresentacao/cidades.ts`). As outras ficam de fora
+  já na leitura, em `lib/dados/carregar.ts`, até juntarem histórico. Para
+  exibi-las, basta incluí-las na lista.
