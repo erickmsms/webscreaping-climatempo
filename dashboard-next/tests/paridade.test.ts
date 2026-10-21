@@ -1,10 +1,13 @@
 /**
- * Paridade com o dashboard Streamlit.
+ * Paridade com o antigo dashboard Streamlit (removido).
  *
- * O gabarito (fixtures/streamlit-golden.json) é o que o dashboard/app.py exibe
- * para cada filtro de cidade, capturado por scripts/gerar_golden_streamlit.py.
- * Aqui o novo front lê o mesmo banco e precisa exibir exatamente o mesmo.
+ * O gabarito (fixtures/streamlit-golden.json) é o que o dashboard/app.py exibia
+ * para cada filtro de cidade, lendo fixtures/dataset_climatempo.db. Os dois
+ * arquivos estão congelados: o app e o script que gerou o gabarito estão no
+ * commit c8b6151 (dashboard/app.py e dashboard-next/scripts/).
+ * Com o mesmo banco, este front precisa exibir exatamente o mesmo.
  */
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { montarComparacao, type LinhaComparada } from "@/lib/analise";
 import { lerTabelasGold } from "@/lib/db";
@@ -18,8 +21,10 @@ type Visao = { metricas: Array<{ rotulo: string; valor: string }>; tabelas: Tabe
 
 const visoes = gabarito.visoes as Record<string, Visao>;
 
-const tabelas = lerTabelasGold();
-if (!tabelas) throw new Error("dataset_climatempo.db não encontrado na raiz do repositório");
+const BANCO_DO_GABARITO = fileURLToPath(new URL("./fixtures/dataset_climatempo.db", import.meta.url));
+
+const tabelas = lerTabelasGold(BANCO_DO_GABARITO);
+if (!tabelas) throw new Error(`banco do gabarito não encontrado: ${BANCO_DO_GABARITO}`);
 const linhas = montarComparacao(tabelas.dadosDia, tabelas.previsoes);
 
 /** Números iguais até ruído de ponto flutuante; NaN do JS equivale ao null do JSON. */

@@ -21,7 +21,7 @@ export function formatarFixo(v: number, casas = 2): string {
   return v < 0 ? `-${truncado}` : truncado;
 }
 
-/** Equivalente ao fmt_num do app Streamlit. */
+/** Número com 2 casas e sufixo opcional; travessão quando não há valor (NaN). */
 export function formatarNumero(v: number, sufixo = ""): string {
   if (Number.isNaN(v)) return "—";
   return `${formatarFixo(v, 2)}${sufixo}`;

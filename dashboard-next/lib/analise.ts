@@ -1,5 +1,6 @@
 /**
- * Cálculos do dashboard, portados de dashboard/app.py (Streamlit).
+ * Cálculos do dashboard, portados do antigo dashboard Streamlit
+ * (dashboard/app.py, removido; última versão no commit c8b6151).
  *
  * Regra geral: replicar a semântica do pandas. Valores ausentes são `null` e
  * se propagam nas contas (como NaN), e as médias ignoram ausentes (skipna).
@@ -75,7 +76,7 @@ function paraTexto(v: unknown): string | null {
   return v === null || v === undefined ? null : String(v);
 }
 
-/** Tipagem, saneamento e JOIN D-1 -> D (seções equivalentes do app.py). */
+/** Tipagem, saneamento e JOIN D-1 -> D. */
 export function montarComparacao(
   dadosDia: LinhaGoldDia[],
   previsoes: LinhaGoldPrevisao[],

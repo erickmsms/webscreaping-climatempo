@@ -1,12 +1,11 @@
-# Dashboard Next.js — Qualidade da Previsão
+# Dashboard — Qualidade da Previsão
 
-Versão em **Next.js + React** do dashboard Streamlit (`../dashboard/app.py`).
-Reproduz as mesmas análises, com os mesmos números: métricas de erro (MAE, RMSE,
-Bias, MAPE), acurácias, métricas por cidade, séries de erro por dia, base
-comparada e ranking por score composto.
+Dashboard em **Next.js + React** que mede a qualidade da previsão do
+Climatempo: compara a previsão coletada em D-1 com o dado de D e mostra
+métricas de erro (MAE, RMSE, Bias, MAPE), acurácias, métricas por cidade,
+séries de erro por dia, a base comparada e o ranking por score composto.
 
-O dashboard Streamlit continua no repositório e funcionando. Os dois leem o
-mesmo banco: as tabelas gold do dbt em `../dataset_climatempo.db`.
+Ele lê as tabelas gold geradas pelo dbt em `../dataset_climatempo.db`.
 
 ## Como rodar
 
@@ -38,32 +37,32 @@ app/
 lib/
   db.ts               leitura das tabelas gold (better-sqlite3, só no servidor)
   dados.ts            base comparada D-1 -> D com cache de 1h ("use cache")
-  analise.ts          cálculos portados do app.py (join, métricas, scores)
+  analise.ts          cálculos (join, métricas, scores)
   painel.ts           modelo de tela: o que a página mostra para cada filtro
   formato.ts          formatação numérica idêntica ao Python
   cores.ts            cor fixa por cidade
 components/           cartões, tabelas, gráficos e o painel (cliente)
 tests/                testes unitários e de paridade
-scripts/              gerador do gabarito de paridade (Python)
 ```
 
 O cálculo fica todo em `lib/` (funções puras, testáveis sem o Next). Os
 componentes só desenham o modelo de tela montado por `lib/painel.ts`.
 
-## Paridade com o Streamlit
+## Origem e teste de paridade
 
-`tests/paridade.test.ts` garante que este front exibe exatamente o mesmo que o
-Streamlit: para "Todas" e para cada cidade, compara métricas (rótulo e valor
-formatado), tabelas e as séries de cada gráfico com um gabarito capturado do
-próprio `app.py`.
+Este dashboard substituiu o antigo, em Streamlit (`dashboard/app.py`). A última
+versão em que os dois coexistem é o commit `c8b6151`.
 
-O gabarito (`tests/fixtures/streamlit-golden.json`) depende do banco. Quando o
-`dataset_climatempo.db` ou o `app.py` mudarem, gere de novo:
+`tests/paridade.test.ts` garante que as análises continuam idênticas às do
+Streamlit. Ele usa dois arquivos congelados em `tests/fixtures/`:
 
-```bash
-pip install streamlit pandas plotly
-python scripts/gerar_golden_streamlit.py
-```
+- `dataset_climatempo.db`: uma cópia do banco na época da migração;
+- `streamlit-golden.json`: tudo o que o `app.py` exibia com esse banco, para
+  "Todas" e para cada cidade (métricas, tabelas e séries dos gráficos).
+
+Com o mesmo banco, o front precisa exibir exatamente o mesmo. Como os arquivos
+estão congelados, o teste não quebra quando o banco de produção é atualizado.
+Se uma regra de cálculo mudar de propósito, ajuste o teste junto.
 
 ## Decisões
 
@@ -72,15 +71,9 @@ python scripts/gerar_golden_streamlit.py
   inteiras, médias como 9/8 acontecem, então `lib/formato.ts` replica o Python.
 - **Ausentes como no pandas.** Valores nulos se propagam nas contas e as médias
   os ignoram (`skipna`).
-- **Gráficos próprios, sem biblioteca.** O Plotly liga os pontos de uma cidade
-  mesmo quando falta um dia, mas abre um buraco quando o valor é nulo. As
-  bibliotecas comuns de gráfico em React não distinguem os dois casos.
+- **Gráficos próprios, sem biblioteca.** Um dia sem coleta não interrompe a
+  linha da cidade, mas um valor nulo interrompe. As bibliotecas comuns de
+  gráfico em React não distinguem os dois casos.
 - **Cache de 1h.** O pipeline atualiza o banco uma vez por dia; a página é
-  pré-renderizada e revalidada a cada hora (no Streamlit era o `st.cache_data`).
+  pré-renderizada e revalidada a cada hora.
 - **Filtro de cidade no navegador.** Trocar de cidade não faz nova requisição.
-
-## Diferenças de apresentação
-
-- Tabelas mostram decimais com 2 casas (o `st.dataframe` mostra o valor cru).
-- Os gráficos têm tooltip e navegação por teclado, mas não têm zoom/pan como o Plotly.
-- As versões antigas do dashboard (`dash1aversao.py`, `dash2aversao.py`) não foram migradas.

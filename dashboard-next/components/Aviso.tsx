@@ -3,7 +3,7 @@ const ESTILO = {
   erro: { icone: "⛔", rotulo: "Erro", cor: "border-critical" },
 } as const;
 
-/** Mensagem de aviso (o st.warning / st.error do Streamlit). */
+/** Mensagem de alerta ou erro, com ícone e rótulo além da cor. */
 export function Aviso({ tipo, children }: { tipo: keyof typeof ESTILO; children: React.ReactNode }) {
   const estilo = ESTILO[tipo];
   return (

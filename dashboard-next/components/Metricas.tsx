@@ -5,7 +5,7 @@ const COLUNAS: Record<number, string> = {
   4: "sm:grid-cols-2 lg:grid-cols-4",
 };
 
-/** Linha de cartões de métrica (o st.metric do Streamlit). */
+/** Linha de cartões de métrica. */
 export function GrupoMetricas({ metricas }: { metricas: Metrica[] }) {
   return (
     <dl className={`grid grid-cols-2 gap-3 ${COLUNAS[metricas.length] ?? "sm:grid-cols-4"}`}>

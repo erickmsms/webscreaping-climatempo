@@ -6,7 +6,7 @@ import Database from "better-sqlite3";
 import type { LinhaGoldDia, LinhaGoldPrevisao } from "./analise";
 
 /**
- * Mesmo banco que o dashboard Streamlit lê: as tabelas gold geradas pelo dbt.
+ * Banco com as tabelas gold geradas pelo dbt.
  * Por padrão fica na raiz do repositório; CLIMATEMPO_DB_PATH sobrescreve.
  */
 export function caminhoDoBanco(): string {

@@ -54,7 +54,7 @@ function marcasX(t0: number, t1: number, larguraPlot: number) {
   return marcas;
 }
 
-/** Trechos contínuos da série: um valor ausente interrompe a linha (como no Plotly). */
+/** Trechos contínuos da série: um valor ausente interrompe a linha; um dia sem ponto, não. */
 function trechos(pontos: PontoSerie[]) {
   const resultado: Array<Array<{ t: number; y: number }>> = [];
   let atual: Array<{ t: number; y: number }> = [];
@@ -83,7 +83,7 @@ function useLargura<T extends HTMLElement>() {
   return [ref, largura] as const;
 }
 
-/** Gráfico de linhas de erro por dia (o px.line do Streamlit), com uma linha por série. */
+/** Gráfico de linhas de erro por dia, com uma linha por série. */
 export function GraficoLinhas({
   titulo,
   unidade,

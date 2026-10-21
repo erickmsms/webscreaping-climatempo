@@ -8,8 +8,8 @@ export type ResultadoComparacao =
   | { status: "sem-pares" };
 
 /**
- * Base comparada D-1 -> D, em cache por algumas horas (no Streamlit era o
- * st.cache_data). O pipeline atualiza o banco uma vez por dia.
+ * Base comparada D-1 -> D, em cache por algumas horas. O pipeline atualiza o
+ * banco uma vez por dia.
  */
 export async function carregarComparacao(): Promise<ResultadoComparacao> {
   "use cache";

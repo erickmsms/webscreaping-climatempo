@@ -6,7 +6,7 @@ import { formatarNumero } from "@/lib/formato";
 
 const MARCAS = [0, 25, 50, 75, 100];
 
-/** Barras horizontais do ranking (o px.bar do Streamlit): top 10 por Score Final. */
+/** Barras horizontais do ranking: top 10 por Score Final. */
 export function GraficoRanking({
   titulo,
   linhas,

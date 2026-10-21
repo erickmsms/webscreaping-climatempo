@@ -1,9 +1,9 @@
 /**
  * Modelo de tela do dashboard: tudo o que a página exibe para um filtro de
- * cidade, com os mesmos rótulos e a mesma ordem do dashboard/app.py.
+ * cidade, com os mesmos rótulos e a mesma ordem do antigo dashboard Streamlit.
  *
  * Os componentes só desenham este modelo, e o teste de paridade
- * (tests/paridade.test.ts) compara este modelo com o gabarito do Streamlit.
+ * (tests/paridade.test.ts) compara este modelo com o gabarito capturado do Streamlit.
  */
 import {
   acuraciaChuvaBinaria,

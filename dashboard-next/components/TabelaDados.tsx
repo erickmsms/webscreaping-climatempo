@@ -20,7 +20,7 @@ function formatarCelula(valor: unknown, tipo: Coluna<unknown>["tipo"]): string {
   return tipo === "inteiro" ? String(valor) : formatarNumero(valor);
 }
 
-/** Tabela de dados (o st.dataframe do Streamlit). */
+/** Tabela de dados com cabeçalho fixo e rolagem própria. */
 export function TabelaDados<T extends object>({
   colunas,
   linhas,
