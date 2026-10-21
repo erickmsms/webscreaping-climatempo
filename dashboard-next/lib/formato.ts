@@ -26,3 +26,56 @@ export function formatarNumero(v: number, sufixo = ""): string {
   if (Number.isNaN(v)) return "—";
   return `${formatarFixo(v, 2)}${sufixo}`;
 }
+
+const MENOS = "−";
+
+/**
+ * Número no formato brasileiro, para a tela: vírgula decimal e sinal de menos
+ * tipográfico, com o mesmo arredondamento do Python. `sinal` põe "+" nos
+ * positivos (útil para erros e viés). Um valor que arredonda para zero sai sem sinal.
+ */
+export function formatarDecimal(v: number, casas: number, opcoes: { sinal?: boolean } = {}): string {
+  if (Number.isNaN(v)) return "—";
+  const texto = formatarFixo(v, casas).replace(".", ",");
+  const absoluto = texto.replace("-", "");
+  if (!/[1-9]/.test(absoluto)) return absoluto;
+  if (texto.startsWith("-")) return `${MENOS}${absoluto}`;
+  return opcoes.sinal ? `+${absoluto}` : absoluto;
+}
+
+/** Porcentagem com 1 casa ("91,7%"); 100 sai sem casa decimal ("100%"). */
+export function formatarPercentual(v: number): string {
+  if (Number.isNaN(v)) return "—";
+  const texto = formatarDecimal(v, 1);
+  return `${texto === "100,0" ? "100" : texto}%`;
+}
+
+const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+
+function partesDaData(data: string) {
+  const [ano, mes, dia] = data.slice(0, 10).split("-").map(Number);
+  return { ano, mes, dia };
+}
+
+/** "2026-03-01" -> "1 mar" (ou "1 mar 2026"). */
+export function formatarDia(data: string, comAno = false): string {
+  const { ano, mes, dia } = partesDaData(data);
+  return `${dia} ${MESES[mes - 1]}${comAno ? ` ${ano}` : ""}`;
+}
+
+/** Intervalo de datas: "17 fev – 6 mar 2026"; o ano só se repete quando muda. */
+export function formatarPeriodo(inicio: string, fim: string): string {
+  if (inicio === fim) return formatarDia(fim, true);
+  const mesmoAno = partesDaData(inicio).ano === partesDaData(fim).ano;
+  return `${formatarDia(inicio, !mesmoAno)} – ${formatarDia(fim, true)}`;
+}
+
+/** Meses cobertos, para o chapéu: "Fev–mar 2026", "Mar 2026" ou "Dez 2025–jan 2026". */
+export function formatarMeses(inicio: string, fim: string): string {
+  const a = partesDaData(inicio);
+  const b = partesDaData(fim);
+  const capitular = (s: string) => s[0].toUpperCase() + s.slice(1);
+  if (a.ano !== b.ano) return `${capitular(MESES[a.mes - 1])} ${a.ano}–${MESES[b.mes - 1]} ${b.ano}`;
+  if (a.mes === b.mes) return `${capitular(MESES[a.mes - 1])} ${a.ano}`;
+  return `${capitular(MESES[a.mes - 1])}–${MESES[b.mes - 1]} ${a.ano}`;
+}

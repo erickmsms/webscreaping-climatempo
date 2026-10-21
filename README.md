@@ -4,9 +4,9 @@ Projeto de engenharia de dados que coleta previsões meteorológicas via **web s
 
 Toda a pipeline é **orquestrada com Apache Airflow**.
 
-<img width="1280" alt="Dashboard: métricas gerais, de temperatura, de chuva e de classificação" src="docs/img/dashboard-metricas.png" />
-<img width="1280" alt="Dashboard: métricas por cidade e erro de temperatura ao longo do tempo" src="docs/img/dashboard-graficos.png" />
-<img width="1280" alt="Dashboard: ranking de precisão por cidade" src="docs/img/dashboard-ranking.png" />
+<img width="1168" alt="Dashboard: manchete com a cidade de previsão mais confiável, números principais e ranking de precisão" src="docs/img/dashboard-abertura.png" />
+<img width="1168" alt="Dashboard: erro de chuva por dia com os piores erros anotados e erro de temperatura por dia" src="docs/img/dashboard-graficos.png" />
+<img width="1168" alt="Dashboard: métricas por cidade e quadro com todas as métricas" src="docs/img/dashboard-metricas.png" />
 
 
 <img width="1918" height="968" alt="DAG do pipeline no Airflow" src="https://github.com/user-attachments/assets/8fd29bb6-4de8-4a4a-a4bd-2faace0392b4" />

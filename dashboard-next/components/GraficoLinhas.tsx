@@ -1,25 +1,23 @@
 "use client";
 
 import { useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
-import { formatarNumero } from "@/lib/formato";
+import { formatarDecimal, formatarDia } from "@/lib/formato";
 import type { PontoSerie } from "@/lib/painel";
 
 export type SerieDesenho = { nome: string; cor: string; pontos: PontoSerie[] };
 
-const ALTURA = 260;
-const MARGEM = { topo: 12, direita: 16, base: 28, esquerda: 44 };
+/** Ponto anotado no gráfico, com título e uma linha de explicação. */
+export type Anotacao = { x: string; y: number; cor: string; titulo: string; texto: string };
+
+const MARGEM = { topo: 16, direita: 16, base: 28, esquerda: 44 };
 const DIA_MS = 86_400_000;
-const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 
 const paraTempo = (data: string) => Date.parse(`${data}T00:00:00Z`);
+const paraData = (t: number) => new Date(t).toISOString().slice(0, 10);
 
-function rotuloCurto(t: number) {
-  const d = new Date(t);
-  return `${d.getUTCDate()} ${MESES[d.getUTCMonth()]}`;
-}
-
-function rotuloLongo(t: number) {
-  return `${rotuloCurto(t)} ${new Date(t).getUTCFullYear()}`;
+/** Valor com sinal e unidade; inteiros sem casas decimais. */
+function formatarValor(v: number, unidade: string) {
+  return `${formatarDecimal(v, Number.isInteger(v) ? 0 : 1, { sinal: true })} ${unidade}`;
 }
 
 function passoRedondo(bruto: number) {
@@ -83,15 +81,24 @@ function useLargura<T extends HTMLElement>() {
   return [ref, largura] as const;
 }
 
-/** Gráfico de linhas de erro por dia, com uma linha por série. */
+const HALO = { paintOrder: "stroke", stroke: "var(--page)", strokeWidth: 4, strokeLinejoin: "round" } as const;
+
+/** Abaixo desta largura, as anotações viram marcadores numerados com o texto embaixo do gráfico. */
+const LARGURA_MINIMA_ANOTACAO_INLINE = 640;
+
+/** Gráfico de linhas de erro por dia, com uma linha por série e anotações opcionais. */
 export function GraficoLinhas({
-  titulo,
+  rotulo,
   unidade,
   series,
+  anotacoes = [],
+  altura = 260,
 }: {
-  titulo: string;
+  rotulo: string;
   unidade: string;
   series: SerieDesenho[];
+  anotacoes?: Anotacao[];
+  altura?: number;
 }) {
   const [ref, largura] = useLargura<HTMLDivElement>();
   const [ativo, setAtivo] = useState<number | null>(null);
@@ -107,11 +114,11 @@ export function GraficoLinhas({
     }
     const y = escalaY(valores);
     const larguraPlot = Math.max(1, largura - MARGEM.esquerda - MARGEM.direita);
-    const alturaPlot = ALTURA - MARGEM.topo - MARGEM.base;
+    const alturaPlot = altura - MARGEM.topo - MARGEM.base;
     const px = (t: number) => MARGEM.esquerda + ((t - t0) / (t1 - t0)) * larguraPlot;
     const py = (v: number) => MARGEM.topo + ((y.max - v) / (y.max - y.min)) * alturaPlot;
     return { datas, y, px, py, marcasX: marcasX(t0, t1, larguraPlot) };
-  }, [series, largura]);
+  }, [series, largura, altura]);
 
   const { datas, y, px, py } = desenho;
   const tAtivo = ativo === null ? null : datas[ativo];
@@ -141,29 +148,31 @@ export function GraficoLinhas({
           existe: s.pontos.some((p) => paraTempo(p.x) === tAtivo),
         }));
 
-  return (
-    <figure className="rounded-lg border border-borda bg-surface p-4">
-      <figcaption className="mb-2 font-medium">{titulo}</figcaption>
+  const descricaoAnotacoes = anotacoes.map((a) => `${a.titulo}: ${a.texto}`).join(". ");
+  const anotacoesInline = largura >= LARGURA_MINIMA_ANOTACAO_INLINE;
 
+  return (
+    <figure className="m-0 flex flex-col gap-3">
       {series.length >= 2 && (
-        <ul className="mb-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-2">
+        <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
           {series.map((s) => (
-            <li key={s.nome} className="flex items-center gap-1.5">
-              <span aria-hidden className="inline-block h-0.5 w-4 rounded-full" style={{ background: s.cor }} />
+            <li key={s.nome} className="flex items-center gap-2">
+              <span aria-hidden className="inline-block h-[3px] w-[18px] rounded-full" style={{ background: s.cor }} />
               {s.nome}
             </li>
           ))}
         </ul>
       )}
 
-      <div ref={ref} className="relative">
+      {/* overflow-hidden: no HTML pré-renderizado o SVG ainda tem a largura padrão, até o ResizeObserver medir. */}
+      <div ref={ref} className="relative overflow-hidden">
         <svg
           width={largura}
-          height={ALTURA}
+          height={altura}
           role="img"
-          aria-label={`${titulo}. Use as setas para ver os valores de cada dia.`}
+          aria-label={`${rotulo}. ${descricaoAnotacoes ? `${descricaoAnotacoes}. ` : ""}Use as setas para ver os valores de cada dia.`}
           tabIndex={0}
-          className="block touch-none select-none rounded outline-none focus-visible:ring-2 focus-visible:ring-[var(--series-1)]"
+          className="block touch-none rounded outline-none select-none focus-visible:ring-2 focus-visible:ring-accent"
           onPointerMove={aoMoverPonteiro}
           onPointerLeave={() => setAtivo(null)}
           onKeyDown={aoTeclar}
@@ -180,14 +189,14 @@ export function GraficoLinhas({
                 strokeWidth={1}
               />
               <text x={MARGEM.esquerda - 8} y={py(v)} dy="0.32em" textAnchor="end" className="fill-muted text-xs tabular-nums">
-                {v}
+                {formatarDecimal(v, Number.isInteger(v) ? 0 : 1)}
               </text>
             </g>
           ))}
 
           {desenho.marcasX.map((t) => (
-            <text key={t} x={px(t)} y={ALTURA - 8} textAnchor="middle" className="fill-muted text-xs">
-              {rotuloCurto(t)}
+            <text key={t} x={px(t)} y={altura - 8} textAnchor="middle" className="fill-muted text-xs">
+              {formatarDia(paraData(t))}
             </text>
           ))}
 
@@ -209,27 +218,48 @@ export function GraficoLinhas({
             ),
           )}
 
+          {anotacoes.map((a, i) => {
+            const x = px(paraTempo(a.x));
+            const yPonto = py(a.y);
+            if (!anotacoesInline) {
+              return (
+                <g key={`${a.x}-${a.titulo}`} pointerEvents="none" aria-hidden="true">
+                  <circle cx={x} cy={yPonto} r={9} fill="var(--page)" stroke={a.cor} strokeWidth={2} />
+                  <text x={x} y={yPonto} dy="0.35em" textAnchor="middle" className="fill-ink text-[11px] font-bold">
+                    {i + 1}
+                  </text>
+                </g>
+              );
+            }
+            const aDireita = x < largura / 2;
+            const tx = aDireita ? x + 12 : x - 12;
+            const y1 = yPonto < altura / 2 ? yPonto + 22 : yPonto - 24;
+            return (
+              <g key={`${a.x}-${a.titulo}`} pointerEvents="none" aria-hidden="true">
+                <circle cx={x} cy={yPonto} r={6} fill={a.cor} stroke="var(--page)" strokeWidth={2} />
+                <text x={tx} y={y1} textAnchor={aDireita ? "start" : "end"} className="fill-ink text-[13px] font-semibold" style={HALO}>
+                  {a.titulo}
+                </text>
+                <text x={tx} y={y1 + 17} textAnchor={aDireita ? "start" : "end"} className="fill-ink-2 text-[13px]" style={HALO}>
+                  {a.texto}
+                </text>
+              </g>
+            );
+          })}
+
           {tAtivo !== null && (
             <g pointerEvents="none">
               <line
                 x1={px(tAtivo)}
                 x2={px(tAtivo)}
                 y1={MARGEM.topo}
-                y2={ALTURA - MARGEM.base}
+                y2={altura - MARGEM.base}
                 stroke="var(--muted)"
                 strokeWidth={1}
               />
               {linhasDica.map((s) =>
                 s.y === null ? null : (
-                  <circle
-                    key={s.nome}
-                    cx={px(tAtivo)}
-                    cy={py(s.y)}
-                    r={4}
-                    fill={s.cor}
-                    stroke="var(--surface)"
-                    strokeWidth={2}
-                  />
+                  <circle key={s.nome} cx={px(tAtivo)} cy={py(s.y)} r={4} fill={s.cor} stroke="var(--page)" strokeWidth={2} />
                 ),
               )}
             </g>
@@ -239,14 +269,10 @@ export function GraficoLinhas({
         {tAtivo !== null && (
           <div
             role="status"
-            className="pointer-events-none absolute top-2 z-10 min-w-40 rounded-md border border-borda bg-surface px-3 py-2 text-sm shadow-md"
-            style={
-              px(tAtivo) > largura * 0.6
-                ? { right: largura - px(tAtivo) + 12 }
-                : { left: px(tAtivo) + 12 }
-            }
+            className="pointer-events-none absolute top-2 z-10 min-w-44 rounded-lg border border-rule bg-page px-3 py-2 text-sm shadow-md"
+            style={px(tAtivo) > largura * 0.6 ? { right: largura - px(tAtivo) + 12 } : { left: px(tAtivo) + 12 }}
           >
-            <div className="mb-1 font-medium">{rotuloLongo(tAtivo)}</div>
+            <div className="mb-1 font-semibold">{formatarDia(paraData(tAtivo), true)}</div>
             {linhasDica
               .filter((s) => s.existe)
               .map((s) => (
@@ -255,14 +281,25 @@ export function GraficoLinhas({
                     <span aria-hidden className="inline-block h-2 w-2 rounded-full" style={{ background: s.cor }} />
                     {s.nome}
                   </span>
-                  <span className="tabular-nums">
-                    {s.y === null ? "—" : `${formatarNumero(s.y)} ${unidade}`}
-                  </span>
+                  <span className="font-medium tabular-nums">{s.y === null ? "—" : formatarValor(s.y, unidade)}</span>
                 </div>
               ))}
           </div>
         )}
       </div>
+
+      {!anotacoesInline && anotacoes.length > 0 && (
+        <ol aria-hidden="true" className="flex flex-col gap-1.5 text-sm">
+          {anotacoes.map((a, i) => (
+            <li key={`${a.x}-${a.titulo}`} className="flex gap-2">
+              <span className="font-bold">{i + 1}.</span>
+              <span>
+                <span className="font-semibold">{a.titulo}:</span> <span className="text-ink-2">{a.texto}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      )}
     </figure>
   );
 }

@@ -1,18 +1,22 @@
 import { Aviso } from "@/components/Aviso";
+import { Cabecalho } from "@/components/Cabecalho";
 import { Dashboard } from "@/components/Dashboard";
 import { carregarComparacao } from "@/lib/dados";
 
 export default async function Page() {
   const resultado = await carregarComparacao();
+  if (resultado.status === "ok") return <Dashboard linhas={resultado.linhas} />;
 
   return (
-    <main className="mx-auto max-w-7xl space-y-6 px-4 py-8 sm:px-8">
-      <h1 className="text-3xl font-bold sm:text-4xl">🌦️ Qualidade da Previsão - Climatempo</h1>
-      {resultado.status === "sem-banco" && <Aviso tipo="erro">Não encontrei dataset_climatempo.db.</Aviso>}
-      {resultado.status === "sem-pares" && (
-        <Aviso tipo="alerta">Não encontrei pares válidos de previsão D-1 → real D.</Aviso>
-      )}
-      {resultado.status === "ok" && <Dashboard linhas={resultado.linhas} />}
-    </main>
+    <>
+      <Cabecalho />
+      <main className="mx-auto max-w-[70rem] px-6 py-14">
+        {resultado.status === "sem-banco" ? (
+          <Aviso tipo="erro">Não encontrei o banco de dados (dataset_climatempo.db).</Aviso>
+        ) : (
+          <Aviso tipo="alerta">Não encontrei pares válidos de previsão D-1 → real D.</Aviso>
+        )}
+      </main>
+    </>
   );
 }

@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
-/* Tokens de cor. Categóricas (series-*) seguem a paleta validada para daltonismo,
-   na ordem fixa: a cidade N sempre usa a cor N. */
+/* Tokens do visual "Boletim". Categóricas (series-*) seguem a paleta validada
+   para daltonismo, na ordem fixa: a cidade N sempre usa a cor N. */
 :root {
   color-scheme: light;
-  --page: #f9f9f7;
-  --surface: #fcfcfb;
-  --ink: #0b0b0b;
-  --ink-2: #52514e;
-  --muted: #898781;
-  --grid: #e1e0d9;
-  --axis: #c3c2b7;
-  --border: rgba(11, 11, 11, 0.1);
+  --page: #ffffff;
+  --surface: #f5f5f5;
+  --ink: #111111;
+  --ink-2: #4a4a4a;
+  --muted: #666666;
+  --rule: #e3e3e3;
+  --rule-strong: #111111;
+  --track: #f0f0f0;
+  --grid: #ededed;
+  --axis: #9a9a9a;
+  --accent: #1a56db;
   --series-1: #2a78d6;
   --series-2: #eb6834;
   --series-3: #1baf7a;
@@ -27,14 +30,17 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --page: #0d0d0d;
+    --page: #0f0f0e;
     --surface: #1a1a19;
     --ink: #f0efec;
     --ink-2: #c3c2b7;
-    --muted: #898781;
-    --grid: #2c2c2a;
-    --axis: #383835;
-    --border: rgba(255, 255, 255, 0.1);
+    --muted: #a3a29a;
+    --rule: #2c2c2a;
+    --rule-strong: #f0efec;
+    --track: #262624;
+    --grid: #232321;
+    --axis: #6b6a64;
+    --accent: #7aa2f7;
     --series-1: #3987e5;
     --series-2: #d95926;
     --series-3: #199e70;
@@ -52,12 +58,16 @@
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-track: var(--track);
   --color-grid: var(--grid);
   --color-axis: var(--axis);
-  --color-borda: var(--border);
+  --color-accent: var(--accent);
   --color-warning: var(--warning);
   --color-critical: var(--critical);
-  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), system-ui, sans-serif;
 }
 
 body {

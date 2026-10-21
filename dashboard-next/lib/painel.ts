@@ -1,9 +1,10 @@
 /**
- * Modelo de tela do dashboard: tudo o que a página exibe para um filtro de
- * cidade, com os mesmos rótulos e a mesma ordem do antigo dashboard Streamlit.
+ * Modelo de tela do dashboard: todos os números que a página exibe para um
+ * filtro de cidade. Só valores; rótulos e formatação ficam nos componentes.
  *
  * Os componentes só desenham este modelo, e o teste de paridade
- * (tests/paridade.test.ts) compara este modelo com o gabarito capturado do Streamlit.
+ * (tests/paridade.test.ts) confere estes números com o gabarito capturado do
+ * antigo dashboard Streamlit.
  */
 import {
   acuraciaChuvaBinaria,
@@ -11,51 +12,53 @@ import {
   acuraciaVolumeChuva,
   bias,
   calcularScore,
-  LIMITE_TEMPERATURA,
   mae,
   mape,
   metricasPorCidade,
-  PESO_CHUVA,
-  PESO_DESCRICAO,
-  PESO_TEMPERATURA,
   rankingPorCidade,
   rmse,
   type LinhaComparada,
   type LinhaRanking,
   type MetricasCidade,
+  type Score,
 } from "./analise";
-import { formatarFixo, formatarNumero } from "./formato";
 
 export const TODAS = "Todas";
 
-export type Metrica = { rotulo: string; valor: string };
+/** Erros de chuva menores que isso (em mm) não viram destaque no gráfico. */
+export const LIMIAR_DESTAQUE_CHUVA = 5;
 
 export type PontoSerie = { x: string; y: number | null };
 export type Serie = { nome: string; pontos: PontoSerie[] };
+export type GraficoErro = { unidade: string; series: Serie[] };
 
-export type GraficoErro = {
-  titulo: string;
-  unidade: string;
-  series: Serie[];
-};
+export type ErrosTemperatura = { mae: number; rmse: number; bias: number; mape: number };
+export type ErrosChuva = { mae: number; rmse: number; bias: number };
+
+/** Um dia em que a previsão de chuva errou muito, para anotar no gráfico. */
+export type Destaque = { cidade_id: string; dia: string; erro: number };
 
 export type Painel = {
   cidade: string;
-  subtitulo: string;
-  geral: Metrica[];
-  temperaturaMax: Metrica[];
-  temperaturaMin: Metrica[];
-  chuva: Metrica[];
-  classificacao: Metrica[];
+  todas: boolean;
+  linhasComparadas: number;
+  numCidades: number;
+  inicio: string;
+  fim: string;
+  temperaturaMax: ErrosTemperatura;
+  temperaturaMin: ErrosTemperatura;
+  chuva: ErrosChuva;
+  acuracia: { descricao: number; chuvaBinaria: number; volumeChuva: number };
+  /** Ranking de todas as cidades, mesmo quando o filtro é uma cidade só. */
+  ranking: LinhaRanking[];
+  /** Score da cidade filtrada (null em "Todas"). */
+  scoreCidade: Score | null;
+  /** Métricas por cidade (só em "Todas"). */
   porCidade: MetricasCidade[] | null;
-  graficos: GraficoErro[];
+  graficos: { temperaturaMax: GraficoErro; temperaturaMin: GraficoErro; chuva: GraficoErro };
+  destaquesChuva: Destaque[];
   base: LinhaComparada[];
-  ranking: { destaques: Metrica[]; linhas: LinhaRanking[]; legenda: string } | null;
-  scoreCidade: { metricas: Metrica[]; legenda: string } | null;
 };
-
-const pct = (v: number) => formatarNumero(v, "%");
-const percentual = (peso: number) => Math.trunc(peso * 100);
 
 /** Opções do seletor de cidade: "Todas" + cidades em ordem alfabética. */
 export function opcoesDeCidade(linhas: LinhaComparada[]): string[] {
@@ -69,7 +72,6 @@ function graficoDeErro(
   linhas: LinhaComparada[],
   todas: boolean,
   campo: "erro_temp_max" | "erro_temp_min" | "erro_chuva_mm",
-  titulo: string,
   unidade: string,
 ): GraficoErro {
   const ordenadas = [...linhas].sort((a, b) =>
@@ -82,10 +84,28 @@ function graficoDeErro(
     pontos.push({ x: l.dia_real, y: l[campo] });
     grupos.set(nome, pontos);
   }
+  return { unidade, series: [...grupos.entries()].map(([nome, pontos]) => ({ nome, pontos })) };
+}
+
+/** Os 2 maiores erros de chuva (em módulo) a partir do limiar, do maior para o menor. */
+function destaquesDeChuva(linhas: LinhaComparada[]): Destaque[] {
+  return linhas
+    .filter((l) => l.erro_chuva_mm !== null && Math.abs(l.erro_chuva_mm) >= LIMIAR_DESTAQUE_CHUVA)
+    .map((l) => ({ cidade_id: l.cidade_id, dia: l.dia_real, erro: l.erro_chuva_mm as number }))
+    .sort((a, b) => Math.abs(b.erro) - Math.abs(a.erro))
+    .slice(0, 2);
+}
+
+function errosTemperatura(linhas: LinhaComparada[], campo: "temp_max" | "temp_min"): ErrosTemperatura {
+  const erros = linhas.map((l) => l[`erro_${campo}`]);
   return {
-    titulo,
-    unidade,
-    series: [...grupos.entries()].map(([nome, pontos]) => ({ nome, pontos })),
+    mae: mae(erros),
+    rmse: rmse(erros),
+    bias: bias(erros),
+    mape: mape(
+      linhas.map((l) => l[`prev_${campo}`]),
+      linhas.map((l) => l[`real_${campo}`]),
+    ),
   };
 }
 
@@ -94,92 +114,33 @@ export function montarPainel(todasAsLinhas: LinhaComparada[], cidade: string): P
   const linhas = todas ? todasAsLinhas : todasAsLinhas.filter((l) => l.cidade_id === cidade);
   if (linhas.length === 0) return null;
 
-  const erroMax = linhas.map((l) => l.erro_temp_max);
-  const erroMin = linhas.map((l) => l.erro_temp_min);
-  const erroChuva = linhas.map((l) => l.erro_chuva_mm);
   const dias = linhas.map((l) => l.dia_real).sort();
-
-  const geral: Metrica[] = [
-    { rotulo: "Linhas comparadas", valor: String(linhas.length) },
-    { rotulo: "Cidades", valor: String(new Set(linhas.map((l) => l.cidade_id)).size) },
-    { rotulo: "Primeira data", valor: dias[0] },
-    { rotulo: "Última data", valor: dias[dias.length - 1] },
-  ];
-
-  const temperatura = (erros: Array<number | null>, campo: "temp_max" | "temp_min"): Metrica[] => [
-    { rotulo: "MAE", valor: formatarNumero(mae(erros)) },
-    { rotulo: "RMSE", valor: formatarNumero(rmse(erros)) },
-    { rotulo: "Bias", valor: formatarNumero(bias(erros)) },
-    {
-      rotulo: "MAPE",
-      valor: pct(
-        mape(
-          linhas.map((l) => l[`prev_${campo}`]),
-          linhas.map((l) => l[`real_${campo}`]),
-        ),
-      ),
-    },
-  ];
-
-  const pesos =
-    `Score Final = ${percentual(PESO_TEMPERATURA)}% Temperatura + ` +
-    `${percentual(PESO_CHUVA)}% Chuva + ` +
-    `${percentual(PESO_DESCRICAO)}% Descrição.`;
-
-  let ranking: Painel["ranking"] = null;
-  let scoreCidade: Painel["scoreCidade"] = null;
-  if (todas) {
-    const linhasRanking = rankingPorCidade(linhas);
-    ranking = {
-      destaques: [
-        { rotulo: "🥇 Cidade #1", valor: linhasRanking[0].cidade_id },
-        { rotulo: "⭐ Score #1", valor: formatarFixo(linhasRanking[0].scoreFinal, 2) },
-        { rotulo: "📌 Cidades no ranking", valor: String(linhasRanking.length) },
-      ],
-      linhas: linhasRanking,
-      legenda:
-        `${pesos} Score Temperatura usa limite de ${LIMITE_TEMPERATURA.toFixed(1)}°C ` +
-        `(MAE ≥ ${LIMITE_TEMPERATURA.toFixed(1)} → 0 pontos).`,
-    };
-  } else {
-    const score = calcularScore(linhas);
-    scoreCidade = {
-      metricas: [
-        { rotulo: "Cidade", valor: cidade },
-        { rotulo: "Score Final", valor: formatarNumero(score.scoreFinal) },
-        { rotulo: "Score Temperatura", valor: formatarNumero(score.scoreTemperatura) },
-        { rotulo: "Score Chuva", valor: formatarNumero(score.scoreChuva) },
-      ],
-      legenda: pesos,
-    };
-  }
+  const errosChuva = linhas.map((l) => l.erro_chuva_mm);
 
   return {
     cidade,
-    subtitulo: todas
-      ? "Visão consolidada de todas as cidades"
-      : `Visão filtrada para cidade ${cidade}`,
-    geral,
-    temperaturaMax: temperatura(erroMax, "temp_max"),
-    temperaturaMin: temperatura(erroMin, "temp_min"),
-    chuva: [
-      { rotulo: "MAE", valor: formatarNumero(mae(erroChuva)) },
-      { rotulo: "RMSE", valor: formatarNumero(rmse(erroChuva)) },
-      { rotulo: "Bias", valor: formatarNumero(bias(erroChuva)) },
-    ],
-    classificacao: [
-      { rotulo: "✅ Acurácia: Descrição do Clima", valor: pct(acuraciaDescricao(linhas)) },
-      { rotulo: "🌧️ Acurácia: Choveu vs Não", valor: pct(acuraciaChuvaBinaria(linhas)) },
-      { rotulo: "🎯 Acurácia % Volume Chuva", valor: pct(acuraciaVolumeChuva(linhas)) },
-    ],
+    todas,
+    linhasComparadas: linhas.length,
+    numCidades: new Set(linhas.map((l) => l.cidade_id)).size,
+    inicio: dias[0],
+    fim: dias[dias.length - 1],
+    temperaturaMax: errosTemperatura(linhas, "temp_max"),
+    temperaturaMin: errosTemperatura(linhas, "temp_min"),
+    chuva: { mae: mae(errosChuva), rmse: rmse(errosChuva), bias: bias(errosChuva) },
+    acuracia: {
+      descricao: acuraciaDescricao(linhas),
+      chuvaBinaria: acuraciaChuvaBinaria(linhas),
+      volumeChuva: acuraciaVolumeChuva(linhas),
+    },
+    ranking: rankingPorCidade(todasAsLinhas),
+    scoreCidade: todas ? null : calcularScore(linhas),
     porCidade: todas ? metricasPorCidade(linhas) : null,
-    graficos: [
-      graficoDeErro(linhas, todas, "erro_temp_max", "Erro Temp. Máx (Previsto - Real) por dia", "°C"),
-      graficoDeErro(linhas, todas, "erro_temp_min", "Erro Temp. Mín (Previsto - Real) por dia", "°C"),
-      graficoDeErro(linhas, todas, "erro_chuva_mm", "Erro Chuva (mm) (Previsto - Real) por dia", "mm"),
-    ],
+    graficos: {
+      temperaturaMax: graficoDeErro(linhas, todas, "erro_temp_max", "°C"),
+      temperaturaMin: graficoDeErro(linhas, todas, "erro_temp_min", "°C"),
+      chuva: graficoDeErro(linhas, todas, "erro_chuva_mm", "mm"),
+    },
+    destaquesChuva: destaquesDeChuva(linhas),
     base: linhas,
-    ranking,
-    scoreCidade,
   };
 }

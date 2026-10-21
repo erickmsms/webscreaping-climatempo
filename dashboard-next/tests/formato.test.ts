@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { formatarFixo, formatarNumero } from "@/lib/formato";
+import {
+  formatarDecimal,
+  formatarDia,
+  formatarFixo,
+  formatarMeses,
+  formatarNumero,
+  formatarPercentual,
+  formatarPeriodo,
+} from "@/lib/formato";
 
 describe("formatarFixo", () => {
   // Valores esperados conferidos com f"{v:.2f}" no Python.
@@ -41,5 +49,55 @@ describe("formatarNumero", () => {
   it("desempata como o Python mesmo com sufixo", () => {
     expect(formatarNumero(9 / 8)).toBe("1.12");
     expect(formatarNumero(-9 / 8, "%")).toBe("-1.12%");
+  });
+});
+
+describe("formatarDecimal", () => {
+  it("usa vírgula, sinal de menos tipográfico e o arredondamento do Python", () => {
+    expect(formatarDecimal(0.62, 2)).toBe("0,62");
+    expect(formatarDecimal(-0.1, 2)).toBe("−0,10");
+    expect(formatarDecimal(9 / 8, 2)).toBe("1,12");
+    expect(formatarDecimal(91.66666, 1)).toBe("91,7");
+    expect(formatarDecimal(100, 0)).toBe("100");
+  });
+
+  it("põe + nos positivos só quando pedido", () => {
+    expect(formatarDecimal(0.22, 2, { sinal: true })).toBe("+0,22");
+    expect(formatarDecimal(0.22, 2)).toBe("0,22");
+  });
+
+  it("não põe sinal em valor que arredonda para zero", () => {
+    expect(formatarDecimal(-0.001, 2)).toBe("0,00");
+    expect(formatarDecimal(0.001, 2, { sinal: true })).toBe("0,00");
+    expect(formatarDecimal(0, 0, { sinal: true })).toBe("0");
+  });
+
+  it("mostra travessão para NaN", () => {
+    expect(formatarDecimal(Number.NaN, 1)).toBe("—");
+  });
+});
+
+describe("formatarPercentual", () => {
+  it("usa 1 casa, exceto em 100%", () => {
+    expect(formatarPercentual(45)).toBe("45,0%");
+    expect(formatarPercentual(91.66666)).toBe("91,7%");
+    expect(formatarPercentual(100)).toBe("100%");
+    expect(formatarPercentual(Number.NaN)).toBe("—");
+  });
+});
+
+describe("datas", () => {
+  it("formata dia e período em português", () => {
+    expect(formatarDia("2026-03-01")).toBe("1 mar");
+    expect(formatarDia("2026-02-17", true)).toBe("17 fev 2026");
+    expect(formatarPeriodo("2026-02-17", "2026-03-06")).toBe("17 fev – 6 mar 2026");
+    expect(formatarPeriodo("2025-12-28", "2026-01-06")).toBe("28 dez 2025 – 6 jan 2026");
+    expect(formatarPeriodo("2026-03-06", "2026-03-06")).toBe("6 mar 2026");
+  });
+
+  it("resume os meses cobertos", () => {
+    expect(formatarMeses("2026-02-17", "2026-03-06")).toBe("Fev–mar 2026");
+    expect(formatarMeses("2026-03-01", "2026-03-06")).toBe("Mar 2026");
+    expect(formatarMeses("2025-12-28", "2026-01-06")).toBe("Dez 2025–jan 2026");
   });
 });
