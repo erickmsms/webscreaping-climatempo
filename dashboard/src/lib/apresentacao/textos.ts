@@ -35,6 +35,15 @@ export function linhaFina(): string {
   return "Comparamos cada previsão que o Climatempo fez na véspera com o que o próprio site registrou no dia seguinte.";
 }
 
+/** Em palavras, o que um índice de correlação entre erros quer dizer. */
+export function leituraDaCorrelacao(indice: number): string {
+  if (Number.isNaN(indice)) return "sem dias suficientes para comparar";
+  if (indice >= 0.5) return "as cidades tendem a errar juntas";
+  if (indice >= 0.2) return "as cidades erram junto só um pouco";
+  if (indice > -0.2) return "os erros de uma cidade não dizem nada sobre os das outras";
+  return "as cidades tendem a errar em sentidos opostos";
+}
+
 /** Anotação de um destaque: "Recife, 1 mar" / "choveu 49,6 mm a mais que o previsto". */
 export function textoDoDestaque(d: Destaque): { titulo: string; texto: string } {
   const quanto = formatarDecimal(Math.abs(d.erro), 1);

@@ -36,6 +36,7 @@ function painel(extra: Partial<Painel>): Painel {
       temperaturaMin: { unidade: "°C", series: [] },
       chuva: { unidade: "mm", series: [] },
     },
+    correlacoes: null,
     destaquesChuva: [],
     ...extra,
   };

@@ -5,6 +5,7 @@ import { Abertura } from "@/components/boletim/Abertura";
 import { Cabecalho } from "@/components/boletim/Cabecalho";
 import { COLUNAS_POR_CIDADE } from "@/components/boletim/colunas";
 import { ComoMedimos } from "@/components/boletim/ComoMedimos";
+import { CorrelacaoDeErros } from "@/components/boletim/CorrelacaoDeErros";
 import { ErroDeChuva, ErroDeTemperatura } from "@/components/boletim/ErrosPorDia";
 import { NumerosPrincipais } from "@/components/boletim/NumerosPrincipais";
 import { QuadroMetricas } from "@/components/boletim/QuadroMetricas";
@@ -41,6 +42,7 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
             </Secao>
 
             <ErroDeChuva painel={painel} cores={cores} />
+            <CorrelacaoDeErros painel={painel} />
             <ErroDeTemperatura painel={painel} cores={cores} />
 
             {painel.porCidade && (
