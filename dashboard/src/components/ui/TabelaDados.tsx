@@ -1,3 +1,4 @@
+import { Termo } from "@/components/ui/Dica";
 import { nomeDaCidade } from "@/lib/apresentacao/cidades";
 import { formatarDecimal, formatarDia, formatarPercentual } from "@/lib/apresentacao/formato";
 
@@ -9,6 +10,8 @@ export type Coluna<T> = {
   sufixo?: string;
   /** "+" nos positivos (para erros). */
   sinal?: boolean;
+  /** Explicação do termo, mostrada num tooltip ao lado do título. */
+  dica?: string;
 };
 
 const NUMERICO = new Set<Coluna<unknown>["tipo"]>(["numero", "decimal", "percentual"]);
@@ -53,7 +56,7 @@ export function TabelaDados<T extends object>({
                   NUMERICO.has(c.tipo) ? "text-right" : "text-left"
                 }`}
               >
-                {c.titulo}
+                {c.dica ? <Termo dica={c.dica}>{c.titulo}</Termo> : c.titulo}
               </th>
             ))}
           </tr>

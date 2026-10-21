@@ -105,6 +105,12 @@ teste junto.
 - **Leitura ilegível é ausente, não zero.** O `-` que o site às vezes devolve no
   lugar da temperatura, e a chuva vazia, viram `null`. O dbt antigo convertia
   isso em 0 sem avisar.
+- **Explicações em tooltips, não em rodapé.** Cada termo técnico (MAE, RMSE,
+  viés, MAPE, acertos, score) tem um ícone "?" ao lado com a explicação, em
+  `components/ui/Dica.tsx`. Os textos ficam em `lib/apresentacao/glossario.ts`,
+  com os pesos e limites vindos das mesmas constantes do cálculo. O balão abre
+  com mouse, teclado (foco) ou toque, fecha com Esc ou ao tocar fora, e tem
+  posição fixa para não ser cortado por tabelas com rolagem.
 - **Gráficos próprios, sem biblioteca.** Um dia sem coleta não interrompe a
   linha da cidade, mas um valor nulo interrompe. As bibliotecas comuns de
   gráfico em React não distinguem os dois casos.

@@ -2,7 +2,6 @@
  * Textos do boletim gerados a partir dos números do painel, para que a
  * manchete e as conclusões acompanhem os dados em vez de ficarem fixas.
  */
-import { PESO_CHUVA, PESO_DESCRICAO, PESO_TEMPERATURA } from "@/lib/analise/metricas";
 import { nomeDaCidade } from "@/lib/apresentacao/cidades";
 import { formatarDecimal, formatarDia, formatarMeses } from "@/lib/apresentacao/formato";
 import type { Destaque, Painel } from "@/lib/analise/painel";
@@ -11,8 +10,6 @@ import type { Destaque, Painel } from "@/lib/analise/painel";
 export const ERRO_MAXIMO_TEMPERATURA_OK = 1;
 /** O volume de chuva "passa no teste" com pelo menos 50% de acerto. */
 export const ACERTO_MINIMO_VOLUME_OK = 50;
-
-const pct = (peso: number) => Math.trunc(peso * 100);
 
 /** Linha acima da manchete: "Fev–mar 2026 · 4 cidades · 60 previsões". */
 export function chapeu(p: Painel): string {
@@ -51,15 +48,7 @@ export function linhaFina(p: Painel): string {
   return `${metodo} Nem a temperatura nem o volume de chuva passam no teste.`;
 }
 
-/** "Score de 0 a 100: 50% temperatura, 40% chuva e 10% descrição do tempo." */
-export function explicacaoScore(): string {
-  return (
-    `Score de 0 a 100: ${pct(PESO_TEMPERATURA)}% temperatura, ` +
-    `${pct(PESO_CHUVA)}% chuva e ${pct(PESO_DESCRICAO)}% descrição do tempo.`
-  );
-}
-
-/** Critérios usados na linha fina, para a seção "Como medimos". */
+/** Critérios usados na linha fina (explicados no tooltip de "passa no teste"). */
 export function criterios(): string {
   return (
     `Consideramos que a temperatura passa no teste com erro médio de até ` +

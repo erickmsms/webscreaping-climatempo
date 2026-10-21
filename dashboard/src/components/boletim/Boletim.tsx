@@ -7,8 +7,10 @@ import { nomeDaCidade } from "@/lib/apresentacao/cidades";
 import { coresPorCidade } from "@/lib/apresentacao/cores";
 import { formatarPeriodo } from "@/lib/apresentacao/formato";
 import { montarPainel, opcoesDeCidade, TODAS, type GraficoErro } from "@/lib/analise/painel";
-import { chapeu, criterios, explicacaoScore, linhaFina, manchete, textoDoDestaque } from "@/lib/apresentacao/textos";
+import { GLOSSARIO } from "@/lib/apresentacao/glossario";
+import { chapeu, linhaFina, manchete, textoDoDestaque } from "@/lib/apresentacao/textos";
 import { Aviso } from "@/components/ui/Aviso";
+import { Dica, Termo } from "@/components/ui/Dica";
 import { Cabecalho } from "@/components/boletim/Cabecalho";
 import { GraficoLinhas, type SerieDesenho } from "@/components/graficos/GraficoLinhas";
 import { NumerosPrincipais } from "@/components/boletim/NumerosPrincipais";
@@ -20,37 +22,38 @@ const REPOSITORIO = "https://github.com/erickmsms/webscreaping-climatempo";
 
 const COLUNAS_POR_CIDADE: Coluna<MetricasCidade>[] = [
   { chave: "cidade_id", titulo: "Cidade", tipo: "cidade" },
-  { chave: "n", titulo: "Dias", tipo: "numero" },
-  { chave: "mae_temp_max", titulo: "Erro na máxima", tipo: "decimal", sufixo: "°C" },
-  { chave: "rmse_temp_max", titulo: "RMSE máx", tipo: "decimal" },
-  { chave: "mae_temp_min", titulo: "Erro na mínima", tipo: "decimal", sufixo: "°C" },
-  { chave: "rmse_temp_min", titulo: "RMSE mín", tipo: "decimal" },
-  { chave: "mae_chuva", titulo: "Erro na chuva", tipo: "decimal", sufixo: "mm" },
-  { chave: "acc_chuva", titulo: "Acertou se choveria", tipo: "percentual" },
+  { chave: "n", titulo: "Dias", tipo: "numero", dica: GLOSSARIO.dias },
+  { chave: "mae_temp_max", titulo: "Erro na máxima", tipo: "decimal", sufixo: "°C", dica: GLOSSARIO.mae },
+  { chave: "rmse_temp_max", titulo: "RMSE máx", tipo: "decimal", dica: GLOSSARIO.rmse },
+  { chave: "mae_temp_min", titulo: "Erro na mínima", tipo: "decimal", sufixo: "°C", dica: GLOSSARIO.mae },
+  { chave: "rmse_temp_min", titulo: "RMSE mín", tipo: "decimal", dica: GLOSSARIO.rmse },
+  { chave: "mae_chuva", titulo: "Erro na chuva", tipo: "decimal", sufixo: "mm", dica: GLOSSARIO.mae },
+  { chave: "acc_chuva", titulo: "Acertou se choveria", tipo: "percentual", dica: GLOSSARIO.acertoChuva },
 ];
 
 const COLUNAS_BASE: Coluna<LinhaComparada>[] = [
   { chave: "cidade_id", titulo: "Cidade", tipo: "cidade" },
-  { chave: "dia_coleta_prev", titulo: "Previsto em", tipo: "data" },
-  { chave: "dia_real", titulo: "Dia", tipo: "data" },
+  { chave: "dia_coleta_prev", titulo: "Previsto em", tipo: "data", dica: GLOSSARIO.previstoEm },
+  { chave: "dia_real", titulo: "Dia", tipo: "data", dica: GLOSSARIO.diaObservado },
   { chave: "prev_temp_min", titulo: "Mín prevista", tipo: "numero", sufixo: "°C" },
   { chave: "real_temp_min", titulo: "Mín real", tipo: "numero", sufixo: "°C" },
-  { chave: "erro_temp_min", titulo: "Erro mín", tipo: "numero", sinal: true },
+  { chave: "erro_temp_min", titulo: "Erro mín", tipo: "numero", sinal: true, dica: GLOSSARIO.erroPrevistoReal },
   { chave: "prev_temp_max", titulo: "Máx prevista", tipo: "numero", sufixo: "°C" },
   { chave: "real_temp_max", titulo: "Máx real", tipo: "numero", sufixo: "°C" },
-  { chave: "erro_temp_max", titulo: "Erro máx", tipo: "numero", sinal: true },
+  { chave: "erro_temp_max", titulo: "Erro máx", tipo: "numero", sinal: true, dica: GLOSSARIO.erroPrevistoReal },
   { chave: "prev_chuva_mm", titulo: "Chuva prevista", tipo: "decimal", sufixo: "mm" },
   { chave: "real_chuva_mm", titulo: "Chuva real", tipo: "decimal", sufixo: "mm" },
-  { chave: "erro_chuva_mm", titulo: "Erro chuva", tipo: "decimal", sinal: true },
+  { chave: "erro_chuva_mm", titulo: "Erro chuva", tipo: "decimal", sinal: true, dica: GLOSSARIO.erroPrevistoReal },
   { chave: "prev_clima_desc", titulo: "Descrição prevista", tipo: "texto" },
   { chave: "real_clima_desc", titulo: "Descrição real", tipo: "texto" },
 ];
 
-function Secao({ titulo, descricao, children }: { titulo: string; descricao?: string; children: React.ReactNode }) {
+function Secao({ titulo, dica, children }: { titulo: string; dica?: string; children: React.ReactNode }) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="font-display text-3xl font-bold tracking-[-0.015em]">{titulo}</h2>
-      {descricao && <p className="mb-2 max-w-[47.5rem] text-ink-2">{descricao}</p>}
+      <h2 className="font-display text-3xl font-bold tracking-[-0.015em]">
+        {dica ? <Termo dica={dica}>{titulo}</Termo> : titulo}
+      </h2>
       {children}
     </section>
   );
@@ -82,18 +85,20 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
               <h1 className="font-display text-4xl leading-[1.04] font-extrabold tracking-[-0.025em] sm:text-6xl">
                 {manchete(painel)}
               </h1>
-              <p className="max-w-[47.5rem] text-lg leading-relaxed text-ink-2 sm:text-xl">{linhaFina(painel)}</p>
+              <p className="max-w-[47.5rem] text-lg leading-relaxed text-ink-2 sm:text-xl">
+                {linhaFina(painel)} <Dica texto={GLOSSARIO.passaNoTeste} termo="passa no teste" />
+              </p>
             </section>
 
             <NumerosPrincipais painel={painel} />
 
-            <Secao titulo="O ranking" descricao={explicacaoScore()}>
+            <Secao titulo="O ranking" dica={GLOSSARIO.score}>
               <Ranking linhas={painel.ranking} cores={cores} selecionada={painel.todas ? undefined : painel.cidade} />
             </Secao>
 
             <Secao
               titulo={painel.destaquesChuva.length > 0 ? "Quando a previsão errou feio" : "Erro na chuva, dia a dia"}
-              descricao="Erro de chuva por dia, em mm (previsto − real). Abaixo de zero, choveu mais do que o previsto."
+              dica={GLOSSARIO.chuvaPorDia}
             >
               <GraficoLinhas
                 rotulo="Erro de chuva por dia"
@@ -111,7 +116,7 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
 
             <Secao
               titulo="Erro na temperatura, dia a dia"
-              descricao="Previsto − real, em °C. Acima de zero, a previsão foi mais quente que o dia."
+              dica={GLOSSARIO.temperaturaPorDia}
             >
               <div className="grid gap-10 lg:grid-cols-2">
                 <div className="flex min-w-0 flex-col gap-2">
@@ -134,10 +139,7 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
             </Secao>
 
             {painel.porCidade && (
-              <Secao
-                titulo="Cidade a cidade"
-                descricao="Erros médios (MAE) e acerto de chuva em cada cidade, do maior para o menor erro na máxima."
-              >
+              <Secao titulo="Cidade a cidade" dica={GLOSSARIO.porCidade}>
                 <TabelaDados colunas={COLUNAS_POR_CIDADE} linhas={painel.porCidade} legenda="Métricas por cidade" />
               </Secao>
             )}
@@ -159,10 +161,8 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
               <h2 className="font-display text-xl font-bold">Como medimos</h2>
               <p>
                 Para cada cidade e dia, pegamos a previsão publicada na véspera (D-1) e comparamos com o registro do
-                próprio Climatempo no dia (D). MAE é o erro médio absoluto; RMSE pesa mais os erros grandes; viés mostra
-                se a previsão tende a errar para cima ou para baixo.
+                próprio Climatempo no dia (D).
               </p>
-              <p>{criterios()}</p>
               <p>
                 <strong>Limitação:</strong> o “real” ainda é o registro do site, não uma medição de estação. Próxima
                 etapa: comparar com as estações do INMET.
