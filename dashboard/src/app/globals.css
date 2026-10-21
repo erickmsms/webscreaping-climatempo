@@ -70,6 +70,11 @@
   --font-display: var(--font-archivo), var(--font-inter), system-ui, sans-serif;
 }
 
+/* O cabeçalho é fixo: foco por teclado e âncoras não podem parar atrás dele. */
+html {
+  scroll-padding-top: 7rem;
+}
+
 body {
   background: var(--page);
   color: var(--ink);
