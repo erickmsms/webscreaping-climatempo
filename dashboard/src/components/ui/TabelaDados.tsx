@@ -36,7 +36,9 @@ export function TabelaDados<T extends object>({
   legenda: string;
 }) {
   return (
-    <div className="overflow-x-auto">
+    // -mr-3/pr-3: o ícone de explicação da última coluna tem uma área de toque que passa 12 px da borda
+    // direita; sem essa folga ela contaria como conteúdo e apareceria uma rolagem horizontal à toa.
+    <div className="-mr-3 overflow-x-auto pr-3">
       <table className="w-full min-w-[45rem] border-collapse text-[15px] tabular-nums">
         <caption className="sr-only">{legenda}</caption>
         <thead>
