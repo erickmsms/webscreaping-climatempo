@@ -50,13 +50,31 @@ export const GLOSSARIO = {
   temperaturaPorDia:
     "Previsto − real, em °C. Acima de zero, a previsão foi mais quente que o dia; abaixo, mais fria.",
 
-  correlacao:
-    "Responde se, quando uma cidade erra num dia, as outras erram junto. Para cada par de cidades, comparamos os " +
-    "erros de cada dia e medimos o quanto eles andam juntos, numa escala de −1 a +1; o índice é a média de todos os pares. " +
-    "Perto de +1: quando uma erra para mais, a outra também (erros em comum, como uma frente fria que ninguém previu). " +
-    "Perto de zero: os erros de uma cidade não dizem nada sobre os das outras. " +
-    "Perto de −1: quando uma erra para mais, a outra erra para menos. " +
-    "Mostramos um índice para a chuva, um para a temperatura máxima e um para a mínima. Aparece com duas ou mais cidades marcadas.",
+  referenciaTemperatura:
+    "Compara o erro médio da previsão com o de uma referência simples: supor que amanhã será igual a hoje, " +
+    "sem previsão nenhuma. Barras menores são melhores. Se a previsão não ficasse bem abaixo da referência, " +
+    "ela não estaria agregando nada.",
+
+  referenciaChuva:
+    "Compara o acerto de “choveu ou não” com o de chutar sempre o resultado mais comum no período (se choveu " +
+    "na maioria dos dias, chutar sempre “vai chover”). Barras maiores são melhores. A previsão só vale algo " +
+    "se passar bem desse chute.",
+
+  viradas:
+    "Dias em que a temperatura máxima mudou 3 °C ou mais em relação ao dia anterior. São os dias em que repetir " +
+    "o dia de hoje falha feio, e em que uma previsão de verdade mais faz falta.",
+
+  aviso:
+    "Separa os dois jeitos de errar “vai chover?”. Pego de surpresa: choveu sem a previsão avisar. " +
+    "Alarme falso: a previsão avisou chuva e o dia ficou seco.",
+
+  faixasDeChuva:
+    "Erro da previsão de chuva conforme o quanto choveu de verdade, só nos dias em que choveu. " +
+    "Abaixo de zero, a previsão ficou aquém do que caiu.",
+
+  totalDeChuva:
+    "Soma da chuva prevista e da chuva real em todos os dias do período, ao lado do erro médio por dia. " +
+    "Os dois números podem destoar: erros para mais e para menos em dias diferentes se compensam no total.",
 
   porCidade:
     "Erro médio e acerto de chuva em cada cidade, do maior para o menor erro na máxima.",

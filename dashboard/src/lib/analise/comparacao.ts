@@ -65,7 +65,7 @@ export function paraData(v: unknown): string | null {
   return data === `${m[1]}-${m[2]}-${m[3]}` ? data : null;
 }
 
-function somarDias(data: string, dias: number): string {
+export function somarDias(data: string, dias: number): string {
   return new Date(Date.parse(`${data}T00:00:00Z`) + dias * DIA_MS).toISOString().slice(0, 10);
 }
 

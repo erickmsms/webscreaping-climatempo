@@ -36,7 +36,17 @@ function painel(extra: Partial<Painel>): Painel {
       temperaturaMin: { unidade: "°C", series: [] },
       chuva: { unidade: "mm", series: [] },
     },
-    correlacoes: null,
+    referencia: {
+      temperaturaMax: { previsao: 0.66, ingenuo: 1.52 },
+      temperaturaMin: { previsao: 0.62, ingenuo: 1.11 },
+      chuvaBinaria: { previsao: 91.2, ingenuo: 57.4, diasComChuva: 57.4 },
+      viradas: { previsao: 1.1, ingenuo: 4.4, dias: 169 },
+    },
+    chuvaEmDetalhe: {
+      aviso: { acertos: 0, surpresas: 0, alarmesFalsos: 0, total: 0 },
+      faixas: [],
+      porCidade: [],
+    },
     destaquesChuva: [],
     ...extra,
   };

@@ -7,7 +7,6 @@
  * antigo dashboard Streamlit.
  */
 import type { LinhaComparada } from "@/lib/analise/comparacao";
-import { matrizDeCorrelacao } from "@/lib/analise/correlacao";
 import {
   acuraciaChuvaBinaria,
   acuraciaDescricao,
@@ -23,6 +22,8 @@ import {
   type MetricasCidade,
   type Score,
 } from "@/lib/analise/metricas";
+import { avisoDeChuva, errosPorFaixaDeChuva, totaisDeChuva, type AvisoDeChuva, type ErroPorFaixa, type TotalDeChuva } from "@/lib/analise/chuva";
+import { calcularReferencia, type Referencia } from "@/lib/analise/referencia";
 
 /** Erros de chuva menores que isso (em mm) não viram destaque no gráfico. */
 export const LIMIAR_DESTAQUE_CHUVA = 5;
@@ -57,8 +58,10 @@ export type Painel = {
   /** Métricas por cidade (só com mais de uma cidade). */
   porCidade: MetricasCidade[] | null;
   graficos: { temperaturaMax: GraficoErro; temperaturaMin: GraficoErro; chuva: GraficoErro };
-  /** Índice de correlação entre os erros das cidades, por tipo de erro (só com mais de uma cidade). */
-  correlacoes: { chuva: number; temperaturaMax: number; temperaturaMin: number } | null;
+  /** A previsão contra o que se acertaria sem previsão nenhuma. */
+  referencia: Referencia;
+  /** A chuva em detalhe: tipo de erro, erro por tamanho da chuva e total do período. */
+  chuvaEmDetalhe: { aviso: AvisoDeChuva; faixas: ErroPorFaixa[]; porCidade: TotalDeChuva[] };
   destaquesChuva: Destaque[];
 };
 
@@ -142,13 +145,12 @@ export function montarPainel(todasAsLinhas: LinhaComparada[], selecionadas: stri
       temperaturaMin: graficoDeErro(linhas, varias, "erro_temp_min", "°C"),
       chuva: graficoDeErro(linhas, varias, "erro_chuva_mm", "mm"),
     },
-    correlacoes: varias
-      ? {
-          chuva: matrizDeCorrelacao(linhas, "erro_chuva_mm").indice,
-          temperaturaMax: matrizDeCorrelacao(linhas, "erro_temp_max").indice,
-          temperaturaMin: matrizDeCorrelacao(linhas, "erro_temp_min").indice,
-        }
-      : null,
+    referencia: calcularReferencia(linhas),
+    chuvaEmDetalhe: {
+      aviso: avisoDeChuva(linhas),
+      faixas: errosPorFaixaDeChuva(linhas),
+      porCidade: totaisDeChuva(linhas),
+    },
     destaquesChuva: destaquesDeChuva(linhas),
   };
 }
