@@ -6,11 +6,6 @@ import { nomeDaCidade } from "@/lib/apresentacao/cidades";
 import { formatarDecimal, formatarDia, formatarMeses } from "@/lib/apresentacao/formato";
 import type { Destaque, Painel } from "@/lib/analise/painel";
 
-/** A temperatura "passa no teste" com erro médio na máxima de até 1 °C. */
-export const ERRO_MAXIMO_TEMPERATURA_OK = 1;
-/** O volume de chuva "passa no teste" com pelo menos 50% de acerto. */
-export const ACERTO_MINIMO_VOLUME_OK = 50;
-
 /** Linha acima da manchete: "Fev–mar 2026 · 4 cidades · 60 previsões". */
 export function chapeu(p: Painel): string {
   const onde = p.todas
@@ -31,21 +26,9 @@ export function manchete(p: Painel): string {
   return `${nome} ficou em ${posicao}º lugar entre ${total} cidades.`;
 }
 
-/** Explica o método e diz o que passa no teste (critérios nas constantes acima). */
-export function linhaFina(p: Painel): string {
-  const metodo =
-    "Comparamos cada previsão que o Climatempo fez na véspera com o que o próprio site registrou no dia seguinte.";
-  const temperaturaOk = p.temperaturaMax.mae <= ERRO_MAXIMO_TEMPERATURA_OK;
-  const volume = p.acuracia.volumeChuva;
-
-  if (Number.isNaN(volume)) {
-    return `${metodo} ${temperaturaOk ? "A temperatura passa no teste." : "A temperatura não passa no teste."}`;
-  }
-  const chuvaOk = volume >= ACERTO_MINIMO_VOLUME_OK;
-  if (temperaturaOk && chuvaOk) return `${metodo} Temperatura e volume de chuva passam no teste.`;
-  if (temperaturaOk) return `${metodo} A temperatura passa no teste; o volume de chuva, não.`;
-  if (chuvaOk) return `${metodo} O volume de chuva passa no teste; a temperatura, não.`;
-  return `${metodo} Nem a temperatura nem o volume de chuva passam no teste.`;
+/** Uma frase que explica o que o boletim compara. */
+export function linhaFina(): string {
+  return "Comparamos cada previsão que o Climatempo fez na véspera com o que o próprio site registrou no dia seguinte.";
 }
 
 /** Anotação de um destaque: "Recife, 1 mar" / "choveu 49,6 mm a mais que o previsto". */

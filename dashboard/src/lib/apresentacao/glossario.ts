@@ -1,6 +1,6 @@
 /**
  * Explicações dos termos do boletim, mostradas em tooltips ao lado de cada um.
- * Os números (pesos do score, limites do "passa no teste") vêm das mesmas
+ * Os números (pesos do score e limite de temperatura) vêm das mesmas
  * constantes que o cálculo usa, então o texto não fica desatualizado.
  */
 import { LIMITE_TEMPERATURA, PESO_CHUVA, PESO_DESCRICAO, PESO_TEMPERATURA } from "@/lib/analise/metricas";

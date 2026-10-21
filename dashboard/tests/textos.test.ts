@@ -68,20 +68,10 @@ describe("manchete", () => {
 });
 
 describe("linhaFina", () => {
-  const veredito = (maeMax: number, volume: number) =>
-    linhaFina(
-      painel({
-        temperaturaMax: { mae: maeMax, rmse: 0, bias: 0, mape: 0 },
-        acuracia: { descricao: 0, chuvaBinaria: 0, volumeChuva: volume },
-      }),
-    ).split("seguinte. ")[1];
-
-  it("diz o que passa no teste conforme os dados", () => {
-    expect(veredito(0.62, 29)).toBe("A temperatura passa no teste; o volume de chuva, não.");
-    expect(veredito(0.62, 80)).toBe("Temperatura e volume de chuva passam no teste.");
-    expect(veredito(2, 80)).toBe("O volume de chuva passa no teste; a temperatura, não.");
-    expect(veredito(2, 29)).toBe("Nem a temperatura nem o volume de chuva passam no teste.");
-    expect(veredito(0.62, Number.NaN)).toBe("A temperatura passa no teste.");
+  it("explica o método, sem veredito", () => {
+    expect(linhaFina()).toBe(
+      "Comparamos cada previsão que o Climatempo fez na véspera com o que o próprio site registrou no dia seguinte.",
+    );
   });
 });
 
