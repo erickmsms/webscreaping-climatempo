@@ -2,7 +2,7 @@ import type { MetricasCidade } from "@/lib/analise/metricas";
 import { GLOSSARIO } from "@/lib/apresentacao/glossario";
 import type { Coluna } from "@/components/ui/TabelaDados";
 
-/** Colunas da tabela "Cidade a cidade". */
+/** Colunas da tabela "Cidade a Cidade". */
 export const COLUNAS_POR_CIDADE: Coluna<MetricasCidade>[] = [
   { chave: "cidade_id", titulo: "Cidade", tipo: "cidade" },
   { chave: "n", titulo: "Dias", tipo: "numero", dica: GLOSSARIO.dias },

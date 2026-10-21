@@ -36,7 +36,7 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
             <Abertura painel={painel} />
             <NumerosPrincipais painel={painel} />
 
-            <Secao titulo="O ranking" dica={GLOSSARIO.score}>
+            <Secao titulo="O Ranking" dica={GLOSSARIO.score}>
               <Ranking linhas={painel.ranking} cores={cores} selecionada={painel.todas ? undefined : painel.cidade} />
             </Secao>
 
@@ -44,7 +44,7 @@ export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
             <ErroDeTemperatura painel={painel} cores={cores} />
 
             {painel.porCidade && (
-              <Secao titulo="Cidade a cidade" dica={GLOSSARIO.porCidade}>
+              <Secao titulo="Cidade a Cidade" dica={GLOSSARIO.porCidade}>
                 <TabelaDados colunas={COLUNAS_POR_CIDADE} linhas={painel.porCidade} legenda="Métricas por cidade" />
               </Secao>
             )}
