@@ -1,0 +1,357 @@
+{
+ "fonte": "https://apitempo.inmet.gov.br/estacoes/T",
+ "baixado_em": "2026-10-21",
+ "raio_km": 150,
+ "estacoes": [
+  {
+   "codigo": "A301",
+   "nome": "RECIFE",
+   "uf": "PE",
+   "latitude": -8.01888888,
+   "longitude": -34.94416666,
+   "altitude": 10.0,
+   "situacao": "Operante",
+   "inicio": "2004-12-21"
+  },
+  {
+   "codigo": "A309",
+   "nome": "ARCO VERDE",
+   "uf": "PE",
+   "latitude": -8.4336111,
+   "longitude": -37.05555555,
+   "altitude": 683.95,
+   "situacao": "Operante",
+   "inicio": "2004-11-19"
+  },
+  {
+   "codigo": "A313",
+   "nome": "CAMPINA GRANDE",
+   "uf": "PB",
+   "latitude": -7.22555554,
+   "longitude": -35.90472222,
+   "altitude": 546.17,
+   "situacao": "Operante",
+   "inicio": "2006-12-21"
+  },
+  {
+   "codigo": "A320",
+   "nome": "JOAO PESSOA",
+   "uf": "PB",
+   "latitude": -7.1436111,
+   "longitude": -34.84972221,
+   "altitude": 43.0,
+   "situacao": "Operante",
+   "inicio": "2007-07-20"
+  },
+  {
+   "codigo": "A322",
+   "nome": "GARANHUNS",
+   "uf": "PE",
+   "latitude": -8.91083333,
+   "longitude": -36.49333333,
+   "altitude": 827.78,
+   "situacao": "Operante",
+   "inicio": "2007-07-07"
+  },
+  {
+   "codigo": "A323",
+   "nome": "PAO DE ACUCAR",
+   "uf": "AL",
+   "latitude": -9.74916666,
+   "longitude": -37.43083332,
+   "altitude": 20.83,
+   "situacao": "Operante",
+   "inicio": "2007-07-13"
+  },
+  {
+   "codigo": "A327",
+   "nome": "PALMEIRA DOS INDIOS",
+   "uf": "AL",
+   "latitude": -9.42027777,
+   "longitude": -36.62027777,
+   "altitude": 278.01,
+   "situacao": "Operante",
+   "inicio": "2007-07-10"
+  },
+  {
+   "codigo": "A328",
+   "nome": "SURUBIM",
+   "uf": "PE",
+   "latitude": -7.84249999,
+   "longitude": -35.79027777,
+   "altitude": 421.44,
+   "situacao": "Operante",
+   "inicio": "2008-03-08"
+  },
+  {
+   "codigo": "A334",
+   "nome": "MONTEIRO",
+   "uf": "PB",
+   "latitude": -7.88277777,
+   "longitude": -37.12749999,
+   "altitude": 606.39,
+   "situacao": "Operante",
+   "inicio": "2007-08-21"
+  },
+  {
+   "codigo": "A341",
+   "nome": "CARUARU",
+   "uf": "PE",
+   "latitude": -8.35611111,
+   "longitude": -36.02833332,
+   "altitude": 837.0,
+   "situacao": "Pane",
+   "inicio": "2007-11-20"
+  },
+  {
+   "codigo": "A348",
+   "nome": "CABACEIRAS",
+   "uf": "PB",
+   "latitude": -7.48333333,
+   "longitude": -36.28638888,
+   "altitude": 391.96,
+   "situacao": "Operante",
+   "inicio": "2008-02-27"
+  },
+  {
+   "codigo": "A349",
+   "nome": "IBIMIRIM",
+   "uf": "PE",
+   "latitude": -8.50944444,
+   "longitude": -37.71166666,
+   "altitude": 434.23,
+   "situacao": "Pane",
+   "inicio": "2008-10-13"
+  },
+  {
+   "codigo": "A357",
+   "nome": "PALMARES",
+   "uf": "PE",
+   "latitude": -8.66666666,
+   "longitude": -35.56805554,
+   "altitude": 164.01,
+   "situacao": "Operante",
+   "inicio": "2008-09-03"
+  },
+  {
+   "codigo": "A387",
+   "nome": "SANTA CRUZ DO CAPIBARIBE",
+   "uf": "PE",
+   "latitude": -7.95083333,
+   "longitude": -36.22583332,
+   "altitude": 456.0,
+   "situacao": "Operante",
+   "inicio": "2026-08-04"
+  },
+  {
+   "codigo": "A388",
+   "nome": "ALIANCA",
+   "uf": "PE",
+   "latitude": -7.60916666,
+   "longitude": -35.23527777,
+   "altitude": 99.0,
+   "situacao": "Operante",
+   "inicio": "2026-08-01"
+  },
+  {
+   "codigo": "A389",
+   "nome": "ITAPISSUMA",
+   "uf": "PE",
+   "latitude": -7.77749999,
+   "longitude": -34.90027777,
+   "altitude": 7.0,
+   "situacao": "Operante",
+   "inicio": "2026-07-29"
+  },
+  {
+   "codigo": "A390",
+   "nome": "SAO JOSE DA COROA GRANDE",
+   "uf": "PE",
+   "latitude": -8.8861111,
+   "longitude": -35.15305555,
+   "altitude": 9.0,
+   "situacao": "Operante",
+   "inicio": "2026-08-09"
+  },
+  {
+   "codigo": "A509",
+   "nome": "MONTE VERDE",
+   "uf": "MG",
+   "latitude": -22.86166666,
+   "longitude": -46.04333333,
+   "altitude": 1544.89,
+   "situacao": "Operante",
+   "inicio": "2004-12-18"
+  },
+  {
+   "codigo": "A530",
+   "nome": "CALDAS",
+   "uf": "MG",
+   "latitude": -21.91805554,
+   "longitude": -46.38305554,
+   "altitude": 1077.34,
+   "situacao": "Operante",
+   "inicio": "2006-11-27"
+  },
+  {
+   "codigo": "A701",
+   "nome": "SAO PAULO - MIRANTE",
+   "uf": "SP",
+   "latitude": -23.4962888,
+   "longitude": -46.6200666,
+   "altitude": 785.64,
+   "situacao": "Operante",
+   "inicio": "2006-07-24"
+  },
+  {
+   "codigo": "A706",
+   "nome": "CAMPOS DO JORDAO",
+   "uf": "SP",
+   "latitude": -22.75027777,
+   "longitude": -45.60388888,
+   "altitude": 1662.95,
+   "situacao": "Operante",
+   "inicio": "2002-03-12"
+  },
+  {
+   "codigo": "A711",
+   "nome": "SAO CARLOS",
+   "uf": "SP",
+   "latitude": -21.98027777,
+   "longitude": -47.88388888,
+   "altitude": 859.29,
+   "situacao": "Operante",
+   "inicio": "2006-09-03"
+  },
+  {
+   "codigo": "A713",
+   "nome": "IPERO",
+   "uf": "SP",
+   "latitude": -23.4261111,
+   "longitude": -47.58555555,
+   "altitude": 609.33,
+   "situacao": "Operante",
+   "inicio": "2006-08-21"
+  },
+  {
+   "codigo": "A715",
+   "nome": "SAO MIGUEL ARCANJO",
+   "uf": "SP",
+   "latitude": -23.89083333,
+   "longitude": -47.99916666,
+   "altitude": 710.0,
+   "situacao": "Operante",
+   "inicio": "2006-08-14"
+  },
+  {
+   "codigo": "A726",
+   "nome": "PIRACICABA",
+   "uf": "SP",
+   "latitude": -22.70305555,
+   "longitude": -47.62333332,
+   "altitude": 566.46,
+   "situacao": "Operante",
+   "inicio": "2006-09-25"
+  },
+  {
+   "codigo": "A728",
+   "nome": "TAUBATE",
+   "uf": "SP",
+   "latitude": -23.04166666,
+   "longitude": -45.52083332,
+   "altitude": 582.26,
+   "situacao": "Operante",
+   "inicio": "2006-12-19"
+  },
+  {
+   "codigo": "A738",
+   "nome": "CASA BRANCA",
+   "uf": "SP",
+   "latitude": -21.78055554,
+   "longitude": -47.07527777,
+   "altitude": 734.15,
+   "situacao": "Operante",
+   "inicio": "2007-06-24"
+  },
+  {
+   "codigo": "A739",
+   "nome": "ITAPIRA",
+   "uf": "SP",
+   "latitude": -22.415,
+   "longitude": -46.80527777,
+   "altitude": 634.89,
+   "situacao": "Operante",
+   "inicio": "2007-11-04"
+  },
+  {
+   "codigo": "A740",
+   "nome": "SAO LUIZ DO PARAITINGA",
+   "uf": "SP",
+   "latitude": -23.22833332,
+   "longitude": -45.41694443,
+   "altitude": 874.0,
+   "situacao": "Operante",
+   "inicio": "2007-10-31"
+  },
+  {
+   "codigo": "A741",
+   "nome": "BARRA BONITA",
+   "uf": "SP",
+   "latitude": -22.4711111,
+   "longitude": -48.5575,
+   "altitude": 533.68,
+   "situacao": "Operante",
+   "inicio": "2008-04-23"
+  },
+  {
+   "codigo": "A744",
+   "nome": "BRAGANCA PAULISTA",
+   "uf": "SP",
+   "latitude": -22.94916666,
+   "longitude": -46.5261111,
+   "altitude": 891.0,
+   "situacao": "Operante",
+   "inicio": "2017-12-19"
+  },
+  {
+   "codigo": "A755",
+   "nome": "BARUERI",
+   "uf": "SP",
+   "latitude": -23.52388888,
+   "longitude": -46.86944443,
+   "altitude": 776.5,
+   "situacao": "Pane",
+   "inicio": "2011-03-28"
+  },
+  {
+   "codigo": "A765",
+   "nome": "BERTIOGA",
+   "uf": "SP",
+   "latitude": -23.84472221,
+   "longitude": -46.14333333,
+   "altitude": 5.0,
+   "situacao": "Operante",
+   "inicio": "2017-01-31"
+  },
+  {
+   "codigo": "A770",
+   "nome": "SAO SIMAO",
+   "uf": "SP",
+   "latitude": -21.46111111,
+   "longitude": -47.57944443,
+   "altitude": 620.0,
+   "situacao": "Operante",
+   "inicio": "2019-07-02"
+  },
+  {
+   "codigo": "A771",
+   "nome": "SAO PAULO - INTERLAGOS",
+   "uf": "SP",
+   "latitude": -23.72444443,
+   "longitude": -46.67749999,
+   "altitude": 771.0,
+   "situacao": "Operante",
+   "inicio": "2018-03-13"
+  }
+ ]
+}

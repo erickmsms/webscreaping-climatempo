@@ -76,6 +76,41 @@ export const GLOSSARIO = {
     "Soma da chuva prevista e da chuva real em todos os dias do período, ao lado do erro médio por dia. " +
     "Os dois números podem destoar: erros para mais e para menos em dias diferentes se compensam no total.",
 
+  constancia:
+    "Quanto a temperatura máxima muda, em média, de um dia para o outro em cada cidade. Onde o tempo quase não muda, " +
+    "errar pouco é fácil: até repetir o dia de hoje funcionaria bem. Por isso o erro bruto premia o clima calmo, " +
+    "e a seção seguinte compara as cidades de forma justa.",
+
+  erroJusto:
+    "À esquerda, as cidades ordenadas pelo menor erro. À direita, pela nota sobre o óbvio, de 0 a 100 (maior é melhor): " +
+    "0 é igual a repetir o dia de hoje (“amanhã = hoje”) e 100 é acertar tudo. A nota é 100 × (1 − erro justo), em que o " +
+    "erro justo é o erro da previsão dividido por quanto o tempo muda na cidade; quem fica pior que repetir o dia de hoje " +
+    "recebe 0. A linha mostra quem sobe ou desce quando o clima calmo ou agitado sai da conta.",
+
+  notaSobreObvio:
+    "Nota de 0 a 100 (maior é melhor) sobre o “amanhã = hoje”: 0 é igual a repetir o dia de hoje e 100 é acertar tudo. " +
+    "Já desconta o clima da cidade: é 100 × (1 − erro da previsão ÷ quanto o tempo muda na cidade), então cidades de " +
+    "clima calmo e de clima agitado são comparadas de forma justa.",
+
+  erroPorMudanca:
+    "Erro médio da previsão separado pelo tamanho da mudança do tempo em relação ao dia anterior. " +
+    "A segunda linha de cada faixa é o erro para cada 1 unidade de mudança: ele cai conforme a virada aumenta, " +
+    "ou seja, o erro cresce bem menos que a própria mudança.",
+
+  estacoes:
+    "Estações automáticas do INMET dentro de cada município (limites do IBGE) e no entorno, até 50 km do limite. " +
+    "O índice de cobertura soma as estações operantes: uma estação dentro da cidade vale 1; fora, o valor cai com a " +
+    "distância ao limite, medida em raios da cidade, então uma cidade pequena precisa de estação mais colada do que " +
+    "uma grande. Só a localização entra na conta; as medições não são usadas. " +
+    "Com só 4 cidades, a comparação com o erro aponta uma tendência e não prova que a estação causa o erro. " +
+    "As outras 30 cidades coletadas desde 21/10/2026 darão mais pontos quando juntarem histórico.",
+
+  correlacaoDePosto:
+    "Correlação de Spearman: de −1 a +1, mede se dois números sobem e descem juntos (positivo) ou em sentidos opostos " +
+    "(negativo). Perto de zero, não há relação. Mostra associação, não prova causa. " +
+    "A confiança vem de quantos casos sustentam a relação: com centenas de dias ela é bem estabelecida; " +
+    "com 4 cidades só indica uma direção, e um ponto fora da curva muda o resultado.",
+
   porCidade:
     "Erro médio e acerto de chuva em cada cidade, do maior para o menor erro na máxima.",
 
