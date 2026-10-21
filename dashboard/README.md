@@ -69,9 +69,8 @@ em `lib/apresentacao/` e nos componentes.
 
 Este dashboard substituiu o antigo, em Streamlit (`dashboard/app.py`), que lia
 um SQLite montado por um projeto dbt. A última versão em que o Streamlit existe
-é o commit `c8b6151`, e a última com o dbt é a `388077a`. Prints de uma versão
-anterior do Streamlit estão em
-[`docs/img/streamlit-antigo/`](../docs/img/streamlit-antigo/).
+é o commit `c8b6151`, e a última com o dbt é a `388077a`. O print da DAG do
+Airflow da época do dbt está em [`docs/img/airflow-dag.png`](../docs/img/airflow-dag.png).
 
 `tests/paridade.test.ts` garante que as análises continuam idênticas às do
 Streamlit. Ele usa dois arquivos congelados em `tests/fixtures/`:
