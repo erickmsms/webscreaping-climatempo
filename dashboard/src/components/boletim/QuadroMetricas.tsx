@@ -23,11 +23,11 @@ function Grupo({ titulo, linhas }: { titulo: string; linhas: Linha[] }) {
 
 function temperatura(t: ErrosTemperatura): Linha[] {
   return [
-    { rotulo: "Erro médio (MAE)", valor: formatarComUnidade(t.mae, "°C"), dica: GLOSSARIO.mae },
+    { rotulo: "Erro Médio (MAE)", valor: formatarComUnidade(t.mae, "°C"), dica: GLOSSARIO.mae },
     { rotulo: "RMSE", valor: formatarComUnidade(t.rmse, "°C"), dica: GLOSSARIO.rmse },
     { rotulo: "Viés", valor: formatarComUnidade(t.bias, "°C", { sinal: true }), dica: GLOSSARIO.vies },
     {
-      rotulo: "Erro percentual (MAPE)",
+      rotulo: "Erro Percentual (MAPE)",
       valor: Number.isNaN(t.mape) ? "—" : `${formatarDecimal(t.mape, 2)}%`,
       dica: GLOSSARIO.mape,
     },
@@ -38,12 +38,12 @@ function temperatura(t: ErrosTemperatura): Linha[] {
 export function QuadroMetricas({ painel }: { painel: Painel }) {
   return (
     <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
-      <Grupo titulo="Temperatura máxima" linhas={temperatura(painel.temperaturaMax)} />
-      <Grupo titulo="Temperatura mínima" linhas={temperatura(painel.temperaturaMin)} />
+      <Grupo titulo="Temperatura Máxima" linhas={temperatura(painel.temperaturaMax)} />
+      <Grupo titulo="Temperatura Mínima" linhas={temperatura(painel.temperaturaMin)} />
       <Grupo
         titulo="Chuva"
         linhas={[
-          { rotulo: "Erro médio (MAE)", valor: formatarComUnidade(painel.chuva.mae, "mm"), dica: GLOSSARIO.mae },
+          { rotulo: "Erro Médio (MAE)", valor: formatarComUnidade(painel.chuva.mae, "mm"), dica: GLOSSARIO.mae },
           { rotulo: "RMSE", valor: formatarComUnidade(painel.chuva.rmse, "mm"), dica: GLOSSARIO.rmse },
           { rotulo: "Viés", valor: formatarComUnidade(painel.chuva.bias, "mm", { sinal: true }), dica: GLOSSARIO.vies },
         ]}
@@ -52,17 +52,17 @@ export function QuadroMetricas({ painel }: { painel: Painel }) {
         titulo="Acertos"
         linhas={[
           {
-            rotulo: "Descrição do tempo",
+            rotulo: "Descrição do Tempo",
             valor: formatarPercentual(painel.acuracia.descricao),
             dica: GLOSSARIO.acertoDescricao,
           },
           {
-            rotulo: "Choveu ou não",
+            rotulo: "Choveu ou Não",
             valor: formatarPercentual(painel.acuracia.chuvaBinaria),
             dica: GLOSSARIO.acertoChuva,
           },
           {
-            rotulo: "Volume de chuva",
+            rotulo: "Volume de Chuva",
             valor: formatarPercentual(painel.acuracia.volumeChuva),
             dica: GLOSSARIO.acertoVolume,
           },
