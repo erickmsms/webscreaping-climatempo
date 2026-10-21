@@ -1,6 +1,6 @@
 import { Termo } from "@/components/ui/Dica";
 import type { Painel } from "@/lib/analise/painel";
-import { formatarDecimal, formatarPercentual } from "@/lib/apresentacao/formato";
+import { formatarComUnidade, formatarPercentual } from "@/lib/apresentacao/formato";
 import { GLOSSARIO } from "@/lib/apresentacao/glossario";
 
 type Numero = { valor: string; antes?: string; termo?: string; dica?: string; depois: string };
@@ -10,10 +10,10 @@ export function NumerosPrincipais({ painel }: { painel: Painel }) {
   const volume = painel.acuracia.volumeChuva;
   const numeros: Numero[] = [
     {
-      valor: `${formatarDecimal(painel.temperaturaMax.mae, 2)} °C`,
+      valor: formatarComUnidade(painel.temperaturaMax.mae, "°C"),
       termo: "erro médio",
       dica: GLOSSARIO.mae,
-      depois: ` na temperatura máxima. Na mínima, ${formatarDecimal(painel.temperaturaMin.mae, 2)} °C.`,
+      depois: ` na temperatura máxima. Na mínima, ${formatarComUnidade(painel.temperaturaMin.mae, "°C")}.`,
     },
     {
       valor: formatarPercentual(painel.acuracia.chuvaBinaria),

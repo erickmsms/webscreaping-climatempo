@@ -39,10 +39,18 @@ Para usar outro arquivo de dados, defina `CLIMATEMPO_DATA_PATH` com o caminho do
 src/
   app/                      página, layout e estilos (App Router)
   components/
-    boletim/                Boletim (a página), Cabecalho, NumerosPrincipais,
-                            Ranking, QuadroMetricas
-    graficos/               GraficoLinhas
-    ui/                     Aviso, TabelaDados (genéricos)
+    boletim/                a página, uma seção por arquivo
+      Boletim.tsx             filtro de cidade e composição das seções
+      Abertura.tsx            chapéu, manchete e linha fina
+      NumerosPrincipais.tsx   os três números do resumo
+      Ranking.tsx             ranking com barras
+      ErrosPorDia.tsx         erro de chuva e de temperatura por dia
+      QuadroMetricas.tsx      MAE, RMSE, viés, MAPE e acertos
+      BaseComparada.tsx       base de pares D-1 -> D, recolhida
+      ComoMedimos.tsx, Rodape.tsx, Cabecalho.tsx
+      colunas.ts              colunas das duas tabelas
+    graficos/               GraficoLinhas e series.ts (modelo -> séries desenhadas)
+    ui/                     genéricos: Secao, Dica/Termo (tooltip), TabelaDados, Aviso
   lib/
     dados/
       bronze.ts             leitura do histórico da coleta (só no servidor)

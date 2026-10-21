@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   formatarDecimal,
+  formatarComUnidade,
   formatarDia,
   formatarFixo,
   formatarMeses,
@@ -74,6 +75,24 @@ describe("formatarDecimal", () => {
 
   it("mostra travessão para NaN", () => {
     expect(formatarDecimal(Number.NaN, 1)).toBe("—");
+  });
+});
+
+describe("formatarComUnidade", () => {
+  it("junta número e unidade, com 2 casas por padrão", () => {
+    expect(formatarComUnidade(0.62, "°C")).toBe("0,62 °C");
+    expect(formatarComUnidade(4.994, "mm")).toBe("4,99 mm");
+  });
+
+  it("aceita casas, sinal e unidade opcional", () => {
+    expect(formatarComUnidade(0.074, "°C", { sinal: true })).toBe("+0,07 °C");
+    expect(formatarComUnidade(-0.44, "mm", { sinal: true })).toBe("−0,44 mm");
+    expect(formatarComUnidade(3, undefined, { casas: 0 })).toBe("3");
+    expect(formatarComUnidade(20, "°C", { casas: 0 })).toBe("20 °C");
+  });
+
+  it("sem valor sai só o travessão, sem unidade", () => {
+    expect(formatarComUnidade(Number.NaN, "°C")).toBe("—");
   });
 });
 

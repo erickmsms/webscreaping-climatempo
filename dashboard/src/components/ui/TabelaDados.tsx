@@ -1,6 +1,6 @@
 import { Termo } from "@/components/ui/Dica";
 import { nomeDaCidade } from "@/lib/apresentacao/cidades";
-import { formatarDecimal, formatarDia, formatarPercentual } from "@/lib/apresentacao/formato";
+import { formatarComUnidade, formatarDia, formatarPercentual } from "@/lib/apresentacao/formato";
 
 export type Coluna<T> = {
   chave: keyof T & string;
@@ -26,8 +26,7 @@ function formatarCelula(valor: unknown, coluna: Coluna<unknown>): string {
 
   // "numero": inteiros como estão (temperaturas); "decimal": 2 casas.
   const casas = coluna.tipo === "decimal" ? 2 : Number.isInteger(valor) ? 0 : 1;
-  const texto = formatarDecimal(valor, casas, { sinal: coluna.sinal });
-  return coluna.sufixo ? `${texto} ${coluna.sufixo}` : texto;
+  return formatarComUnidade(valor, coluna.sufixo, { casas, sinal: coluna.sinal });
 }
 
 /** Tabela de dados com cabeçalho fixo; `rolagem` limita a altura para tabelas longas. */

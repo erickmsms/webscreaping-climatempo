@@ -43,6 +43,19 @@ export function formatarDecimal(v: number, casas: number, opcoes: { sinal?: bool
   return opcoes.sinal ? `+${absoluto}` : absoluto;
 }
 
+/**
+ * Número com unidade opcional ("0,62 °C", "+0,07 mm"): 2 casas por padrão,
+ * `sinal` põe "+" nos positivos. Sem valor (NaN) sai só o travessão.
+ */
+export function formatarComUnidade(
+  v: number,
+  unidade?: string,
+  opcoes: { casas?: number; sinal?: boolean } = {},
+): string {
+  const texto = formatarDecimal(v, opcoes.casas ?? 2, { sinal: opcoes.sinal });
+  return unidade && !Number.isNaN(v) ? `${texto} ${unidade}` : texto;
+}
+
 /** Porcentagem com 1 casa ("91,7%"); 100 sai sem casa decimal ("100%"). */
 export function formatarPercentual(v: number): string {
   if (Number.isNaN(v)) return "—";

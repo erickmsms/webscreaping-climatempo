@@ -1,13 +1,9 @@
-import { formatarDecimal, formatarPercentual } from "@/lib/apresentacao/formato";
+import { formatarComUnidade, formatarDecimal, formatarPercentual } from "@/lib/apresentacao/formato";
 import { GLOSSARIO } from "@/lib/apresentacao/glossario";
 import type { ErrosTemperatura, Painel } from "@/lib/analise/painel";
 import { Termo } from "@/components/ui/Dica";
 
 type Linha = { rotulo: string; valor: string; dica?: string };
-
-function comUnidade(v: number, unidade: string, sinal = false) {
-  return Number.isNaN(v) ? "—" : `${formatarDecimal(v, 2, { sinal })} ${unidade}`;
-}
 
 function Grupo({ titulo, linhas }: { titulo: string; linhas: Linha[] }) {
   return (
@@ -27,9 +23,9 @@ function Grupo({ titulo, linhas }: { titulo: string; linhas: Linha[] }) {
 
 function temperatura(t: ErrosTemperatura): Linha[] {
   return [
-    { rotulo: "Erro médio (MAE)", valor: comUnidade(t.mae, "°C"), dica: GLOSSARIO.mae },
-    { rotulo: "RMSE", valor: comUnidade(t.rmse, "°C"), dica: GLOSSARIO.rmse },
-    { rotulo: "Viés", valor: comUnidade(t.bias, "°C", true), dica: GLOSSARIO.vies },
+    { rotulo: "Erro médio (MAE)", valor: formatarComUnidade(t.mae, "°C"), dica: GLOSSARIO.mae },
+    { rotulo: "RMSE", valor: formatarComUnidade(t.rmse, "°C"), dica: GLOSSARIO.rmse },
+    { rotulo: "Viés", valor: formatarComUnidade(t.bias, "°C", { sinal: true }), dica: GLOSSARIO.vies },
     {
       rotulo: "Erro percentual (MAPE)",
       valor: Number.isNaN(t.mape) ? "—" : `${formatarDecimal(t.mape, 2)}%`,
@@ -47,9 +43,9 @@ export function QuadroMetricas({ painel }: { painel: Painel }) {
       <Grupo
         titulo="Chuva"
         linhas={[
-          { rotulo: "Erro médio (MAE)", valor: comUnidade(painel.chuva.mae, "mm"), dica: GLOSSARIO.mae },
-          { rotulo: "RMSE", valor: comUnidade(painel.chuva.rmse, "mm"), dica: GLOSSARIO.rmse },
-          { rotulo: "Viés", valor: comUnidade(painel.chuva.bias, "mm", true), dica: GLOSSARIO.vies },
+          { rotulo: "Erro médio (MAE)", valor: formatarComUnidade(painel.chuva.mae, "mm"), dica: GLOSSARIO.mae },
+          { rotulo: "RMSE", valor: formatarComUnidade(painel.chuva.rmse, "mm"), dica: GLOSSARIO.rmse },
+          { rotulo: "Viés", valor: formatarComUnidade(painel.chuva.bias, "mm", { sinal: true }), dica: GLOSSARIO.vies },
         ]}
       />
       <Grupo
