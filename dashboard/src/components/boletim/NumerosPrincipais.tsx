@@ -1,7 +1,7 @@
 import type { Painel } from "@/lib/analise/painel";
 import { formatarComUnidade, formatarPercentual } from "@/lib/apresentacao/formato";
 
-/** Os quatro números que resumem o período, em cards logo abaixo da manchete. */
+/** Os quatro números que resumem o período, logo abaixo da manchete. */
 export function NumerosPrincipais({ painel }: { painel: Painel }) {
   const volume = painel.acuracia.volumeChuva;
   const numeros = [
@@ -17,10 +17,13 @@ export function NumerosPrincipais({ painel }: { painel: Painel }) {
   ];
 
   return (
-    <section aria-label="Números principais" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section aria-label="Números principais" className="grid border-t-2 border-b border-rule-strong border-b-rule lg:grid-cols-4">
       {numeros.map((n) => (
-        <div key={n.texto} className="flex flex-col gap-2.5 rounded-xl bg-surface p-6">
-          <span className="font-display text-6xl leading-none font-extrabold tracking-[-0.03em] lg:text-5xl">
+        <div
+          key={n.texto}
+          className="flex flex-col gap-2.5 border-t border-rule py-7 first:border-t-0 lg:border-t-0 lg:border-l lg:px-7 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0"
+        >
+          <span className="font-display text-6xl leading-none font-extrabold tracking-[-0.03em] md:text-7xl lg:text-5xl xl:text-[3.25rem]">
             {n.valor}
           </span>
           <span className="leading-relaxed text-ink-2">{n.texto}</span>
