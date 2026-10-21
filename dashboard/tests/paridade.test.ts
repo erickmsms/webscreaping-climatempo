@@ -58,7 +58,7 @@ function comoOStreamlitExibia(p: Painel) {
     { rotulo: "🌧️ Acurácia: Choveu vs Não", valor: pct(p.acuracia.chuvaBinaria) },
     { rotulo: "🎯 Acurácia % Volume Chuva", valor: pct(p.acuracia.volumeChuva) },
   ];
-  if (p.todas) {
+  if (p.varias) {
     metricas.push(
       { rotulo: "🥇 Cidade #1", valor: p.ranking[0].cidade_id },
       { rotulo: "⭐ Score #1", valor: formatarFixo(p.ranking[0].scoreFinal, 2) },
@@ -67,7 +67,7 @@ function comoOStreamlitExibia(p: Painel) {
   } else {
     const score = p.scoreCidade!;
     metricas.push(
-      { rotulo: "Cidade", valor: p.cidade },
+      { rotulo: "Cidade", valor: p.cidades[0] },
       { rotulo: "Score Final", valor: n(score.scoreFinal) },
       { rotulo: "Score Temperatura", valor: n(score.scoreTemperatura) },
       { rotulo: "Score Chuva", valor: n(score.scoreChuva) },
@@ -120,13 +120,16 @@ const comoRegistro = (l: LinhaComparada) => l as unknown as Record<string, Valor
 /** A base de pares que o Streamlit mostrava (e a tela deste app não mostra mais). */
 const baseDaVisao = (cidade: string) => (cidade === "Todas" ? linhas : linhas.filter((l) => l.cidade_id === cidade));
 
+/** O gabarito do Streamlit tem a visão "Todas" e uma por cidade; no app novo, "Todas" é a seleção completa. */
+const selecaoDaVisao = (cidade: string) => (cidade === "Todas" ? opcoesDeCidade(linhas) : [cidade]);
+
 it("oferece as mesmas opções de cidade", () => {
-  expect(opcoesDeCidade(linhas)).toEqual(gabarito.opcoes_cidade);
+  expect(["Todas", ...opcoesDeCidade(linhas)]).toEqual(gabarito.opcoes_cidade);
 });
 
 describe.each(gabarito.opcoes_cidade)("visão %s", (cidade) => {
   const esperado = visoes[cidade];
-  const painelAtual = montarPainel(linhas, cidade);
+  const painelAtual = montarPainel(linhas, selecaoDaVisao(cidade));
   if (!painelAtual) throw new Error(`painel vazio para ${cidade}`);
   const painel = comOsPesosDoGabarito(painelAtual);
 

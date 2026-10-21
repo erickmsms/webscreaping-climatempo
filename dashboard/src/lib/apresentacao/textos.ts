@@ -8,18 +8,22 @@ import type { Destaque, Painel } from "@/lib/analise/painel";
 
 /** Linha acima da manchete: "Fev–mar 2026 · 4 cidades · 60 previsões". */
 export function chapeu(p: Painel): string {
-  const onde = p.todas
-    ? `${p.numCidades} ${p.numCidades === 1 ? "cidade" : "cidades"}`
-    : `${nomeDaCidade(p.cidade).nome}/${nomeDaCidade(p.cidade).uf}`;
+  const unica = nomeDaCidade(p.cidades[0]);
+  const onde = p.varias ? `${p.numCidades} cidades` : `${unica.nome}/${unica.uf}`;
   return `${formatarMeses(p.inicio, p.fim)} · ${onde} · ${p.linhasComparadas} previsões`;
 }
 
 /** A conclusão principal, em uma frase. */
 export function manchete(p: Painel): string {
-  if (p.todas) return `${nomeDaCidade(p.ranking[0].cidade_id).nome} teve a previsão mais confiável do período.`;
+  if (p.varias) {
+    const melhor = p.ranking.find((r) => p.cidades.includes(r.cidade_id)) ?? p.ranking[0];
+    const onde = p.numCidades < p.ranking.length ? "entre as cidades selecionadas" : "do período";
+    return `${nomeDaCidade(melhor.cidade_id).nome} teve a previsão mais confiável ${onde}.`;
+  }
 
-  const nome = nomeDaCidade(p.cidade).nome;
-  const posicao = p.ranking.findIndex((r) => r.cidade_id === p.cidade) + 1;
+  const cidade = p.cidades[0];
+  const nome = nomeDaCidade(cidade).nome;
+  const posicao = p.ranking.findIndex((r) => r.cidade_id === cidade) + 1;
   const total = p.ranking.length;
   if (posicao === 1) return `${nome} teve a previsão mais confiável do período.`;
   if (posicao === total) return `${nome} teve a previsão menos confiável do período.`;

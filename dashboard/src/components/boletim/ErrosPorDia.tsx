@@ -18,7 +18,7 @@ export function ErroDeChuva({ painel, cores }: Props) {
         rotulo="Erro de chuva por dia"
         unidade="mm"
         altura={300}
-        series={desenharSeries(painel.graficos.chuva, painel.cidade, cores)}
+        series={desenharSeries(painel.graficos.chuva, painel.cidades[0], cores)}
         anotacoes={painel.destaquesChuva.map((d) => ({
           x: d.dia,
           y: d.erro,
@@ -46,7 +46,7 @@ export function ErroDeTemperatura({ painel, cores }: Props) {
             <GraficoLinhas
               rotulo={t.rotulo}
               unidade="°C"
-              series={desenharSeries(painel.graficos[t.grafico], painel.cidade, cores)}
+              series={desenharSeries(painel.graficos[t.grafico], painel.cidades[0], cores)}
             />
           </div>
         ))}

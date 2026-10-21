@@ -8,17 +8,18 @@ const largura = (v: number) => `${Number.isNaN(v) ? 0 : Math.min(100, Math.max(0
 export function Ranking({
   linhas,
   cores,
-  selecionada,
+  selecionadas,
 }: {
   linhas: LinhaRanking[];
   cores: Record<string, string>;
-  selecionada?: string;
+  /** Cidades a destacar; sem isso (filtro cobrindo todas) nenhuma é destacada. */
+  selecionadas?: string[];
 }) {
   return (
     <ol>
       {linhas.map((l, i) => {
         const { nome, uf } = nomeDaCidade(l.cidade_id);
-        const destaque = l.cidade_id === selecionada;
+        const destaque = selecionadas?.includes(l.cidade_id) ?? false;
         return (
           <li
             key={l.cidade_id}
@@ -35,7 +36,7 @@ export function Ranking({
                 <span className="font-display text-xl font-bold sm:text-2xl">{nome}</span>
                 <span className="text-sm text-muted">{uf}</span>
                 {destaque && (
-                  <span className="text-xs font-semibold tracking-wider text-accent uppercase">cidade filtrada</span>
+                  <span className="text-xs font-semibold tracking-wider text-accent uppercase">selecionada</span>
                 )}
               </div>
               <div aria-hidden="true" className="h-3.5 rounded-r bg-track">

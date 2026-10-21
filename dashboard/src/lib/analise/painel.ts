@@ -23,8 +23,6 @@ import {
   type Score,
 } from "@/lib/analise/metricas";
 
-export const TODAS = "Todas";
-
 /** Erros de chuva menores que isso (em mm) não viram destaque no gráfico. */
 export const LIMIAR_DESTAQUE_CHUVA = 5;
 
@@ -39,8 +37,10 @@ export type ErrosChuva = { mae: number; rmse: number; bias: number };
 export type Destaque = { cidade_id: string; dia: string; erro: number };
 
 export type Painel = {
-  cidade: string;
-  todas: boolean;
+  /** Cidades do filtro (ids), em ordem alfabética. */
+  cidades: string[];
+  /** Mais de uma cidade no filtro: as visões "por cidade" fazem sentido. */
+  varias: boolean;
   linhasComparadas: number;
   numCidades: number;
   inicio: string;
@@ -49,27 +49,24 @@ export type Painel = {
   temperaturaMin: ErrosTemperatura;
   chuva: ErrosChuva;
   acuracia: { descricao: number; chuvaBinaria: number; volumeChuva: number };
-  /** Ranking de todas as cidades, mesmo quando o filtro é uma cidade só. */
+  /** Ranking de todas as cidades, mesmo quando o filtro deixa só algumas. */
   ranking: LinhaRanking[];
-  /** Score da cidade filtrada (null em "Todas"). */
+  /** Score da cidade filtrada (null com mais de uma cidade). */
   scoreCidade: Score | null;
-  /** Métricas por cidade (só em "Todas"). */
+  /** Métricas por cidade (só com mais de uma cidade). */
   porCidade: MetricasCidade[] | null;
   graficos: { temperaturaMax: GraficoErro; temperaturaMin: GraficoErro; chuva: GraficoErro };
   destaquesChuva: Destaque[];
 };
 
-/** Opções do seletor de cidade: "Todas" + cidades em ordem alfabética. */
+/** Opções do seletor de cidade: as cidades com dados, em ordem alfabética. */
 export function opcoesDeCidade(linhas: LinhaComparada[]): string[] {
-  const cidades = [...new Set(linhas.map((l) => l.cidade_id))].sort((a, b) =>
-    a < b ? -1 : a > b ? 1 : 0,
-  );
-  return [TODAS, ...cidades];
+  return [...new Set(linhas.map((l) => l.cidade_id))].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 }
 
 function graficoDeErro(
   linhas: LinhaComparada[],
-  todas: boolean,
+  varias: boolean,
   campo: "erro_temp_max" | "erro_temp_min" | "erro_chuva_mm",
   unidade: string,
 ): GraficoErro {
@@ -78,7 +75,7 @@ function graficoDeErro(
   );
   const grupos = new Map<string, PontoSerie[]>();
   for (const l of ordenadas) {
-    const nome = todas ? l.cidade_id : "";
+    const nome = varias ? l.cidade_id : "";
     const pontos = grupos.get(nome) ?? [];
     pontos.push({ x: l.dia_real, y: l[campo] });
     grupos.set(nome, pontos);
@@ -108,19 +105,22 @@ function errosTemperatura(linhas: LinhaComparada[], campo: "temp_max" | "temp_mi
   };
 }
 
-export function montarPainel(todasAsLinhas: LinhaComparada[], cidade: string): Painel | null {
-  const todas = cidade === TODAS;
-  const linhas = todas ? todasAsLinhas : todasAsLinhas.filter((l) => l.cidade_id === cidade);
+export function montarPainel(todasAsLinhas: LinhaComparada[], selecionadas: string[]): Painel | null {
+  const escolhidas = new Set(selecionadas);
+  const linhas = todasAsLinhas.filter((l) => escolhidas.has(l.cidade_id));
   if (linhas.length === 0) return null;
+
+  const cidades = opcoesDeCidade(linhas);
+  const varias = cidades.length > 1;
 
   const dias = linhas.map((l) => l.dia_real).sort();
   const errosChuva = linhas.map((l) => l.erro_chuva_mm);
 
   return {
-    cidade,
-    todas,
+    cidades,
+    varias,
     linhasComparadas: linhas.length,
-    numCidades: new Set(linhas.map((l) => l.cidade_id)).size,
+    numCidades: cidades.length,
     inicio: dias[0],
     fim: dias[dias.length - 1],
     temperaturaMax: errosTemperatura(linhas, "temp_max"),
@@ -132,12 +132,12 @@ export function montarPainel(todasAsLinhas: LinhaComparada[], cidade: string): P
       volumeChuva: acuraciaVolumeChuva(linhas),
     },
     ranking: rankingPorCidade(todasAsLinhas),
-    scoreCidade: todas ? null : calcularScore(linhas),
-    porCidade: todas ? metricasPorCidade(linhas) : null,
+    scoreCidade: varias ? null : calcularScore(linhas),
+    porCidade: varias ? metricasPorCidade(linhas) : null,
     graficos: {
-      temperaturaMax: graficoDeErro(linhas, todas, "erro_temp_max", "°C"),
-      temperaturaMin: graficoDeErro(linhas, todas, "erro_temp_min", "°C"),
-      chuva: graficoDeErro(linhas, todas, "erro_chuva_mm", "mm"),
+      temperaturaMax: graficoDeErro(linhas, varias, "erro_temp_max", "°C"),
+      temperaturaMin: graficoDeErro(linhas, varias, "erro_temp_min", "°C"),
+      chuva: graficoDeErro(linhas, varias, "erro_chuva_mm", "mm"),
     },
     destaquesChuva: destaquesDeChuva(linhas),
   };

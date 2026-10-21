@@ -14,30 +14,30 @@ import { Aviso } from "@/components/ui/Aviso";
 import { Secao } from "@/components/ui/Secao";
 import { TabelaDados } from "@/components/ui/TabelaDados";
 import type { LinhaComparada } from "@/lib/analise/comparacao";
-import { montarPainel, opcoesDeCidade, TODAS } from "@/lib/analise/painel";
+import { montarPainel, opcoesDeCidade } from "@/lib/analise/painel";
 import { coresPorCidade } from "@/lib/apresentacao/cores";
 import { GLOSSARIO } from "@/lib/apresentacao/glossario";
 
 /** A página: filtro de cidade e as seções do boletim, do resumo aos detalhes. */
 export function Boletim({ linhas }: { linhas: LinhaComparada[] }) {
   const opcoes = useMemo(() => opcoesDeCidade(linhas), [linhas]);
-  const cores = useMemo(() => coresPorCidade(opcoes.filter((o) => o !== TODAS)), [opcoes]);
-  const [cidade, setCidade] = useState(TODAS);
-  const painel = useMemo(() => montarPainel(linhas, cidade), [linhas, cidade]);
+  const cores = useMemo(() => coresPorCidade(opcoes), [opcoes]);
+  const [cidades, setCidades] = useState(opcoes);
+  const painel = useMemo(() => montarPainel(linhas, cidades), [linhas, cidades]);
 
   return (
     <>
-      <Cabecalho opcoes={opcoes} cidade={cidade} aoEscolher={setCidade} />
+      <Cabecalho opcoes={opcoes} cidades={cidades} cores={cores} aoEscolher={setCidades} />
       <main className="mx-auto flex max-w-[70rem] flex-col gap-16 px-6 pt-14 pb-20">
         {!painel ? (
-          <Aviso tipo="alerta">Sem dados para o filtro selecionado.</Aviso>
+          <Aviso tipo="alerta">Marque ao menos uma cidade para ver o boletim.</Aviso>
         ) : (
           <>
             <Abertura painel={painel} />
             <NumerosPrincipais painel={painel} />
 
             <Secao titulo="O Ranking" dica={GLOSSARIO.score}>
-              <Ranking linhas={painel.ranking} cores={cores} selecionada={painel.todas ? undefined : painel.cidade} />
+              <Ranking linhas={painel.ranking} cores={cores} selecionadas={painel.numCidades < opcoes.length ? painel.cidades : undefined} />
             </Secao>
 
             <ErroDeChuva painel={painel} cores={cores} />

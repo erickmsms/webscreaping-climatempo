@@ -40,7 +40,7 @@ src/
   app/                      página, layout e estilos (App Router)
   components/
     boletim/                a página, uma seção por arquivo
-      Boletim.tsx             filtro de cidade e composição das seções
+      Boletim.tsx             filtro de cidades (seleção múltipla) e composição das seções
       Abertura.tsx            chapéu, manchete e linha fina
       NumerosPrincipais.tsx   os três números do resumo
       Ranking.tsx             ranking com barras
@@ -123,7 +123,8 @@ teste junto.
   gráfico em React não distinguem os dois casos.
 - **Cache de 1h.** O workflow acrescenta a coleta uma vez por dia; a página é
   pré-renderizada e revalidada a cada hora.
-- **Filtro de cidade no navegador.** Trocar de cidade não faz nova requisição.
+- **Filtro de cidades no navegador.** O seletor abre com todas marcadas; marcar ou
+  desmarcar cidades não faz nova requisição.
 - **A coleta tem mais cidades do que a tela.** Desde 21/10/2026 a coleta guarda
   34 cidades, mas o dashboard exibe só as 4 originais, listadas em
   `CIDADES_EXIBIDAS` (`lib/apresentacao/cidades.ts`). As outras ficam de fora

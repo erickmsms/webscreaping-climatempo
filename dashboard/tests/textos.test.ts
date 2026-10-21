@@ -18,8 +18,8 @@ function rankingDe(...cidades: string[]): LinhaRanking[] {
 
 function painel(extra: Partial<Painel>): Painel {
   return {
-    cidade: "Todas",
-    todas: true,
+    cidades: ["AMERICANA-SP", "PEDRA-PE", "RECIFE-PE", "SAOPAULO-SP"],
+    varias: true,
     linhasComparadas: 60,
     numCidades: 4,
     inicio: "2026-02-17",
@@ -55,13 +55,18 @@ describe("manchete", () => {
     expect(manchete(painel({}))).toBe("São Paulo teve a previsão mais confiável do período.");
   });
 
+  it("escolhe a melhor entre as cidades selecionadas", () => {
+    const filtro = { cidades: ["PEDRA-PE", "RECIFE-PE"], numCidades: 2, linhasComparadas: 30 };
+    expect(manchete(painel(filtro))).toBe("Recife teve a previsão mais confiável entre as cidades selecionadas.");
+  });
+
   it("diz a posição da cidade filtrada", () => {
-    const filtro = { todas: false, numCidades: 1, linhasComparadas: 15 };
-    expect(manchete(painel({ ...filtro, cidade: "SAOPAULO-SP" }))).toBe(
+    const filtro = { varias: false, numCidades: 1, linhasComparadas: 15 };
+    expect(manchete(painel({ ...filtro, cidades: ["SAOPAULO-SP"] }))).toBe(
       "São Paulo teve a previsão mais confiável do período.",
     );
-    expect(manchete(painel({ ...filtro, cidade: "RECIFE-PE" }))).toBe("Recife ficou em 3º lugar entre 4 cidades.");
-    expect(manchete(painel({ ...filtro, cidade: "PEDRA-PE" }))).toBe(
+    expect(manchete(painel({ ...filtro, cidades: ["RECIFE-PE"] }))).toBe("Recife ficou em 3º lugar entre 4 cidades.");
+    expect(manchete(painel({ ...filtro, cidades: ["PEDRA-PE"] }))).toBe(
       "Pedra teve a previsão menos confiável do período.",
     );
   });
@@ -78,7 +83,7 @@ describe("linhaFina", () => {
 describe("chapeu", () => {
   it("resume período, abrangência e volume de dados", () => {
     expect(chapeu(painel({}))).toBe("Fev–mar 2026 · 4 cidades · 60 previsões");
-    expect(chapeu(painel({ todas: false, cidade: "RECIFE-PE", numCidades: 1, linhasComparadas: 15 }))).toBe(
+    expect(chapeu(painel({ varias: false, cidades: ["RECIFE-PE"], numCidades: 1, linhasComparadas: 15 }))).toBe(
       "Fev–mar 2026 · Recife/PE · 15 previsões",
     );
   });
