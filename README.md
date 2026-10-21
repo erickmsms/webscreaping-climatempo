@@ -190,6 +190,7 @@ Ranking final ponderado:
 * Apache Airflow
 * Streamlit
 * Plotly
+* Next.js + React (novo dashboard)
 
 ---
 
@@ -205,6 +206,14 @@ Ranking final ponderado:
 
 ```
 streamlit run dashboard/app.py
+```
+
+Ou o novo dashboard em Next.js, com as mesmas análises (detalhes em [`dashboard-next/README.md`](dashboard-next/README.md)):
+
+```
+cd dashboard-next
+npm install
+npm run dev
 ```
 
 ---
