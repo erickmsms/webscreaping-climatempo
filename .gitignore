@@ -6,15 +6,6 @@ venv/
 .pytest_cache/
 .scrapy/
 
-# dbt
-transformation/target/
-transformation/dbt_packages/
-transformation/.user.yml
-logs/
-
-# Dados derivados (a carga gera de novo a cada execução)
-data/bronze/*.csv
-
 # Node / Next.js (o dashboard tem o próprio .gitignore)
 node_modules/
 

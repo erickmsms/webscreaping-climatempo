@@ -11,8 +11,8 @@ export default async function Page() {
     <>
       <Cabecalho />
       <main className="mx-auto max-w-[70rem] px-6 py-14">
-        {resultado.status === "sem-banco" ? (
-          <Aviso tipo="erro">Não encontrei o banco de dados (dataset_climatempo.db).</Aviso>
+        {resultado.status === "sem-dados" ? (
+          <Aviso tipo="erro">Não encontrei os dados da coleta (data/bronze/previsoes.jsonl).</Aviso>
         ) : (
           <Aviso tipo="alerta">Não encontrei pares válidos de previsão D-1 → real D.</Aviso>
         )}

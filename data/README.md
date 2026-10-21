@@ -1,14 +1,23 @@
 # Dados
 
-| Arquivo | O que é |
-|---|---|
-| `dataset_climatempo.db` | SQLite com a tabela bruta (`raw_climatempo_previsao`) e as tabelas silver e gold do dbt. É o que o dashboard lê. |
-| `bronze/previsoes.jsonl` | Saída da coleta do Scrapy. A coleta sobrescreve este arquivo; o histórico fica na tabela bruta. |
-| `bronze/nao-carregado-2026-02-18.jsonl` | 8 leituras de 18/02/2026 que uma execução da DAG gravou no caminho errado e nunca foram carregadas no banco. |
-| `bronze/previsoes.csv` | Cópia em CSV da última carga, para inspeção. Gerado pela carga e fora do git. |
+`bronze/previsoes.jsonl` é o histórico completo da coleta, em JSON Lines (uma
+linha por cidade, tipo e execução). O workflow diário acrescenta ao arquivo; é
+a única fonte de dados do dashboard.
 
-Para carregar o arquivo de 18/02 no banco, a partir de `ingestion/`:
+## De onde veio
 
-```bash
-python carga/carregar_bronze.py --entrada ../data/bronze/nao-carregado-2026-02-18.jsonl
-```
+Junta duas fontes, sem duplicatas:
+
+- a coleta feita à mão neste repositório, de 16/02 a 06/03/2026;
+- o histórico do repositório `githubactions-screapy`, que coleta desde
+  21/02/2026. Foi importado em 21/10/2026 (leitura apenas; aquele repositório
+  não foi alterado).
+
+Quando há mais de uma leitura da mesma cidade e tipo no mesmo dia (UTC), o
+dashboard usa a mais recente.
+
+## Leituras ilegíveis
+
+O site às vezes devolve `-` no lugar da temperatura ou deixa a chuva vazia
+(04/10 e 29/09/2026 em São Paulo, por exemplo). Ficam no arquivo como vieram,
+e o dashboard as trata como ausentes.

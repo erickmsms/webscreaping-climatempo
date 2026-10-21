@@ -8,7 +8,8 @@ séries de erro por dia, a base comparada e o ranking por score composto.
 O visual é o de um boletim: abre com a conclusão em manchete, gerada a partir
 dos dados, seguida dos números principais e do ranking. Os detalhes vêm depois.
 
-Ele lê as tabelas gold geradas pelo dbt em `../data/dataset_climatempo.db`.
+Ele lê o histórico da coleta em `../data/bronze/previsoes.jsonl` e calcula tudo
+a partir dele, sem banco de dados. A cada coleta diária, o dado novo aparece.
 
 ## Como rodar
 
@@ -22,7 +23,7 @@ npm run dev
 
 Abra http://localhost:3000.
 
-Para usar outro banco, defina `CLIMATEMPO_DB_PATH` com o caminho do `.db`.
+Para usar outro arquivo de dados, defina `CLIMATEMPO_DATA_PATH` com o caminho do `.jsonl`.
 
 | Script | O que faz |
 |---|---|
@@ -44,9 +45,11 @@ src/
     ui/                     Aviso, TabelaDados (genéricos)
   lib/
     dados/
-      db.ts                 leitura das tabelas gold (better-sqlite3, só no servidor)
+      bronze.ts             leitura do histórico da coleta (só no servidor)
       carregar.ts           base comparada D-1 -> D com cache de 1h ("use cache")
     analise/
+      gold.ts               coleta bruta -> dado do dia e previsão para amanhã
+                            (leituras ilegíveis viram ausentes, não zero)
       comparacao.ts         tipagem, saneamento e JOIN D-1 -> D
       metricas.ts           erros, acertos, scores e ranking
       painel.ts             modelo de tela: os números de cada filtro
@@ -64,23 +67,29 @@ em `lib/apresentacao/` e nos componentes.
 
 ## Origem e teste de paridade
 
-Este dashboard substituiu o antigo, em Streamlit (`dashboard/app.py`). A última
-versão em que os dois coexistem é o commit `c8b6151`. Prints de uma versão
-anterior do dashboard Streamlit estão em
+Este dashboard substituiu o antigo, em Streamlit (`dashboard/app.py`), que lia
+um SQLite montado por um projeto dbt. A última versão em que o Streamlit existe
+é o commit `c8b6151`, e a última com o dbt é a `388077a`. Prints de uma versão
+anterior do Streamlit estão em
 [`docs/img/streamlit-antigo/`](../docs/img/streamlit-antigo/).
 
 `tests/paridade.test.ts` garante que as análises continuam idênticas às do
 Streamlit. Ele usa dois arquivos congelados em `tests/fixtures/`:
 
-- `dataset_climatempo.db`: uma cópia do banco na época da migração;
-- `streamlit-golden.json`: tudo o que o `app.py` exibia com esse banco, para
+- `bronze.jsonl`: a coleta bruta da época da migração (16/02 a 06/03/2026);
+- `streamlit-golden.json`: tudo o que o `app.py` exibia com esses dados, para
   "Todas" e para cada cidade (métricas, tabelas e séries dos gráficos).
+
+A coleta passa pela `lib/analise/gold.ts` (que substituiu as camadas silver e
+gold do dbt) e o resultado precisa ser idêntico ao gabarito. Quando a troca do
+dbt por esse código foi feita, as tabelas dos dois foram comparadas linha a
+linha e eram iguais.
 
 A tela atual tem outro visual e outros rótulos, então o teste reconstrói, a
 partir do modelo numérico, o que o Streamlit mostrava (mesmos rótulos, 2 casas,
-arredondamento do Python) e exige que seja idêntico ao gabarito. Como os
-arquivos estão congelados, o teste não quebra quando o banco de produção é
-atualizado. Se uma regra de cálculo mudar de propósito, ajuste o teste junto.
+arredondamento do Python). Como os arquivos estão congelados, o teste não quebra
+quando o histórico cresce. Se uma regra de cálculo mudar de propósito, ajuste o
+teste junto.
 
 ## Decisões
 
@@ -94,9 +103,12 @@ atualizado. Se uma regra de cálculo mudar de propósito, ajuste o teste junto.
   os critérios em constantes. Se os dados mudarem, as frases acompanham.
 - **Ausentes como no pandas.** Valores nulos se propagam nas contas e as médias
   os ignoram (`skipna`).
+- **Leitura ilegível é ausente, não zero.** O `-` que o site às vezes devolve no
+  lugar da temperatura, e a chuva vazia, viram `null`. O dbt antigo convertia
+  isso em 0 sem avisar.
 - **Gráficos próprios, sem biblioteca.** Um dia sem coleta não interrompe a
   linha da cidade, mas um valor nulo interrompe. As bibliotecas comuns de
   gráfico em React não distinguem os dois casos.
-- **Cache de 1h.** O pipeline atualiza o banco uma vez por dia; a página é
+- **Cache de 1h.** O workflow acrescenta a coleta uma vez por dia; a página é
   pré-renderizada e revalidada a cada hora.
 - **Filtro de cidade no navegador.** Trocar de cidade não faz nova requisição.

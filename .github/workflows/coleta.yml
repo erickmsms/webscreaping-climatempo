@@ -1,0 +1,52 @@
+name: Coleta diária
+
+on:
+  schedule:
+    - cron: "0 16 * * *" # 13h em Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: coleta
+  cancel-in-progress: false
+
+jobs:
+  coleta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: ingestion/requirements.txt
+
+      - name: Instalar dependências
+        run: pip install -r ingestion/requirements.txt
+
+      - name: Coletar
+        working-directory: ingestion
+        run: |
+          wc -l < ../data/bronze/previsoes.jsonl > ../linhas_antes.txt
+          scrapy crawl previsao -o ../data/bronze/previsoes.jsonl
+
+      # Os dados entram no histórico antes da validação: assim uma leitura
+      # ruim não faz o dia todo se perder, e o job ainda fica vermelho.
+      - name: Guardar no histórico
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/bronze/previsoes.jsonl
+          git commit -m "coleta: $(date -u +%F)" || echo "Sem mudanças"
+          git pull --rebase
+          git push
+
+      - name: Validar a coleta do dia
+        working-directory: ingestion
+        run: tail -n +$(( $(cat ../linhas_antes.txt) + 1 )) ../data/bronze/previsoes.jsonl | python validar_coleta.py

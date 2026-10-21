@@ -1,15 +1,15 @@
 # Ingestão
 
-Coleta as previsões do Climatempo com Scrapy e carrega o resultado na tabela
-bruta do SQLite (camada bronze).
+Coleta as previsões do Climatempo com Scrapy e acrescenta ao histórico em
+`../data/bronze/previsoes.jsonl`.
 
 ```
 scrapy.cfg
-coleta/                 projeto Scrapy
+requirements.txt
+coleta/
   settings.py           respeita robots.txt, 1 requisição por vez com intervalo
   spiders/previsao.py   spider: hoje e amanhã de cada cidade
-carga/
-  carregar_bronze.py    JSON Lines -> CSV de inspeção + tabela raw_climatempo_previsao
+validar_coleta.py       confere a coleta recém-gravada; sai com erro se algo estiver errado
 ```
 
 ## Como rodar
@@ -19,19 +19,32 @@ Requer Python 3.11+. Todos os comandos a partir desta pasta.
 ```bash
 pip install -r requirements.txt
 
-# coleta: -O sobrescreve o arquivo, então ele guarda só a última execução
-scrapy crawl previsao -O ../data/bronze/previsoes.jsonl
-
-# carga: acrescenta as linhas na tabela bruta de ../data/dataset_climatempo.db
-python carga/carregar_bronze.py
+# -o ACRESCENTA ao arquivo (o histórico fica nele). Não use -O: ele sobrescreve.
+scrapy crawl previsao -o ../data/bronze/previsoes.jsonl
 ```
 
-A carga aceita `--entrada`, `--csv` e `--banco` para usar outros arquivos, por
-exemplo uma cópia do banco para testes.
+Quem roda isso todo dia é o workflow `.github/workflows/coleta.yml`.
 
-Cada carga **acrescenta** as linhas do arquivo. Carregar o mesmo arquivo duas
-vezes duplica a tabela bruta; a silver do dbt remove as duplicatas, mantendo a
-coleta mais recente de cada cidade, tipo e dia.
+## Validação
+
+Depois da coleta, passa as linhas novas pelo validador:
+
+```bash
+antes=$(wc -l < ../data/bronze/previsoes.jsonl)
+scrapy crawl previsao -o ../data/bronze/previsoes.jsonl
+tail -n +$((antes + 1)) ../data/bronze/previsoes.jsonl | python validar_coleta.py
+```
+
+Ele exige uma leitura `atual` e uma `previsao` de cada cidade do spider, sem
+repetição, com temperatura (`20°`), chuva (`1.0mm`) e descrição legíveis.
+
+## Formato dos dados
+
+Uma linha JSON por cidade e tipo, a cada execução:
+
+```json
+{"cidade": "recife-pe", "atualouprevisao": "atual", "tmin": "24°", "tmax": "31°", "descricao": "...", "chuva": "1.0mm", "dt_ingest": "2026-10-20T19:50:14+00:00"}
+```
 
 ## Cidades
 

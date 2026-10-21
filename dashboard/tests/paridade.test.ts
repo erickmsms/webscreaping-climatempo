@@ -2,18 +2,21 @@
  * Paridade com o antigo dashboard Streamlit (removido).
  *
  * O gabarito (fixtures/streamlit-golden.json) é o que o dashboard/app.py exibia
- * para cada filtro de cidade, lendo fixtures/dataset_climatempo.db. Os dois
- * arquivos estão congelados: o app e o script que gerou o gabarito estão no
- * commit c8b6151 (dashboard/app.py e dashboard-next/scripts/).
+ * para cada filtro de cidade, a partir da coleta em fixtures/bronze.jsonl
+ * (processada pelo dbt e lida do SQLite). Os dois arquivos estão congelados: o
+ * app e o script que gerou o gabarito estão no commit c8b6151, e o dbt no
+ * commit 388077a. Aqui a coleta passa pela gold em TypeScript, o que também
+ * prova que ela equivale ao dbt.
  *
  * A tela atual tem outro visual e outros rótulos, então o teste reconstrói, a
  * partir do modelo numérico, o que o Streamlit mostrava (mesmos rótulos, 2
  * casas e arredondamento do Python) e exige que seja idêntico ao gabarito.
  */
+import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { montarComparacao, type LinhaComparada } from "@/lib/analise/comparacao";
-import { lerTabelasGold } from "@/lib/dados/db";
+import { lerRegistros, montarGold } from "@/lib/analise/gold";
 import { formatarFixo, formatarNumero } from "@/lib/apresentacao/formato";
 import { montarPainel, opcoesDeCidade, type ErrosTemperatura, type Painel } from "@/lib/analise/painel";
 import gabarito from "./fixtures/streamlit-golden.json";
@@ -25,11 +28,10 @@ type Visao = { metricas: Array<{ rotulo: string; valor: string }>; tabelas: Tabe
 
 const visoes = gabarito.visoes as Record<string, Visao>;
 
-const BANCO_DO_GABARITO = fileURLToPath(new URL("./fixtures/dataset_climatempo.db", import.meta.url));
+const COLETA_DO_GABARITO = fileURLToPath(new URL("./fixtures/bronze.jsonl", import.meta.url));
 
-const tabelas = lerTabelasGold(BANCO_DO_GABARITO);
-if (!tabelas) throw new Error(`banco do gabarito não encontrado: ${BANCO_DO_GABARITO}`);
-const linhas = montarComparacao(tabelas.dadosDia, tabelas.previsoes);
+const { dadosDia, previsoes } = montarGold(lerRegistros(fs.readFileSync(COLETA_DO_GABARITO, "utf-8")));
+const linhas = montarComparacao(dadosDia, previsoes);
 
 /** As métricas na ordem, com os rótulos e o formato do app Streamlit. */
 function comoOStreamlitExibia(p: Painel) {
