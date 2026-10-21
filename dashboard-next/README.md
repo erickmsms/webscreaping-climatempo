@@ -51,7 +51,9 @@ componentes só desenham o modelo de tela montado por `lib/painel.ts`.
 ## Origem e teste de paridade
 
 Este dashboard substituiu o antigo, em Streamlit (`dashboard/app.py`). A última
-versão em que os dois coexistem é o commit `c8b6151`.
+versão em que os dois coexistem é o commit `c8b6151`. Prints de uma versão
+anterior do dashboard Streamlit estão em
+[`docs/img/streamlit-antigo/`](../docs/img/streamlit-antigo/).
 
 `tests/paridade.test.ts` garante que as análises continuam idênticas às do
 Streamlit. Ele usa dois arquivos congelados em `tests/fixtures/`:
