@@ -3,9 +3,9 @@ import { GLOSSARIO } from "@/lib/apresentacao/glossario";
 
 describe("glossário", () => {
   it("explica o score com os pesos e o limite que o cálculo usa", () => {
-    expect(GLOSSARIO.score).toContain("50% temperatura");
-    expect(GLOSSARIO.score).toContain("40% chuva");
-    expect(GLOSSARIO.score).toContain("10% descrição");
+    expect(GLOSSARIO.score).toContain("50% chuva");
+    expect(GLOSSARIO.score).toContain("33% temperatura");
+    expect(GLOSSARIO.score).toContain("17% descrição");
     expect(GLOSSARIO.score).toContain("3 °C");
   });
 

@@ -17,6 +17,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { montarComparacao, type LinhaComparada } from "@/lib/analise/comparacao";
 import { lerRegistros, montarGold } from "@/lib/analise/gold";
+import { compararDecrescente, type Score } from "@/lib/analise/metricas";
 import { formatarFixo, formatarNumero } from "@/lib/apresentacao/formato";
 import { montarPainel, opcoesDeCidade, type ErrosTemperatura, type Painel } from "@/lib/analise/painel";
 import gabarito from "./fixtures/streamlit-golden.json";
@@ -96,6 +97,24 @@ function expectTabelaIgual(obtida: Record<string, Valor>[], esperada: Tabela, no
   });
 }
 
+/**
+ * O gabarito foi gerado com os pesos antigos do score (50% temperatura, 40% chuva,
+ * 10% descrição). O app usa outros pesos hoje, então o teste recompõe a nota final e
+ * a ordem do ranking com os antigos a partir das notas de cada variável, que não mudaram.
+ */
+const notaDoGabarito = (s: Pick<Score, "scoreTemperatura" | "scoreChuva" | "scoreDescricao">) =>
+  0.5 * s.scoreTemperatura + 0.4 * s.scoreChuva + 0.1 * s.scoreDescricao;
+
+function comOsPesosDoGabarito(p: Painel): Painel {
+  const recompor = <T extends Score>(s: T): T => ({ ...s, scoreFinal: notaDoGabarito(s) });
+  // O ranking original sai do groupby alfabético; a ordenação é estável, então os empates mantêm essa ordem.
+  const ranking = p.ranking
+    .map(recompor)
+    .sort((a, b) => (a.cidade_id < b.cidade_id ? -1 : a.cidade_id > b.cidade_id ? 1 : 0))
+    .sort((a, b) => compararDecrescente(a.scoreFinal, b.scoreFinal));
+  return { ...p, ranking, scoreCidade: p.scoreCidade && recompor(p.scoreCidade) };
+}
+
 const comoRegistro = (l: LinhaComparada) => l as unknown as Record<string, Valor>;
 
 /** A base de pares que o Streamlit mostrava (e a tela deste app não mostra mais). */
@@ -107,8 +126,9 @@ it("oferece as mesmas opções de cidade", () => {
 
 describe.each(gabarito.opcoes_cidade)("visão %s", (cidade) => {
   const esperado = visoes[cidade];
-  const painel = montarPainel(linhas, cidade);
-  if (!painel) throw new Error(`painel vazio para ${cidade}`);
+  const painelAtual = montarPainel(linhas, cidade);
+  if (!painelAtual) throw new Error(`painel vazio para ${cidade}`);
+  const painel = comOsPesosDoGabarito(painelAtual);
 
   it("tem as mesmas métricas, com o mesmo arredondamento", () => {
     expect(comoOStreamlitExibia(painel)).toEqual(esperado.metricas);

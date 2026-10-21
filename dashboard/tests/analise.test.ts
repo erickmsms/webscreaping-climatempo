@@ -129,14 +129,14 @@ describe("métricas de erro", () => {
 });
 
 describe("score composto", () => {
-  it("zera a temperatura com MAE no limite e pondera 50/40/10", () => {
+  it("zera a temperatura com MAE no limite e pondera 50/33/17 (chuva/temperatura/descrição)", () => {
     const score = calcularScore([
       linha({ erro_temp_max: 3, erro_temp_min: -3, real_chuva_mm: 0, prev_chuva_mm: 0 }),
     ]);
     expect(score.scoreTemperatura).toBe(0);
     expect(score.scoreChuva).toBe(100);
     expect(score.scoreDescricao).toBe(100);
-    expect(score.scoreFinal).toBeCloseTo(50);
+    expect(score.scoreFinal).toBeCloseTo(100 * (3 / 6 + 1 / 6));
   });
 
   it("ordena o ranking do maior score para o menor", () => {

@@ -71,9 +71,15 @@ export function acuraciaVolumeChuva(linhas: LinhaComparada[]): number {
   return 100 - mapeChuva;
 }
 
-export const PESO_TEMPERATURA = 0.5;
-export const PESO_CHUVA = 0.4;
-export const PESO_DESCRICAO = 0.1;
+/**
+ * Pesos do score pelo método rank-sum (Stillwell et al., 1981): cada critério vale
+ * (n − posição + 1) / soma. A posição vem da ordem de importância que os estudos sobre
+ * o uso de previsões apontam: chuva, depois temperatura, depois descrição do tempo
+ * (Lazo et al., 2009 e 2011). Dá 3/6, 2/6 e 1/6.
+ */
+export const PESO_CHUVA = 3 / 6;
+export const PESO_TEMPERATURA = 2 / 6;
+export const PESO_DESCRICAO = 1 / 6;
 /** MAE de temperatura (°C) a partir do qual o Score Temperatura zera. */
 export const LIMITE_TEMPERATURA = 3.0;
 

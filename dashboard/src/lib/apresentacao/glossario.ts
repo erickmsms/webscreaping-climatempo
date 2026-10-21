@@ -6,7 +6,7 @@
 import { LIMITE_TEMPERATURA, PESO_CHUVA, PESO_DESCRICAO, PESO_TEMPERATURA } from "@/lib/analise/metricas";
 import { formatarDecimal } from "@/lib/apresentacao/formato";
 
-const pct = (peso: number) => Math.trunc(peso * 100);
+const pct = (peso: number) => Math.round(peso * 100);
 
 export const GLOSSARIO = {
   mae:
@@ -37,9 +37,11 @@ export const GLOSSARIO = {
     "registrado. É exigente: uma palavra diferente já conta como erro.",
 
   score:
-    `Nota de 0 a 100 que resume a qualidade da previsão de cada cidade: ${pct(PESO_TEMPERATURA)}% temperatura, ` +
-    `${pct(PESO_CHUVA)}% chuva e ${pct(PESO_DESCRICAO)}% descrição do tempo. Na temperatura, um erro médio de ` +
-    `${formatarDecimal(LIMITE_TEMPERATURA, 0)} °C ou mais zera a nota.`,
+    `Nota de 0 a 100 que resume a qualidade da previsão de cada cidade: ${pct(PESO_CHUVA)}% chuva, ` +
+    `${pct(PESO_TEMPERATURA)}% temperatura e ${pct(PESO_DESCRICAO)}% descrição do tempo. ` +
+    "Os pesos seguem a ordem de importância que estudos sobre o uso de previsões apontam (chuva, depois temperatura, " +
+    "depois descrição) e foram calculados pelo método rank-sum. " +
+    `Na temperatura, um erro médio de ${formatarDecimal(LIMITE_TEMPERATURA, 0)} °C ou mais zera a nota.`,
 
   chuvaPorDia:
     "Erro de chuva por dia, em mm (previsto − real). Abaixo de zero, choveu mais do que o previsto. " +
