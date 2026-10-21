@@ -5,7 +5,6 @@
  */
 import { LIMITE_TEMPERATURA, PESO_CHUVA, PESO_DESCRICAO, PESO_TEMPERATURA } from "@/lib/analise/metricas";
 import { formatarDecimal } from "@/lib/apresentacao/formato";
-import { criterios } from "@/lib/apresentacao/textos";
 
 const pct = (peso: number) => Math.trunc(peso * 100);
 
@@ -41,8 +40,6 @@ export const GLOSSARIO = {
     `Nota de 0 a 100 que resume a qualidade da previsão de cada cidade: ${pct(PESO_TEMPERATURA)}% temperatura, ` +
     `${pct(PESO_CHUVA)}% chuva e ${pct(PESO_DESCRICAO)}% descrição do tempo. Na temperatura, um erro médio de ` +
     `${formatarDecimal(LIMITE_TEMPERATURA, 0)} °C ou mais zera a nota.`,
-
-  passaNoTeste: criterios(),
 
   chuvaPorDia:
     "Erro de chuva por dia, em mm (previsto − real). Abaixo de zero, choveu mais do que o previsto. " +

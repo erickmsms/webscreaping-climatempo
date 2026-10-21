@@ -48,15 +48,6 @@ export function linhaFina(p: Painel): string {
   return `${metodo} Nem a temperatura nem o volume de chuva passam no teste.`;
 }
 
-/** Critérios usados na linha fina (explicados no tooltip de "passa no teste"). */
-export function criterios(): string {
-  return (
-    `Consideramos que a temperatura passa no teste com erro médio de até ` +
-    `${formatarDecimal(ERRO_MAXIMO_TEMPERATURA_OK, 0)} °C na máxima, e o volume de chuva ` +
-    `com pelo menos ${ACERTO_MINIMO_VOLUME_OK}% de acerto.`
-  );
-}
-
 /** Anotação de um destaque: "Recife, 1 mar" / "choveu 49,6 mm a mais que o previsto". */
 export function textoDoDestaque(d: Destaque): { titulo: string; texto: string } {
   const quanto = formatarDecimal(Math.abs(d.erro), 1);
