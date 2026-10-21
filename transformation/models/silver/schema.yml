@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: silver_climatempo_previsao
+    description: "Tabela silver com dados limpos e tipados da coleta do Climatempo."
+    columns:
+      - name: cidade_id
+        description: "Nome da cidade em CAIXA ALTA."
+        data_tests:
+          - not_null
+
+      - name: tipo_previsao
+        description: "Define se o dado é HOJE ou AMANHA."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["HOJE", "AMANHA"]
+
+      - name: temp_max
+        description: "Temperatura máxima em graus Celsius."
+        data_tests:
+          - not_null
+
+      - name: chuva_mm
+        description: "Volume de chuva em milímetros."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range: # chuva nunca é negativa
+              arguments:
+                min_value: 0

@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: "Coleta bruta do Climatempo, gravada por ingestion/carga/carregar_bronze.py."
+    schema: main
+    tables:
+      - name: raw_climatempo_previsao
+        description: "Uma linha por cidade, tipo (atual ou previsão) e execução da coleta, com os campos em texto."

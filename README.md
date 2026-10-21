@@ -2,7 +2,7 @@
 
 Projeto de engenharia de dados que coleta previsões meteorológicas via **web scraping**, estrutura os dados em arquitetura medalhão (Bronze → Silver → Gold) e avalia a **qualidade das previsões** comparando previsão D-1 vs dado real D.
 
-Toda a pipeline é **orquestrada com Apache Airflow**.
+Toda a pipeline é **orquestrada com Apache Airflow**, e o resultado aparece num **dashboard em Next.js**.
 
 <img width="1168" alt="Dashboard: manchete com a cidade de previsão mais confiável, números principais e ranking de precisão" src="docs/img/dashboard-abertura.png" />
 <img width="1168" alt="Dashboard: erro de chuva por dia com os piores erros anotados e erro de temperatura por dia" src="docs/img/dashboard-graficos.png" />
@@ -31,21 +31,35 @@ O foco principal é **medir o quão precisa é a previsão do tempo.**
 # 🏗️ Arquitetura do Projeto
 
 ```
-Scrapy → Transform → Bronze (CSV)
-                ↓
-              DBT
-      Silver → Gold (SQLite)
-                ↓
-             Airflow
-                ↓
-           Dashboard (Next.js)
+Scrapy ──► data/bronze/previsoes.jsonl ──► carga ──► SQLite (raw)
+                                                        │
+                                                       dbt
+                                                        │
+                                             silver ──► gold
+                                                        │
+                                              Dashboard (Next.js)
+
+Airflow orquestra coleta → carga → dbt silver → dbt gold, todo dia.
 ```
+
+# 📁 Estrutura do Repositório
+
+```
+ingestion/        coleta com Scrapy e carga da bronze no SQLite
+transformation/   projeto dbt: modelos silver e gold, com testes
+orchestration/    DAG do Airflow
+dashboard/        dashboard em Next.js + React
+data/             banco SQLite e arquivos da bronze
+docs/             imagens e documentação
+```
+
+Cada pasta tem um README com o que ela faz e como rodar.
 
 ---
 
 # 🥉 Camada Bronze
 
-A Bronze é dividida em **duas tarefas principais**:
+A Bronze é dividida em **duas tarefas principais**, ambas em [`ingestion/`](ingestion/):
 
 ## 1️⃣ Scrapy (Web Scraping)
 
@@ -59,46 +73,31 @@ Responsável por:
   * Descrição do clima
   * Volume de chuva
 * Capturar previsões para o dia seguinte
-* Capturar dados reais do dia atual
+* Capturar dados do dia atual
 
-O Scrapy gera o dado bruto.
+O Scrapy gera o dado bruto em `data/bronze/previsoes.jsonl`.
 
-Essa é a parte mais crítica do projeto, pois:
+## 2️⃣ Carga
 
-* Lida com estrutura HTML
-* Trata inconsistências
-* Garante padronização mínima
-* Evita falhas silenciosas
+Após a coleta, `ingestion/carga/carregar_bronze.py`:
 
----
-
-## 2️⃣ Transform (Padronização)
-
-Após a coleta:
-
-* Os dados são tratados com Python
-* Convertidos para formato estruturado
-* Salvos como **CSV em string**
-* Armazenados como camada Bronze
-
-Essa etapa garante que o DBT consiga consumir dados consistentes.
+* Lê o JSON Lines da coleta
+* Faz uma limpeza mínima de texto
+* Grava uma cópia em CSV para inspeção
+* Acrescenta as linhas na tabela `raw_climatempo_previsao` do SQLite
 
 ---
 
 # 🥈 Silver (DBT)
 
-O DBT:
+Em [`transformation/`](transformation/), o DBT:
 
-* Lê os CSVs da Bronze
+* Lê a tabela bruta (declarada como `source`)
 * Aplica tipagem correta
 * Normaliza colunas
-* Remove inconsistências
-* Cria tabelas intermediárias
+* Remove duplicatas (mantém a coleta mais recente de cada cidade, tipo e dia)
 
-Separação clara entre:
-
-* `silver_climatempo_previsao`
-* `silver_climatempo_dadosdia`
+Modelo: `silver_climatempo_previsao`.
 
 ---
 
@@ -106,8 +105,8 @@ Separação clara entre:
 
 Camada analítica final:
 
-* `gold_climatempo_dadosdia`
-* `gold_climatempo_previsoes`
+* `gold_climatempo_dadosdia`: o dado do dia, por cidade
+* `gold_climatempo_previsoes`: a previsão para o dia seguinte (D+1)
 
 Estruturadas para permitir:
 
@@ -117,41 +116,30 @@ Estruturadas para permitir:
 * Avaliação por cidade
 * Ranking de precisão
 
-Essa camada já está pronta para consumo analítico.
+Silver e gold têm testes de dados (`not_null`, valores aceitos, faixas e regras como mínima ≤ máxima).
 
 ---
 
 # ⚙️ Orquestração com Apache Airflow
 
-O Airflow é responsável por:
-
-* Executar o Scrapy
-* Rodar o script de Transform
-* Executar DBT (run + test)
-* Garantir ordem correta das etapas
-* Evitar dependências quebradas
-* Permitir execução diária automatizada
-
-A DAG segue lógica:
+A DAG em [`orchestration/dags/clima_pipeline.py`](orchestration/dags/clima_pipeline.py) roda todo dia:
 
 ```
-scrapy_task
+run_scrapy
     ↓
-transform_task
+run_carga
     ↓
-dbt_run
+dbt_build_silver   (dbt build = run + test)
     ↓
-dbt_test
+dbt_build_gold
 ```
 
 Pontos fortes da orquestração:
 
 * Execução sequencial garantida
 * Separação clara de responsabilidades
-* Reprocessamento simples
-* Controle de falhas
-
-Essa parte é um dos principais diferenciais do projeto.
+* Testes do dbt a cada execução
+* Falhas da carga derrubam a tarefa, em vez de passar em silêncio
 
 ---
 
@@ -160,7 +148,7 @@ Essa parte é um dos principais diferenciais do projeto.
 Comparação entre:
 
 * Previsão coletada em D-1
-* Dado real observado em D
+* Dado observado em D
 
 Métricas calculadas:
 
@@ -194,19 +182,35 @@ Ranking final ponderado:
 
 # 🚀 Como Executar
 
-1. Instalar dependências
+Requisitos: Python 3.11+ e Node.js 20.9+.
 
-2. Subir Airflow
+**1. Coleta e carga** ([detalhes](ingestion/README.md))
 
-3. Rodar DAG
-
-4. Abrir o dashboard (detalhes em [`dashboard-next/README.md`](dashboard-next/README.md)):
-
+```bash
+cd ingestion
+pip install -r requirements.txt
+scrapy crawl previsao -O ../data/bronze/previsoes.jsonl
+python carga/carregar_bronze.py
 ```
-cd dashboard-next
+
+**2. Transformação** ([detalhes](transformation/README.md))
+
+```bash
+cd transformation
+pip install -r requirements.txt
+dbt deps --profiles-dir .
+dbt build --profiles-dir .
+```
+
+**3. Dashboard** ([detalhes](dashboard/README.md))
+
+```bash
+cd dashboard
 npm install
 npm run dev
 ```
+
+Para rodar tudo agendado, veja a [orquestração com Airflow](orchestration/README.md).
 
 ---
 
@@ -216,6 +220,6 @@ npm run dev
 * Web scraping estruturado
 * Arquitetura medalhão
 * Orquestração real com Airflow
-* Modelagem com DBT
+* Modelagem e testes de dados com DBT
 * Métricas de avaliação preditiva
 * Construção de dashboard analítico

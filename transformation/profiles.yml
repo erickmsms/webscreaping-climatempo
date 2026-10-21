@@ -1,0 +1,13 @@
+# Perfil do dbt-sqlite. Rode os comandos com --profiles-dir . a partir desta pasta.
+# CLIMATEMPO_DB_PATH troca o banco (por exemplo, uma cópia para testes).
+projeto_clima:
+  target: dev
+  outputs:
+    dev:
+      type: sqlite
+      threads: 1
+      database: database
+      schema: main
+      schemas_and_paths:
+        main: "{{ env_var('CLIMATEMPO_DB_PATH', '../data/dataset_climatempo.db') }}"
+      schema_directory: "../data"
