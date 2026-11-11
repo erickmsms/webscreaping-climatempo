@@ -9,7 +9,9 @@ requirements.txt
 coleta/
   settings.py           respeita robots.txt, 1 requisição por vez com intervalo
   spiders/previsao.py   spider: hoje e amanhã de cada cidade
+coleta/leitura.py      o que é uma leitura legível (e o que é lacuna)
 validar_coleta.py       confere a coleta recém-gravada; sai com erro se algo estiver errado
+cidades_com_lacuna.py   lista as cidades de hoje que precisam de recoleta
 ```
 
 ## Como rodar
@@ -36,7 +38,23 @@ tail -n +$((antes + 1)) ../data/bronze/previsoes.jsonl | python validar_coleta.p
 ```
 
 Ele exige uma leitura `atual` e uma `previsao` de cada cidade do spider, sem
-repetição, com temperatura (`20°`), chuva (`1.0mm`) e descrição legíveis.
+repetição. Valores ilegíveis (chuva "Sem dados", temperatura ou descrição "-")
+são lacunas do site e viram aviso; só falha se faltar ou repetir leitura, ou se
+mais da metade das cidades vier com lacuna.
+
+## Recoleta
+
+Para preencher lacunas, o spider aceita uma lista de cidades. Nesse modo ele
+busca só elas e **não grava leituras que ainda tenham lacuna**, para que a
+leitura mais recente do dia (a que o dashboard usa) nunca seja pior que a
+anterior:
+
+```bash
+cidades=$(python cidades_com_lacuna.py ../data/bronze/previsoes.jsonl)
+scrapy crawl previsao -a cidades="$cidades" -o ../data/bronze/previsoes.jsonl
+```
+
+Quem roda isso todo dia, às 19h de Brasília, é `.github/workflows/recoleta.yml`.
 
 ## Formato dos dados
 

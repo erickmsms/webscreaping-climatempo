@@ -36,8 +36,9 @@ jobs:
           wc -l < ../data/bronze/previsoes.jsonl > ../linhas_antes.txt
           scrapy crawl previsao -o ../data/bronze/previsoes.jsonl
 
-      # Os dados entram no histórico antes da validação: assim uma leitura
-      # ruim não faz o dia todo se perder, e o job ainda fica vermelho.
+      # Os dados entram no histórico antes da validação, para o dia não se
+      # perder. Lacunas do site ("Sem dados") só geram aviso: o workflow
+      # recoleta.yml tenta preenchê-las no fim da tarde.
       - name: Guardar no histórico
         run: |
           git config user.name "github-actions"

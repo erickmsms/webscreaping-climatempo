@@ -14,7 +14,9 @@ Junta duas fontes, sem duplicatas:
   não foi alterado).
 
 Quando há mais de uma leitura da mesma cidade e tipo no mesmo dia (UTC), o
-dashboard usa a mais recente.
+dashboard usa a mais recente. É o que faz a recoleta das 19h (Brasília)
+funcionar: ela acrescenta, só para as cidades que ficaram com lacuna de manhã,
+leituras novas e completas, que passam a valer no lugar das incompletas.
 
 ## Leituras ilegíveis
 

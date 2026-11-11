@@ -11,7 +11,7 @@ Todo dia, um workflow coleta a previsão do Climatempo para 34 cidades e guarda 
 # 🏗️ Como funciona
 
 ```
-GitHub Actions (todo dia, 13h)
+GitHub Actions (todo dia, 13h; recoleta às 19h)
         │
         ▼
 Scrapy coleta ──► data/bronze/previsoes.jsonl ──► commit no main
@@ -24,7 +24,7 @@ Scrapy coleta ──► data/bronze/previsoes.jsonl ──► commit no main
 Não há banco de dados: o histórico da coleta é um arquivo de texto versionado, e o dashboard calcula tudo a partir dele. O Git é o banco, e cada dia de coleta é um commit.
 
 ```
-.github/workflows/   workflow diário de coleta
+.github/workflows/   workflows de coleta e recoleta
 ingestion/           projeto Scrapy e validação da coleta
 data/bronze/         histórico da coleta (JSON Lines)
 dashboard/           dashboard em Next.js + React
@@ -41,9 +41,11 @@ O workflow [`coleta.yml`](.github/workflows/coleta.yml):
 
 1. roda o spider e **acrescenta** as leituras do dia em `data/bronze/previsoes.jsonl`;
 2. faz commit e push no `main`;
-3. **valida** a coleta (uma leitura de hoje e uma de previsão para cada cidade, com temperatura e chuva legíveis) e fica vermelho se algo estiver errado.
+3. **valida** a coleta: uma leitura de hoje e uma de previsão para cada cidade, sem repetição. Fica vermelho se faltar ou sobrar leitura, ou se mais da metade das cidades vier com lacuna.
 
-O commit vem antes da validação de propósito: uma leitura ruim não faz o dia inteiro se perder, e o job ainda avisa.
+O commit vem antes da validação de propósito: se algo estiver errado, o dia inteiro não se perde.
+
+**Lacunas do site.** O Climatempo às vezes devolve uma cidade sem dados (chuva "Sem dados", temperatura ou descrição "-") e só preenche horas depois. Isso vira aviso, não erro. Às 19h (Brasília), o workflow [`recoleta.yml`](.github/workflows/recoleta.yml) busca de novo só as cidades que ficaram com lacuna e grava apenas as leituras que agora vieram completas. O dashboard usa a leitura mais recente do dia, então ela substitui a incompleta.
 
 O spider coleta, de cada cidade, o dado de hoje e a previsão para amanhã: temperatura mínima e máxima, descrição e volume de chuva.
 

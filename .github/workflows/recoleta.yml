@@ -1,0 +1,72 @@
+name: Recoleta diária
+
+# O Climatempo às vezes devolve cidades sem dados ("Sem dados", "-") e só
+# preenche horas depois. Esta segunda coleta, no fim da tarde, busca de novo
+# apenas as cidades que ficaram com lacuna na coleta do dia e grava só as
+# leituras que agora vieram completas. O dashboard usa a leitura mais recente
+# de cada cidade, tipo e dia (UTC), então a nova substitui a que tinha lacuna.
+
+on:
+  schedule:
+    - cron: "0 22 * * *" # 19h em Brasília, ~6h depois da coleta
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Mesmo grupo da coleta: nunca rodam juntas, e uma espera a outra terminar.
+concurrency:
+  group: coleta
+  cancel-in-progress: false
+
+jobs:
+  recoleta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: ingestion/requirements.txt
+
+      - name: Instalar dependências
+        run: pip install -r ingestion/requirements.txt
+
+      - name: Ver quais cidades têm lacuna hoje
+        id: lacunas
+        working-directory: ingestion
+        run: |
+          cidades=$(python cidades_com_lacuna.py ../data/bronze/previsoes.jsonl)
+          echo "cidades=$cidades" >> "$GITHUB_OUTPUT"
+          echo "Cidades a recoletar: ${cidades:-nenhuma}"
+
+      - name: Recoletar
+        if: steps.lacunas.outputs.cidades != ''
+        working-directory: ingestion
+        run: scrapy crawl previsao -a cidades="${{ steps.lacunas.outputs.cidades }}" -o ../data/bronze/previsoes.jsonl
+
+      - name: Guardar no histórico
+        if: steps.lacunas.outputs.cidades != ''
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/bronze/previsoes.jsonl
+          git commit -m "recoleta: $(date -u +%F)" || echo "Nada novo para guardar"
+          git pull --rebase
+          git push
+
+      - name: Avisar o que continua sem dados
+        if: steps.lacunas.outputs.cidades != ''
+        working-directory: ingestion
+        run: |
+          restantes=$(python cidades_com_lacuna.py ../data/bronze/previsoes.jsonl)
+          if [ -n "$restantes" ]; then
+            echo "::warning title=Lacuna no Climatempo::Seguem sem dados completos hoje: $restantes"
+          else
+            echo "Todas as lacunas foram preenchidas."
+          fi

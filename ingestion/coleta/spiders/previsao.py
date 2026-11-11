@@ -1,5 +1,8 @@
-import scrapy
 from datetime import datetime, timezone
+
+import scrapy
+
+from coleta.leitura import lacunas
 
 class PrevisaoSpider(scrapy.Spider):
     name = "previsao"
@@ -46,6 +49,19 @@ class PrevisaoSpider(scrapy.Spider):
         "https://www.climatempo.com.br/previsao-do-tempo/15-dias/cidade/2667/aperibe-rj",
     ]
 
+    def __init__(self, cidades=None, *args, **kwargs):
+        """Sem argumentos, coleta todas as cidades.
+
+        Com `-a cidades=recife-pe,pedra-pe` é uma recoleta: busca só essas
+        cidades e descarta as leituras com lacuna, para que a leitura mais
+        recente do dia (a que o dashboard usa) nunca seja pior que a anterior.
+        """
+        super().__init__(*args, **kwargs)
+        self.recoleta = bool(cidades)
+        if cidades:
+            pedidas = {c.strip() for c in cidades.split(",") if c.strip()}
+            self.start_urls = [u for u in self.start_urls if u.rstrip("/").split("/")[-1] in pedidas]
+
     def parse(self, response):
         dt_ingest = datetime.now(timezone.utc).isoformat()
         cidade = response.url.split('/')[-1]
@@ -57,7 +73,7 @@ class PrevisaoSpider(scrapy.Spider):
 
         hoje = dias[0]
 
-        yield {
+        yield from self.entregar({
             "cidade": cidade,
             "atualouprevisao": "atual",
             "tmin": hoje.css("span.agg-daily__temp.-min::text").get(),
@@ -65,7 +81,7 @@ class PrevisaoSpider(scrapy.Spider):
             "descricao": hoje.css("p.agg-daily__description::text").get(),
             "chuva": hoje.css("span.agg-daily__rain-text::text").get(),
             "dt_ingest": dt_ingest,
-        }
+        })
 
         # ====================
         # AMANHÃ
@@ -73,7 +89,7 @@ class PrevisaoSpider(scrapy.Spider):
 
         amanha = dias[1]
 
-        yield {
+        yield from self.entregar({
             "cidade": cidade,
             "atualouprevisao": "previsao",
             "tmin": amanha.css("span.agg-daily__temp.-min::text").get(),
@@ -81,4 +97,13 @@ class PrevisaoSpider(scrapy.Spider):
             "descricao": amanha.css("p.agg-daily__description::text").get(),
             "chuva": amanha.css("span.agg-daily__rain-text::text").get(),
             "dt_ingest": dt_ingest,
-        }
+        })
+
+    def entregar(self, leitura):
+        if self.recoleta and lacunas(leitura):
+            self.logger.warning(
+                "Recoleta de %s (%s) ainda com lacuna em %s; não grava",
+                leitura["cidade"], leitura["atualouprevisao"], ", ".join(lacunas(leitura)),
+            )
+            return
+        yield leitura

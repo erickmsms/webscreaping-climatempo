@@ -2,28 +2,32 @@
 
 Lê do stdin as linhas novas do JSON Lines (as que a execução acabou de
 acrescentar). Esperado: uma leitura "atual" e uma "previsao" de cada cidade do
-spider, com temperatura e chuva legíveis.
+spider, sem repetição. Valores ilegíveis ("Sem dados", "-") são lacunas do
+site: viram aviso, já que a recoleta do fim do dia tenta preenchê-las. O job só
+falha por problema de verdade: leitura faltando ou repetida, ou lacuna em mais
+da metade das cidades (sinal de que o site mudou).
 
     tail -n +<primeira linha nova> ../data/bronze/previsoes.jsonl | python validar_coleta.py
 """
 
 import json
-import re
 import sys
 
+from coleta.leitura import lacunas
 from coleta.spiders.previsao import PrevisaoSpider
 
 TIPOS = ("atual", "previsao")
-TEMPERATURA = re.compile(r"^-?\d+°$")
-CHUVA = re.compile(r"^\d+(\.\d+)?mm$")
+LIMITE_DE_CIDADES_COM_LACUNA = 0.5
 
 
 def cidades_esperadas() -> set[str]:
     return {url.rstrip("/").split("/")[-1] for url in PrevisaoSpider.start_urls}
 
 
-def validar(registros: list[dict]) -> list[str]:
+def validar(registros: list[dict]) -> tuple[list[str], list[str]]:
+    """Devolve (problemas, avisos)."""
     problemas = []
+    avisos = []
     esperados = {(c, t) for c in cidades_esperadas() for t in TIPOS}
     obtidos = [(r.get("cidade"), r.get("atualouprevisao")) for r in registros]
 
@@ -32,16 +36,18 @@ def validar(registros: list[dict]) -> list[str]:
     for repetido in sorted({o for o in obtidos if obtidos.count(o) > 1}):
         problemas.append(f"leitura repetida: {repetido[1]} de {repetido[0]}")
 
+    com_lacuna = set()
     for r in registros:
-        onde = f"{r.get('atualouprevisao')} de {r.get('cidade')}"
-        for campo in ("tmin", "tmax"):
-            if not TEMPERATURA.match(str(r.get(campo))):
-                problemas.append(f"{campo} ilegível em {onde}: {r.get(campo)!r}")
-        if not CHUVA.match(str(r.get("chuva"))):
-            problemas.append(f"chuva ilegível em {onde}: {r.get('chuva')!r}")
-        if not (r.get("descricao") or "").strip():
-            problemas.append(f"descrição vazia em {onde}")
-    return problemas
+        faltando = lacunas(r)
+        if faltando:
+            com_lacuna.add(r.get("cidade"))
+            avisos.append(f"{r.get('atualouprevisao')} de {r.get('cidade')} sem {', '.join(faltando)}")
+
+    if len(com_lacuna) > LIMITE_DE_CIDADES_COM_LACUNA * len(cidades_esperadas()):
+        problemas.append(
+            f"{len(com_lacuna)} de {len(cidades_esperadas())} cidades com lacuna: o site deve ter mudado"
+        )
+    return problemas, avisos
 
 
 def main() -> int:
@@ -53,14 +59,16 @@ def main() -> int:
         print("Nenhuma linha nova na coleta de hoje.")
         return 1
 
-    problemas = validar(registros)
+    problemas, avisos = validar(registros)
+    for a in avisos:
+        print(f"::warning title=Lacuna no Climatempo::{a}")
     if problemas:
         print(f"Coleta com {len(problemas)} problema(s):")
         for p in problemas:
             print(f"  - {p}")
         return 1
 
-    print(f"Coleta ok: {len(registros)} leituras de {len(cidades_esperadas())} cidades.")
+    print(f"Coleta ok: {len(registros)} leituras de {len(cidades_esperadas())} cidades, {len(avisos)} com lacuna.")
     return 0
 
 
